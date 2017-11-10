@@ -1,0 +1,40 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+
+
+{% block fos_user_content %}
+
+    {% block stylesheets %}
+        <!-- ==========================
+                 CSS
+        =========================== -->
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('metisMenu/metisMenu.min.css') }}" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="{{ asset('dist/css/sb-admin-2.css') }}" rel="stylesheet">
+        <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+    {% endblock %}
+
+    {% if error %}
+        <div>{{ error|trans({}, 'FOSUserBundle') }}</div>
+    {% endif %}
+
+    {% include "ConnexionBundle:Security:login_content.html.twig" %}
+
+
+    {% block javascript %}
+        <!-- jQuery -->
+        <script src="{{ asset('jquery/jquery.min.js') }}"></script>
+        <!-- Bootstrap Core JavaScript -->
+        <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
+
+        <script src="{{ asset('metisMenu/metisMenu.min.js') }}"></script>
+
+        <script src="{{ asset('dist/js/sb-admin-2.js') }}"></script>
+        <!-- Metis Menu Plugin JavaScript -->
+    {% endblock %}
+
+{% endblock fos_user_content %}
+
+
