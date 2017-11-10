@@ -5,13 +5,13 @@ namespace BackBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
-class DefaultController extends Controller
+class SuiviController extends Controller
 {
     /**
-     * @Route("/", name="default_show")
+     * @Route("/suivi", name="suivi_show")
      */
     public function indexAction()
     {
-        return $this->render('BackBundle:Default:index.html.twig');
+        return $this->render('BackBundle:Suivi:index.html.twig');
     }
 }
