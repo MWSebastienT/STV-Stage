@@ -43,6 +43,27 @@ class Entreprise
     private $adresse;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="zipCode", type="string", length=255)
+     */
+    private $zipCode;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=255)
+     */
+    private $city;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string", length=255)
+     */
+    private $country;
+
+    /**
      * @var int
      *
      * @ORM\Column(name="telephone", type="integer")
@@ -155,5 +176,78 @@ class Entreprise
     {
         return $this->telephone;
     }
-}
 
+    /**
+     * Set zipCode
+     *
+     * @param string $zipCode
+     *
+     * @return Entreprise
+     */
+    public function setZipCode($zipCode)
+    {
+        $this->zipCode = $zipCode;
+
+        return $this;
+    }
+
+    /**
+     * Get zipCode
+     *
+     * @return string
+     */
+    public function getZipCode()
+    {
+        return $this->zipCode;
+    }
+
+
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     *
+     * @return Entreprise
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return Entreprise
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+}
