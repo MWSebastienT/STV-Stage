@@ -1,10 +1,42 @@
 {% extends "BackBundle::layout.html.twig" %}
-
-
+{% form_theme form 'bootstrap_3_layout.html.twig' %}
 {% block pageHeader %}Entreprise{% endblock %}
 {% block pageContent %}
     <li>
         <a href="{{ path('entreprise_show') }}"><i class="fa fa-briefcase fa-fw fa-fw"></i>
             Une Entreprise Random</a>
     </li>
+
+    <h3>Rechercher une entreprise :</h3>
+    <form role="form">
+        <div class="form-group">
+            <label>Nom de l'entreprise</label>
+            <input class="form-control" type="text">
+        </div>
+        <button type="submit" class="btn btn-primary">Recherche</button>
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Ajouter une entreprise</button>
+    </form>
+
+    <!-- Modal -->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Nouvelle entreprise</h4>
+                </div>
+                <div class="modal-body">
+                    {{ form_start(form) }}
+                    {{ form_rest(form) }}
+                    {{ form_end(form) }}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Retour</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}
