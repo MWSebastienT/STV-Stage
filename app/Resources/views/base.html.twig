@@ -278,17 +278,7 @@
                         <a href="{{ path('default_show') }}"><i class="fa fa-dashboard fa-fw"></i> Accueil</a>
                     </li>
                     <li>
-                        <a href="{{ path('stage_show') }}"><i class="fa fa-pencil-square-o fa-fw"></i> Stages<span
-                                    class="fa arrow"></span></a>
-                        {#<ul class="nav nav-second-level">#}
-                        {#<li>#}
-                        {#<a href="flot.html">Flot Charts</a>#}
-                        {#</li>#}
-                        {#<li>#}
-                        {#<a href="morris.html">Morris.js Charts</a>#}
-                        {#</li>#}
-                        {#</ul>#}
-                        <!-- /.nav-second-level -->
+                        <a href="{{ path('stage_show') }}"><i class="fa fa-pencil-square-o fa-fw"></i> Stages</a>
                     </li>
                     <li>
                         <a href="{{ path('entreprise_show') }}"><i class="fa fa-briefcase fa-fw fa-fw"></i>
@@ -296,7 +286,23 @@
                     </li>
                     <li>
                         <a href="{{ path('suivi_show') }}"><i class="fa fa-graduation-cap fa-fw"></i> Suivi
-                            Scolarité</a>
+                            Scolarité<span
+                                    class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="#">Accueil</a>
+                            </li>
+                            <li>
+                                <a href="#">Classe</a>
+                            </li>
+                            <li>
+                                <a href="#">Années Scolaires</a>
+                            </li>
+                            <li>
+                                <a href="#">Types de BAC</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
                     </li>
                 </ul>
             </div>

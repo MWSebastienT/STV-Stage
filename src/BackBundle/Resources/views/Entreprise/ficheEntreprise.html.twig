@@ -4,11 +4,11 @@
     <h1>Informations de l'entreprise</h1>
     <p>Cette sociéte totalise <b>#NBRDESTAGE</b> à son actif</p>
     <form role="form">
-            <div class="form-group">
-                <label for="disabledSelect">Informations de l'entreprise</label>
-                <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input" disabled>
-            </div>
-            <button type="submit" class="btn btn-primary">Editer les informations</button>
+        <div class="form-group">
+            <label for="disabledSelect">Informations de l'entreprise</label>
+            <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input" disabled>
+        </div>
+        <button type="submit" class="btn btn-primary">Editer les informations</button>
     </form>
     <br>
     <div class="panel panel-default">
@@ -16,46 +16,47 @@
             <b>Historique des stages</b>
         </div>
         <!-- /.panel-heading -->
-            <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
-                <thead>
-                <tr>
-                    <th>Année</th>
-                    <th>Elève</th>
-                    <th>Référent pégagogique</th>
-                    <th>Référent professionnel</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
-                <tbody>
+        <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="dataTables-example">
+            <thead>
+            <tr>
+                <th>Année</th>
+                <th>Elève</th>
+                <th>Référent pégagogique</th>
+                <th>Référent professionnel</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>2016/2017</td>
+                <td>Dupont Adrien</td>
+                <td>M. Ammar</td>
+                <td>M. Salesse</td>
+                <td>Voir Detail</td>
+            </tr>
+            <tr>
+                <td>2015/2016</td>
+                <td>Dupont Bernard</td>
+                <td>M. Ammar</td>
+                <td>M. Ammar</td>
+                <td>Voir Detail</td>
+            </tr>
 
-                <tr class="gradeA">
-                    <td>2016/2017</td>
-                    <td>Dupont Adrien</td>
-                    <td>M. Ammar</td>
-                    <td>M. Salesse</td>
-                    <td>Voir Detail</td>
-                </tr>
-                <tr class="gradeX">
-                    <td>2015/2016</td>
-                    <td>Dupont Bernard</td>
-                    <td>M. Ammar</td>
-                    <td>M. Ammar</td>
-                    <td>Voir Detail</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+            </tbody>
+        </table>
     </div>
+
+
 {% endblock %}
 {% block javascript %}
+    {{ parent() }}
     <!-- DataTables JavaScript -->
-    <script src="../vendor/datatables/js/jquery.dataTables.min.js"></script>
-    <script src="../vendor/datatables-plugins/dataTables.bootstrap.min.js"></script>
-    <script src="../vendor/datatables-responsive/dataTables.responsive.js"></script>
-    <script src="{{ asset('dist/js/sb-admin-2.js') }}"></script>
+    <script src="{{ asset('datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('datatables-plugins/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('datatables-responsive/dataTables.responsive.js') }}"></script>
     <!-- Page-Level Demo Scripts - Tables - Use for reference -->
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('#dataTables-example').DataTable({
                 responsive: true
             });
