@@ -23,11 +23,18 @@
         <link href="{{ asset('morrisjs/morris.css') }}" rel="stylesheet">
         <!-- Custom Fonts -->
         <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+        <link href="{{ asset('style.css') }}" rel="stylesheet">
+
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.css"/>
     {% endblock %}
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+
+
     <![endif]-->
 
 </head>
@@ -336,10 +343,12 @@
     <script src="{{ asset('metisMenu/metisMenu.min.js') }}"></script>
     <!-- Morris Charts JavaScript -->
     <script src="{{ asset('raphael/raphael.min.js') }}"></script>
-    <script src="{{ asset('morrisjs/morris.min.js') }}"></script>
     <script src="{{ asset('data/morris-data.js') }}"></script>
+    <script src="{{ asset('morrisjs/morris.min.js') }}"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('dist/js/sb-admin-2.js') }}"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.js"></script>
 {% endblock %}
 
 </body>

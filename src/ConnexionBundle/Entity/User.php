@@ -4,6 +4,7 @@ namespace ConnexionBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * User
@@ -20,9 +21,259 @@ class User extends BaseUser
      */
     protected $id;
 
+    /* mes attributs rajouté en plus de ceux de fos suer */
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="firstName", type="string", length=20)
+     */
+    protected $firstName;
+
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="lastName", type="string", length=20)
+     */
+    protected $lastName;
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="phone", type="integer", length=20)
+     */
+    protected $phone;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string", length=20)
+     */
+    protected $city;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="address", type="string", length=20)
+     */
+    protected $address;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="zipCode", type="string", length=20)
+     */
+    protected $zipCode;
+
+    /**
+     * @var DateTime
+     *
+     * @ORM\Column(name="obtention_bac", type="datetime",nullable=true)
+     */
+    protected $obtention_bac;
+
+
+
+
+
     public function __construct()
     {
         parent::__construct();
         // your own logic
+    }
+
+    /**
+     * Set firstName
+     *
+     * @param string $firstName
+     *
+     * @return User
+     */
+    public function setFirstName($firstName)
+    {
+        $this->firstName = $firstName;
+
+        return $this;
+    }
+
+    /**
+     * Get firstName
+     *
+     * @return string
+     */
+    public function getFirstName()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * Set lastName
+     *
+     * @param string $lastName
+     *
+     * @return User
+     */
+    public function setLastName($lastName)
+    {
+        $this->lastName = $lastName;
+
+        return $this;
+    }
+
+    /**
+     * Get lastName
+     *
+     * @return string
+     */
+    public function getLastName()
+    {
+        return $this->lastName;
+    }
+
+    /**
+     * Set phone
+     *
+     * @param integer $phone
+     *
+     * @return User
+     */
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    /**
+     * Get phone
+     *
+     * @return integer
+     */
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     *
+     * @return User
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set adress
+     *
+     * @param string $adress
+     *
+     * @return User
+     */
+    public function setAdress($adress)
+    {
+        $this->adress = $adress;
+
+        return $this;
+    }
+
+    /**
+     * Get adress
+     *
+     * @return string
+     */
+    public function getAdress()
+    {
+        return $this->adress;
+    }
+
+    /**
+     * Set zipCode
+     *
+     * @param string $zipCode
+     *
+     * @return User
+     */
+    public function setZipCode($zipCode)
+    {
+        $this->zipCode = $zipCode;
+
+        return $this;
+    }
+
+    /**
+     * Get zipCode
+     *
+     * @return string
+     */
+    public function getZipCode()
+    {
+        return $this->zipCode;
+    }
+
+
+
+    /**
+     * Set obtentionBac
+     *
+     * @param \DateTime $obtentionBac
+     *
+     * @return User
+     */
+    public function setObtentionBac($obtentionBac)
+    {
+        $this->obtention_bac = $obtentionBac;
+
+        return $this;
+    }
+
+    /**
+     * Get obtentionBac
+     *
+     * @return \DateTime
+     */
+    public function getObtentionBac()
+    {
+        return $this->obtention_bac;
+    }
+
+    /**
+     * Set address
+     *
+     * @param string $address
+     *
+     * @return User
+     */
+    public function setAddress($address)
+    {
+        $this->address = $address;
+
+        return $this;
+    }
+
+    /**
+     * Get address
+     *
+     * @return string
+     */
+    public function getAddress()
+    {
+        return $this->address;
     }
 }

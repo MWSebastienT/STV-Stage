@@ -2,6 +2,8 @@
 
 namespace BackBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -10,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class EntrepriseType extends AbstractType
+class EleveType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -18,22 +20,14 @@ class EntrepriseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('cA', MoneyType::class)
-            ->add('adresse')
-            ->add('zipCode', TextType::class, [
-                'label'    => 'Code Postal',
-                'required' => false,
-            ])
-            ->add('city', TextType::class, [
-                'label'    => 'Ville',
-                'required' => false,
-            ])
-            ->add('country', TextType::class, [
-                'label'    => 'Pays',
-                'required' => false,
-            ])
-            ->add('telephone', NumberType::class)
+            ->add('firstName')
+            ->add('lastName')
+            ->add('phone')
+            ->add('city')
+            ->add('zipCode')
+            ->add('address')
+            ->add('email', TextType::class)
+            ->add('obtentionBac')
             ->add('valider', SubmitType::class);
     }
     
@@ -43,7 +37,7 @@ class EntrepriseType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'BackBundle\Entity\Entreprise'
+            'data_class' => 'ConnexionBundle\Entity\User'
         ));
     }
 
