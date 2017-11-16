@@ -10,19 +10,19 @@
     <meta name="author" content="">
     <title>{% block title %}SB Admin 2{% endblock %}</title>
     {% block stylesheets %}
-    <!-- ==========================
-             CSS
-    =========================== -->
-    <!-- Bootstrap Core CSS -->
-    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="{{ asset('metisMenu/metisMenu.min.css') }}" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="{{ asset('dist/css/sb-admin-2.css') }}" rel="stylesheet">
-    <!-- Morris Charts CSS -->
-    <link href="{{ asset('morrisjs/morris.css') }}" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <!-- ==========================
+                 CSS
+        =========================== -->
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- MetisMenu CSS -->
+        <link href="{{ asset('metisMenu/metisMenu.min.css') }}" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="{{ asset('dist/css/sb-admin-2.css') }}" rel="stylesheet">
+        <!-- Morris Charts CSS -->
+        <link href="{{ asset('morrisjs/morris.css') }}" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     {% endblock %}
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -35,7 +35,6 @@
 <body>
 
 <div id="wrapper">
-
     <!-- Navigation -->
     <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
         <div class="navbar-header">
@@ -48,7 +47,6 @@
             <a class="navbar-brand" href="">Plateforme de Gestion des Stages</a>
         </div>
         <!-- /.navbar-header -->
-
         <ul class="nav navbar-top-links navbar-right">
             <li class="dropdown">
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
@@ -262,7 +260,6 @@
             <!-- /.dropdown -->
         </ul>
         <!-- /.navbar-top-links -->
-
         <div class="navbar-default sidebar" role="navigation">
             <div class="sidebar-nav navbar-collapse">
                 <ul class="nav" id="side-menu">
@@ -278,25 +275,28 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="{{ path('default_show')}}"><i class="fa fa-dashboard fa-fw"></i> Accueil</a>
+                        <a href="{{ path('default_show') }}"><i class="fa fa-dashboard fa-fw"></i> Accueil</a>
                     </li>
                     <li>
-                        <a href="{{ path('stage_show')}}"><i class="fa fa-pencil-square-o fa-fw"></i> Stages<span class="fa arrow"></span></a>
+                        <a href="{{ path('stage_show') }}"><i class="fa fa-pencil-square-o fa-fw"></i> Stages<span
+                                    class="fa arrow"></span></a>
                         {#<ul class="nav nav-second-level">#}
-                            {#<li>#}
-                                {#<a href="flot.html">Flot Charts</a>#}
-                            {#</li>#}
-                            {#<li>#}
-                                {#<a href="morris.html">Morris.js Charts</a>#}
-                            {#</li>#}
+                        {#<li>#}
+                        {#<a href="flot.html">Flot Charts</a>#}
+                        {#</li>#}
+                        {#<li>#}
+                        {#<a href="morris.html">Morris.js Charts</a>#}
+                        {#</li>#}
                         {#</ul>#}
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="{{ path('entreprise_show')}}"><i class="fa fa-briefcase fa-fw fa-fw"></i> Entreprise</a>
+                        <a href="{{ path('entreprise_index') }}"><i class="fa fa-briefcase fa-fw fa-fw"></i>
+                            Entreprise</a>
                     </li>
                     <li>
-                        <a href="{{ path('suivi_show')}}"><i class="fa fa-graduation-cap fa-fw"></i> Suivi Scolarité</a>
+                        <a href="{{ path('suivi_show') }}"><i class="fa fa-graduation-cap fa-fw"></i> Suivi
+                            Scolarité</a>
                     </li>
                 </ul>
             </div>
@@ -309,17 +309,17 @@
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">{% block pageHeader %}{% endblock %}</h1>
-
             </div>
         </div>
-
         {% block pageContent %}
         {% endblock %}
-        {% block footer %}
-        {% endblock %}
+
+
     </div>
 
 </div>
+
+
 <!-- /#wrapper -->
 {% block javascript %}
     <!-- jQuery -->
