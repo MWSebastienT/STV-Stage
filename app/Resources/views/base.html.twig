@@ -10,19 +10,19 @@
     <meta name="author" content="">
     <title>{% block title %}SB Admin 2{% endblock %}</title>
     {% block stylesheets %}
-    <!-- ==========================
-             CSS
-    =========================== -->
-    <!-- Bootstrap Core CSS -->
-    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
-    <!-- MetisMenu CSS -->
-    <link href="{{ asset('metisMenu/metisMenu.min.css') }}" rel="stylesheet">
-    <!-- Custom CSS -->
-    <link href="{{ asset('dist/css/sb-admin-2.css') }}" rel="stylesheet">
-    <!-- Morris Charts CSS -->
-    <link href="{{ asset('morrisjs/morris.css') }}" rel="stylesheet">
-    <!-- Custom Fonts -->
-    <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <!-- ==========================
+                 CSS
+        =========================== -->
+        <!-- Bootstrap Core CSS -->
+        <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <!-- MetisMenu CSS -->
+        <link href="{{ asset('metisMenu/metisMenu.min.css') }}" rel="stylesheet">
+        <!-- Custom CSS -->
+        <link href="{{ asset('dist/css/sb-admin-2.css') }}" rel="stylesheet">
+        <!-- Morris Charts CSS -->
+        <link href="{{ asset('morrisjs/morris.css') }}" rel="stylesheet">
+        <!-- Custom Fonts -->
+        <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
     {% endblock %}
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -249,7 +249,7 @@
                     <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
-                    <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
+                    <li><a href="{{ path('fos_user_profile_show') }}"><i class="fa fa-user fa-fw"></i>Profile</a>
                     </li>
                     <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
@@ -278,25 +278,28 @@
                         <!-- /input-group -->
                     </li>
                     <li>
-                        <a href="{{ path('default_show')}}"><i class="fa fa-dashboard fa-fw"></i> Accueil</a>
+                        <a href="{{ path('default_show') }}"><i class="fa fa-dashboard fa-fw"></i> Accueil</a>
                     </li>
                     <li>
-                        <a href="{{ path('stage_show')}}"><i class="fa fa-pencil-square-o fa-fw"></i> Stages<span class="fa arrow"></span></a>
+                        <a href="{{ path('stage_show') }}"><i class="fa fa-pencil-square-o fa-fw"></i> Stages<span
+                                    class="fa arrow"></span></a>
                         {#<ul class="nav nav-second-level">#}
-                            {#<li>#}
-                                {#<a href="flot.html">Flot Charts</a>#}
-                            {#</li>#}
-                            {#<li>#}
-                                {#<a href="morris.html">Morris.js Charts</a>#}
-                            {#</li>#}
+                        {#<li>#}
+                        {#<a href="flot.html">Flot Charts</a>#}
+                        {#</li>#}
+                        {#<li>#}
+                        {#<a href="morris.html">Morris.js Charts</a>#}
+                        {#</li>#}
                         {#</ul>#}
                         <!-- /.nav-second-level -->
                     </li>
                     <li>
-                        <a href="{{ path('entreprise_show')}}"><i class="fa fa-briefcase fa-fw fa-fw"></i> Entreprise</a>
+                        <a href="{{ path('entreprise_show') }}"><i class="fa fa-briefcase fa-fw fa-fw"></i>
+                            Entreprise</a>
                     </li>
                     <li>
-                        <a href="{{ path('suivi_show')}}"><i class="fa fa-graduation-cap fa-fw"></i> Suivi Scolarité</a>
+                        <a href="{{ path('suivi_show') }}"><i class="fa fa-graduation-cap fa-fw"></i> Suivi
+                            Scolarité</a>
                     </li>
                 </ul>
             </div>
