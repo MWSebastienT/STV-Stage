@@ -16,7 +16,10 @@ class EntrepriseController extends Controller
     public function indexAction(Request $request)
     {
         $entreprise = new Entreprise();
+        $em = $this->getDoctrine()->getManager();
+        $listeEntreprise = $em->getRepository('BackBundle:Entreprise')->findAll();
         $form = $this->get('form.factory')->create(EntrepriseType::class, $entreprise);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -24,8 +27,10 @@ class EntrepriseController extends Controller
             $em->flush();
             return $this->redirectToRoute('entreprise_index', array('id' => $entreprise->getId()));
         }
+
         return $this->render('BackBundle:Entreprise:index.html.twig', array(
             'form' => $form->createView(),
+            'entreprises' => $listeEntreprise
         ));
     }
 

@@ -35,6 +35,11 @@ class Visite
      */
     private $obs;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Stage")
+     */
+    private $leStage;
+
 
     /**
      * Get id
@@ -93,5 +98,28 @@ class Visite
     {
         return $this->obs;
     }
-}
 
+    /**
+     * Set leStage
+     *
+     * @param \BackBundle\Entity\Stage $leStage
+     *
+     * @return Visite
+     */
+    public function setLeStage(\BackBundle\Entity\Stage $leStage = null)
+    {
+        $this->leStage = $leStage;
+
+        return $this;
+    }
+
+    /**
+     * Get leStage
+     *
+     * @return \BackBundle\Entity\Stage
+     */
+    public function getLeStage()
+    {
+        return $this->leStage;
+    }
+}

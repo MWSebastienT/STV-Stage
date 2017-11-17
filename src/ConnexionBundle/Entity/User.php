@@ -26,7 +26,7 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="firstName", type="string", length=20)
+     * @ORM\Column(name="firstName", type="string", length=20, nullable=true)
      */
     protected $firstName;
 
@@ -34,44 +34,50 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="lastName", type="string", length=20)
+     * @ORM\Column(name="lastName", type="string", length=20, nullable=true)
      */
     protected $lastName;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="phone", type="integer", length=20)
+     * @ORM\Column(name="phone", type="integer", length=20, nullable=true)
      */
     protected $phone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string", length=20)
+     * @ORM\Column(name="city", type="string", length=20, nullable=true)
      */
     protected $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="address", type="string", length=20)
+     * @ORM\Column(name="address", type="string", length=20, nullable=true)
      */
     protected $address;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="zipCode", type="string", length=20)
+     * @ORM\Column(name="zipCode", type="string", length=20, nullable=true)
      */
     protected $zipCode;
 
     /**
      * @var DateTime
      *
-     * @ORM\Column(name="obtention_bac", type="datetime",nullable=true)
+     * @ORM\Column(name="obtention_bac", type="datetime",nullable=true, nullable=true)
      */
     protected $obtention_bac;
+
+    /**
+     * @ORM\ManyToMany (targetEntity="BackBundle\Entity\Diplome", cascade={"persist"})
+     */
+    private $lesDiplomes;
+
 
 
 
@@ -275,5 +281,39 @@ class User extends BaseUser
     public function getAddress()
     {
         return $this->address;
+    }
+
+    /**
+     * Add lesDiplome
+     *
+     * @param \BackBundle\Entity\Diplome $lesDiplome
+     *
+     * @return User
+     */
+    public function addLesDiplome(\BackBundle\Entity\Diplome $lesDiplome)
+    {
+        $this->lesDiplomes[] = $lesDiplome;
+
+        return $this;
+    }
+
+    /**
+     * Remove lesDiplome
+     *
+     * @param \BackBundle\Entity\Diplome $lesDiplome
+     */
+    public function removeLesDiplome(\BackBundle\Entity\Diplome $lesDiplome)
+    {
+        $this->lesDiplomes->removeElement($lesDiplome);
+    }
+
+    /**
+     * Get lesDiplomes
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLesDiplomes()
+    {
+        return $this->lesDiplomes;
     }
 }

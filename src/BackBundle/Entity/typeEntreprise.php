@@ -63,4 +63,3 @@ class typeEntreprise
         return $this->label;
     }
 }
-

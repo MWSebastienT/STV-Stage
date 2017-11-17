@@ -63,4 +63,3 @@ class Promo
         return $this->year;
     }
 }
-
