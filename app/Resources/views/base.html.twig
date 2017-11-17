@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>{% block title %}SB Admin 2{% endblock %}</title>
+    <title>{% block title %}Gestion des stages v1.0{% endblock %}</title>
     {% block stylesheets %}
         <!-- ==========================
                  CSS
@@ -26,7 +26,7 @@
 
         <link href="{{ asset('style.css') }}" rel="stylesheet">
 
-        <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}"/>
+       
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.css"/>
     {% endblock %}
@@ -328,31 +328,25 @@
         </div>
         {% block pageContent %}
         {% endblock %}
-
-
     </div>
-
 </div>
-
-
 <!-- /#wrapper -->
 {% block javascript %}
     <!-- jQuery -->
     <script src="{{ asset('jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('js/moment.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
     <!-- Metis Menu Plugin JavaScript -->
     <script src="{{ asset('metisMenu/metisMenu.min.js') }}"></script>
     <!-- Morris Charts JavaScript -->
     <script src="{{ asset('raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('data/morris-data.js') }}"></script>
     <script src="{{ asset('morrisjs/morris.min.js') }}"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('dist/js/sb-admin-2.js') }}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.js"></script>
+    <script src="{{ asset('js/bootstrap-datetimepicker.js') }}"></script>
 {% endblock %}
 
 </body>

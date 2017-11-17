@@ -121,8 +121,8 @@
                     <div class="form-group">
                         {{ form_label(form.obtentionBac, "Année obtention BAC", {'label_attr': {'class': 'col-sm-3 control-label '}}) }}
                         {{ form_errors(form.obtentionBac) }}
-                        <div class="col-sm-9">
-                            {{ form_widget(form.obtentionBac, {'attr': {'class': 'form-control'}}) }}
+                        <div class="col-sm-9  ">
+                            {{ form_widget(form.obtentionBac, {'attr': {'class': 'form-control datePicker '}}) }}
                         </div>
                     </div>
                     {{ form_row(form.lastName) }}
@@ -139,13 +139,12 @@
 
                 </div>
                 <div class="modal-footer">
-
-
-                    <button type="button" class="btn btn-danger" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Fermer</button>
                     {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+                    {{ form_rest(form) }}
+                    {{ form_end(form) }}
                 </div>
-                {{ form_rest(form) }}
-                {{ form_end(form) }}
+
             </div>
         </div>
     </div>
@@ -163,6 +162,16 @@
             $('#eleve-table').DataTable({
                 responsive: true
             });
+        });
+    </script>
+
+    <script type="text/javascript">
+        $(".datePicker").datetimepicker({
+            format: "dd MM yyyy",
+            autoclose: true,
+            todayBtn: true,
+            startDate: "2013-02-14",
+            minuteStep: 10
         });
     </script>
 {% endblock %}
