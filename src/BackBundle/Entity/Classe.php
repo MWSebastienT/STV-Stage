@@ -28,6 +28,11 @@ class Classe
      */
     private $label;
 
+    /**
+     * @ORM\ManyToMany (targetEntity="BackBundle\Entity\Promo", cascade={"persist"})
+     */
+    private $lesPromos;
+
 
     /**
      * Get id
@@ -62,5 +67,45 @@ class Classe
     {
         return $this->label;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->lesPromos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Get lesPromos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLesPromos()
+    {
+        return $this->lesPromos;
+    }
+
+    /**
+     * Add lesPromo
+     *
+     * @param \BackBundle\Entity\Promo $lesPromo
+     *
+     * @return Classe
+     */
+    public function addLesPromo(\BackBundle\Entity\Promo $lesPromo)
+    {
+        $this->lesPromos[] = $lesPromo;
+
+        return $this;
+    }
+
+    /**
+     * Remove lesPromo
+     *
+     * @param \BackBundle\Entity\Promo $lesPromo
+     */
+    public function removeLesPromo(\BackBundle\Entity\Promo $lesPromo)
+    {
+        $this->lesPromos->removeElement($lesPromo);
+    }
+}
