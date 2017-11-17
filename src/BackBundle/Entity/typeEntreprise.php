@@ -62,4 +62,10 @@ class typeEntreprise
     {
         return $this->label;
     }
+
+    public function __toString()
+    {
+        return $this->label;
+    }
+
 }
