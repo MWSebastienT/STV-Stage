@@ -28,7 +28,7 @@ class EleveType extends AbstractType
             ->add('address')
             ->add('email', TextType::class)
             ->add('obtentionBac')
-            ->add('valider', SubmitType::class);
+            ->add('Valider', SubmitType::class);
     }
     
     /**
