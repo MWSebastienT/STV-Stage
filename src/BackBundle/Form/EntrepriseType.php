@@ -2,6 +2,8 @@
 
 namespace BackBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -19,6 +21,10 @@ class EntrepriseType extends AbstractType
     {
         $builder
             ->add('nom')
+            ->add('leTypeEnt', EntityType::class, array(
+                'class' => 'BackBundle:typeEntreprise',
+                'choice_label' => 'label'
+            ))
             ->add('cA', MoneyType::class)
             ->add('adresse')
             ->add('zipCode', TextType::class, [
@@ -34,9 +40,13 @@ class EntrepriseType extends AbstractType
                 'required' => false,
             ])
             ->add('telephone', NumberType::class)
-            ->add('valider', SubmitType::class);
+            ->add('LesReferentPro', EntityType::class, [
+                'class' => 'ConnexionBundle:User',
+                'multiple' => true,
+            ])
+            ->add('Valider', SubmitType::class);
     }
-    
+
     /**
      * {@inheritdoc}
      */
