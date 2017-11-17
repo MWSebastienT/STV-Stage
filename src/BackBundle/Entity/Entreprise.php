@@ -70,6 +70,16 @@ class Entreprise
      */
     private $telephone;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="ConnexionBundle\Entity\User")
+     */
+    private $leReferentPro;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\typeEntreprise")
+     */
+    private $leTypeEnt;
+
 
     /**
      * Get id
@@ -249,5 +259,53 @@ class Entreprise
     public function getCity()
     {
         return $this->city;
+    }
+
+    /**
+     * Set leReferentPro
+     *
+     * @param \ConnexionBundle\Entity\User $leReferentPro
+     *
+     * @return Entreprise
+     */
+    public function setLeReferentPro(\ConnexionBundle\Entity\User $leReferentPro = null)
+    {
+        $this->leReferentPro = $leReferentPro;
+
+        return $this;
+    }
+
+    /**
+     * Get leReferentPro
+     *
+     * @return \ConnexionBundle\Entity\User
+     */
+    public function getLeReferentPro()
+    {
+        return $this->leReferentPro;
+    }
+
+    /**
+     * Set leTypeEnt
+     *
+     * @param \BackBundle\Entity\Entreprise $leTypeEnt
+     *
+     * @return Entreprise
+     */
+    public function setLeTypeEnt(\BackBundle\Entity\Entreprise $leTypeEnt = null)
+    {
+        $this->leTypeEnt = $leTypeEnt;
+
+        return $this;
+    }
+
+    /**
+     * Get leTypeEnt
+     *
+     * @return \BackBundle\Entity\Entreprise
+     */
+    public function getLeTypeEnt()
+    {
+        return $this->leTypeEnt;
     }
 }

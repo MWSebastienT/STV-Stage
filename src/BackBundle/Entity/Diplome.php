@@ -29,6 +29,7 @@ class Diplome
     private $label;
 
 
+
     /**
      * Get id
      *
@@ -63,4 +64,3 @@ class Diplome
         return $this->label;
     }
 }
-

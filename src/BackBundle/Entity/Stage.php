@@ -35,6 +35,32 @@ class Stage
      */
     private $dateFin;
 
+    /**
+     * @ORM\ManyToMany (targetEntity="BackBundle\Entity\Techno", cascade={"persist"})
+     */
+    private $lesTechnos;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ConnexionBundle\Entity\User")
+     */
+    private $leEleve;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ConnexionBundle\Entity\User")
+     */
+    private $leReferentPro;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="ConnexionBundle\Entity\User")
+     */
+    private $leReferentPeda;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Entreprise")
+     */
+    private $leEntreprise;
+
+
 
     /**
      * Get id
@@ -93,5 +119,141 @@ class Stage
     {
         return $this->dateFin;
     }
-}
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->lesTechnos = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
+    /**
+     * Add lesTechno
+     *
+     * @param \BackBundle\Entity\Techno $lesTechno
+     *
+     * @return Stage
+     */
+    public function addLesTechno(\BackBundle\Entity\Techno $lesTechno)
+    {
+        $this->lesTechnos[] = $lesTechno;
+
+        return $this;
+    }
+
+    /**
+     * Remove lesTechno
+     *
+     * @param \BackBundle\Entity\Techno $lesTechno
+     */
+    public function removeLesTechno(\BackBundle\Entity\Techno $lesTechno)
+    {
+        $this->lesTechnos->removeElement($lesTechno);
+    }
+
+    /**
+     * Get lesTechnos
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLesTechnos()
+    {
+        return $this->lesTechnos;
+    }
+
+    /**
+     * Set leEleve
+     *
+     * @param \ConnexionBundle\Entity\User $leEleve
+     *
+     * @return Stage
+     */
+    public function setLeEleve(\ConnexionBundle\Entity\User $leEleve = null)
+    {
+        $this->leEleve = $leEleve;
+
+        return $this;
+    }
+
+    /**
+     * Get leEleve
+     *
+     * @return \ConnexionBundle\Entity\User
+     */
+    public function getLeEleve()
+    {
+        return $this->leEleve;
+    }
+
+    /**
+     * Set leReferentPro
+     *
+     * @param \ConnexionBundle\Entity\User $leReferentPro
+     *
+     * @return Stage
+     */
+    public function setLeReferentPro(\ConnexionBundle\Entity\User $leReferentPro = null)
+    {
+        $this->leReferentPro = $leReferentPro;
+
+        return $this;
+    }
+
+    /**
+     * Get leReferentPro
+     *
+     * @return \ConnexionBundle\Entity\User
+     */
+    public function getLeReferentPro()
+    {
+        return $this->leReferentPro;
+    }
+
+    /**
+     * Set leReferentPeda
+     *
+     * @param \ConnexionBundle\Entity\User $leReferentPeda
+     *
+     * @return Stage
+     */
+    public function setLeReferentPeda(\ConnexionBundle\Entity\User $leReferentPeda = null)
+    {
+        $this->leReferentPeda = $leReferentPeda;
+
+        return $this;
+    }
+
+    /**
+     * Get leReferentPeda
+     *
+     * @return \ConnexionBundle\Entity\User
+     */
+    public function getLeReferentPeda()
+    {
+        return $this->leReferentPeda;
+    }
+
+    /**
+     * Set leEntreprise
+     *
+     * @param \BackBundle\Entity\Entreprise $leEntreprise
+     *
+     * @return Stage
+     */
+    public function setLeEntreprise(\BackBundle\Entity\Entreprise $leEntreprise = null)
+    {
+        $this->leEntreprise = $leEntreprise;
+
+        return $this;
+    }
+
+    /**
+     * Get leEntreprise
+     *
+     * @return \BackBundle\Entity\Entreprise
+     */
+    public function getLeEntreprise()
+    {
+        return $this->leEntreprise;
+    }
+}
