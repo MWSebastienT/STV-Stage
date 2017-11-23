@@ -23,8 +23,9 @@
         <link href="{{ asset('morrisjs/morris.css') }}" rel="stylesheet">
         <!-- Custom Fonts -->
         <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('css/datepicker.min.css') }}" rel="stylesheet" type="text/css">
 
-        <link href="{{ asset('css/bootstrap-datetimepicker.css') }}" rel="stylesheet" type="text/css">
+
 
         <link href="{{ asset('style.css') }}" rel="stylesheet">
 
@@ -303,7 +304,7 @@
                                     class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="{{ path('suivi_show') }}">Elèves</a>
+                                <a href="">Elèves</a>
                             </li>
                             <li>
                                 <a href="#">Classe</a>
@@ -350,8 +351,13 @@
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('dist/js/sb-admin-2.js') }}"></script>
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs/dt-1.10.16/datatables.min.js"></script>
-    <script src="{{ asset('js/bootstrap-datetimepicker.js') }}"></script>
+    <!-- Pour les relations many to many -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+    <!-- Pour les datetimes -->
+    <script src="{{ asset('js/datepicker.common.js') }}"></script>
+    <script src="{{ asset('js/datepicker.esm.js') }}"></script>
+    <script src="{{ asset('js/datepicker.min.js') }}"></script>
+    <script src="{{ asset('js/eModal.min.js') }}"></script>
 {% endblock %}
 
 </body>

@@ -6,20 +6,61 @@ use BackBundle\Form\EleveType;
 use ConnexionBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class SuiviController extends Controller
 {
     /**
-     * @Route("/suivi.html", name="suivi_show")
+     * @Route("/eleve.html", name="eleve_show")
      */
-    public function indexAction(Request $request)
+    public function indexAction($listEleve = null)
+    {
+        if($listEleve == null)
+        {
+            $em = $this->getDoctrine()->getManager();
+            $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');
+        }
+        return $this->render('BackBundle:Suivi:index.html.twig', array(
+            'eleves' => $listEleve
+        ));
+    }
+
+    /**
+     * @Route("/eleve.html/edit/{id}", name="eleve_edit")
+     */
+    public function editAction(Request $request,$id)
     {
         $em = $this->getDoctrine()->getManager();
         $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');
+        $eleve = $em->getRepository('ConnexionBundle:User')->find($id); // on déclare un nouvelle élève qui est dans la class User de connexionBundle
+        $form = $this->createForm(EleveType::class, $eleve);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($eleve);
+            $em->flush();
+            $session = new Session();
+            $session->getFlashBag()->add('eleveOk', 'Elève modifié avec succès !');
+            return $this->indexAction($listEleve);
+        }
+
+        return $this->render('BackBundle:Suivi:form_base.html.twig', array(
+            'form' => $form->createView(),
+            'eleves' => $listEleve
+        ));
+    }
+
+    /**
+     * @Route("/eleve.html/add", name="eleve_add")
+     */
+    public function addAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');// voir méthode ecrite dans UserRepository
         $eleve = new User(); // on déclare un nouvelle élève qui est dans la class User de connexionBundle
-        $form = $this->get('form.factory')->create(EleveType::class, $eleve);
+        $form = $this->createForm(EleveType::class, $eleve);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $firstName = $eleve->getFirstName();
@@ -34,10 +75,9 @@ class SuiviController extends Controller
             $em->flush();
             $session = new Session();
             $session->getFlashBag()->add('eleveOk', 'Elève ajouté avec succès !');
-
-            return $this->redirectToRoute('suivi_show', array('id' => $eleve->getId(), 'eleves' => $listEleve));
+            return $this->indexAction($listEleve);
         }
-        return $this->render('BackBundle:Suivi:index.html.twig', array(
+        return $this->render('BackBundle:Suivi:form_base.html.twig', array(
             'form' => $form->createView(),
             'eleves' => $listEleve
         ));

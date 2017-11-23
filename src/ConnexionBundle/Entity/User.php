@@ -244,7 +244,7 @@ class User extends BaseUser
      */
     public function setObtentionBac($obtentionBac)
     {
-        $this->obtention_bac = $obtentionBac;
+        $this->obtention_bac = new \DateTime();
 
         return $this;
     }
@@ -254,9 +254,17 @@ class User extends BaseUser
      *
      * @return \DateTime
      */
-    public function getObtentionBac()
+    public function getObtentionBac($format = 'Y')
     {
-        return $this->obtention_bac;
+
+        $date = $this->obtention_bac;
+        if($date != null)
+        {
+            return $date->format($format);
+        }
+        else
+            return null;
+
     }
 
     /**
