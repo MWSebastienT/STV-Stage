@@ -45,4 +45,12 @@ class StageController extends Controller
     {
         return $this->render('BackBundle:Stage:ficheStage.html.twig');
     }
+
+    /**
+     * @Route("/stage/show", name="stage_show_fiche")
+     */
+    public function showAction()
+    {
+        return $this->render('BackBundle:Stage:ficheStage.html.twig');
+    }
 }

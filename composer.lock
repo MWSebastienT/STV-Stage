@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "8ba37d06156a4e86a0b2c5e15337ffb0",
+    "content-hash": "a299c7e2196c9fc61e6ff7caa45a15e5",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -2613,6 +2613,53 @@
             "time": "2017-11-16T18:15:01+00:00"
         },
         {
+            "name": "troopers/ajax-bundle",
+            "version": "dev-master",
+            "target-dir": "Troopers/AjaxBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Troopers/AjaxBundle.git",
+                "reference": "7b4520f202f7dd7c32b737ab96d070f332617fd1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Troopers/AjaxBundle/zipball/7b4520f202f7dd7c32b737ab96d070f332617fd1",
+                "reference": "7b4520f202f7dd7c32b737ab96d070f332617fd1",
+                "shasum": ""
+            },
+            "require-dev": {
+                "symfony/class-loader": "2.1.*"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Troopers\\AjaxBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Leny Bernard (Troopers)",
+                    "email": "leny@troopers.agency",
+                    "homepage": "http://troopers.agency"
+                }
+            ],
+            "description": "Symfony AjaxBundle",
+            "homepage": "http://troopers.agency/bundles/ajax",
+            "keywords": [
+                "ajax"
+            ],
+            "time": "2017-08-07 14:24:58"
+        },
+        {
             "name": "twig/twig",
             "version": "v1.35.0",
             "source": {
@@ -2912,7 +2959,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "troopers/ajax-bundle": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
