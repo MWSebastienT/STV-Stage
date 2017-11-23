@@ -36,9 +36,9 @@ class Stage
     private $dateFin;
 
     /**
-     * @ORM\ManyToMany (targetEntity="BackBundle\Entity\Techno", cascade={"persist"})
+     * @ORM\ManyToMany (targetEntity="BackBundle\Entity\Techno", cascade={"persist"}, mappedBy="Stage")
      */
-    private $lesTechnos;
+    private $lesTechno;
 
     /**
      * @ORM\ManyToOne(targetEntity="ConnexionBundle\Entity\User")
@@ -119,47 +119,8 @@ class Stage
     {
         return $this->dateFin;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->lesTechnos = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
-    /**
-     * Add lesTechno
-     *
-     * @param \BackBundle\Entity\Techno $lesTechno
-     *
-     * @return Stage
-     */
-    public function addLesTechno(\BackBundle\Entity\Techno $lesTechno)
-    {
-        $this->lesTechnos[] = $lesTechno;
 
-        return $this;
-    }
-
-    /**
-     * Remove lesTechno
-     *
-     * @param \BackBundle\Entity\Techno $lesTechno
-     */
-    public function removeLesTechno(\BackBundle\Entity\Techno $lesTechno)
-    {
-        $this->lesTechnos->removeElement($lesTechno);
-    }
-
-    /**
-     * Get lesTechnos
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLesTechnos()
-    {
-        return $this->lesTechnos;
-    }
 
     /**
      * Set leEleve
@@ -255,5 +216,48 @@ class Stage
     public function getLeEntreprise()
     {
         return $this->leEntreprise;
+    }
+
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->lesTechno = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add lesTechno
+     *
+     * @param \BackBundle\Entity\Techno $lesTechno
+     *
+     * @return Stage
+     */
+    public function addLesTechno(\BackBundle\Entity\Techno $lesTechno)
+    {
+        $this->lesTechno[] = $lesTechno;
+
+        return $this;
+    }
+
+    /**
+     * Remove lesTechno
+     *
+     * @param \BackBundle\Entity\Techno $lesTechno
+     */
+    public function removeLesTechno(\BackBundle\Entity\Techno $lesTechno)
+    {
+        $this->lesTechno->removeElement($lesTechno);
+    }
+
+    /**
+     * Get lesTechno
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLesTechno()
+    {
+        return $this->lesTechno;
     }
 }
