@@ -327,4 +327,9 @@ class Entreprise
     {
         return $this->lesReferentPro;
     }
+
+    public function __toString()
+    {
+        return $this->nom;
+    }
 }
