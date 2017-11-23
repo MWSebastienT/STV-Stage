@@ -1,12 +1,10 @@
 {% extends "BackBundle::layout.html.twig" %}
 
-{% form_theme form 'bootstrap_3_layout.html.twig' %}
-
 {% block pageHeader %}Suivi de scolarité{% endblock %}
 
 {% block pageContent %}
 
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+    <button onclick="edit('{{ path('eleve_add') }}','Nouvelle élève')" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter
     </button>
 
@@ -41,12 +39,12 @@
                     <td class="text-center">{{ eleve.city }}</td>
                     <td class="text-center">{{ eleve.zipCode }}</td>
                     <td class="text-center">{{ eleve.address }}</td>
-                    <td class="text-center">{{ eleve.obtentionBac | format('d-m-Y') }}</td>
+                    <td class="text-center">{{ eleve.obtentionBac | date("Y") }}</td>
                     <td class="text-center">
                         <button type="button" class="btn btn-success" aria-label="Left Align">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         </button>
-                        <button type="button" class="btn btn-primary" aria-label="Left Align">
+                        <button  onclick="edit('{{ path('eleve_edit',{'id': eleve.id}) }}','Modification élève')"  type="button" class="btn btn-primary" aria-label="Left Align">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </button>
                         <button type="button" class="btn btn-danger" aria-label="Left Align">
@@ -58,96 +56,9 @@
             </tbody>
         </table>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-         aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h3 class="modal-title" id="exampleModalLabel">Ajouter un élève</h3>
-                </div>
-                <div class="modal-body">
-                    {{ form_start(form, {'attr': {'class': 'form-horizontal','data-toggle':'validator'}}) }}
-                    {# Idem pour un autre champ. #}
-                    <div class="form-group">
-                        {{ form_label(form.lastName, "Nom", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                        {{ form_errors(form.lastName) }}
-                        <div class="col-sm-9">
-                            {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.firstName, "Prenom", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                        {{ form_errors(form.firstName) }}
-                        <div class="col-sm-9">
-                            {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.email, "Email", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                        {{ form_errors(form.email) }}
-                        <div class="col-sm-9">
-                            {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.phone, "Téléphone", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                        {{ form_errors(form.phone) }}
-                        <div class="col-sm-9">
-                            {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.address, "Adresse", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                        {{ form_errors(form.address) }}
-                        <div class="col-sm-9">
-                            {{ form_widget(form.address, {'attr': {'class': 'form-control selectpicker'}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.zipCode, "Code postal", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                        {{ form_errors(form.zipCode) }}
-                        <div class="col-sm-9">
-                            {{ form_widget(form.zipCode, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.city, "Ville", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
-                        {{ form_errors(form.city) }}
-                        <div class="col-sm-9">
-                            {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        {{ form_label(form.obtentionBac, "Année obtention BAC", {'label_attr': {'class': 'col-sm-3 control-label '}}) }}
-                        {{ form_errors(form.obtentionBac) }}
-                        <div class="col-sm-9  ">
-                            {{ form_widget(form.obtentionBac, {'attr': {'class': 'form-control datePicker '}}) }}
-                        </div>
-                    </div>
-                    {{ form_row(form.lastName) }}
-                    {{ form_row(form.firstName) }}
-
-                    {{ form_row(form.email) }}
-                    {{ form_row(form.phone) }}
-                    {{ form_row(form.address) }}
-                    {{ form_row(form.zipCode) }}
-                    {{ form_row(form.city) }}
-                    {{ form_row(form.obtentionBac) }}
-                    {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
 
 
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Fermer</button>
-                    {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
-                    {{ form_rest(form) }}
-                    {{ form_end(form) }}
-                </div>
 
-            </div>
-        </div>
-    </div>
 {% endblock %}
 
 {% block javascript %}
@@ -165,13 +76,28 @@
         });
     </script>
 
-    <script type="text/javascript">
-        $(".datePicker").datetimepicker({
-            format: "dd MM yyyy",
-            autoclose: true,
-            todayBtn: true,
-            startDate: "2013-02-14",
-            minuteStep: 10
-        });
+
+
+    <script>
+        function edit(routeNameId,title)
+        {
+
+            var options = {
+                url: routeNameId,
+                title: title,
+                buttons: [
+                    {text: 'OK', style: 'info',   close: true },
+                    {text: 'Fermer', style: 'danger', close: true }
+                ]
+            };
+
+            eModal.ajax(options);
+        }
+
+
+
     </script>
+
+
+
 {% endblock %}

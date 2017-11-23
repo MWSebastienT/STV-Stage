@@ -2,7 +2,10 @@
 
 namespace ConnexionBundle\Form;
 
+use Doctrine\DBAL\Types\TextType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -16,11 +19,11 @@ class UserType extends AbstractType
         $builder
             ->add('firstName')
             ->add('lastName')
-            ->add('phone')
+            ->add('phone',NumberType::class)
             ->add('city')
             ->add('address')
             ->add('zipCode')
-            ->add('obtention_bac')
+            ->add('obtention_bac',DateTimeType::class)
             ->add('lesDiplomes');
     }
 
