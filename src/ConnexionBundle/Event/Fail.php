@@ -15,8 +15,6 @@ use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 class Fail implements EventSubscriberInterface
 {
     private $request;
-    private $router;
-    private $redisAdapter;
     private $em;
 
     public function __construct(ObjectManager $em,
@@ -37,8 +35,6 @@ class Fail implements EventSubscriberInterface
 
     public function onAuthenticationFailure(AuthenticationFailureEvent $event)
     {
-
-        $username = $event->getAuthenticationToken()->getUsername(); //on récupère le username qui s'est trompé
         $ip = $this->request->getClientIp(); // on récupère l'ip du client qui a fail
         if (strlen($ip) > 0) {
             $logBruteForce = new LogBruteForce();
@@ -46,7 +42,6 @@ class Fail implements EventSubscriberInterface
             $this->em->persist($logBruteForce);
             $this->em->flush();
         }
-        dump($this->em->getRepository('ConnexionBundle:LogBruteForce')->NbIp($ip));die;
     }
 
     public function beforeFirewall(GetResponseEvent $event)
@@ -54,7 +49,7 @@ class Fail implements EventSubscriberInterface
         $request = $event->getRequest();
         if ($request->isMethod(Request::METHOD_POST)) {
             $ip = $request->getClientIp();
-           $listOfOneIp = $this->em->getRepository('ConnexionBundle:LogBruteForce')->NbIp($ip);
+            $listOfOneIp = $this->em->getRepository('ConnexionBundle:LogBruteForce')->NbIp($ip);
 
             if ($listOfOneIp >= 3) {
                 $this->em->getRepository('ConnexionBundle:LogBruteForce')->clean();
@@ -63,8 +58,6 @@ class Fail implements EventSubscriberInterface
                     'Trop de t\'entative de reconnexion, veuillez réessayer dans 1 H'
                 );
             }
-
         }
-
     }
 }

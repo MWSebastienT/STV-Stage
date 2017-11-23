@@ -4,9 +4,9 @@
 
 {% block pageContent %}
 
-    <button onclick="edit('{{ path('eleve_add') }}','Nouvelle élève')" type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
+    <a href="{{ path('eleve_add') }}" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter
-    </button>
+    </a>
 
     {% for message in app.flashes('eleveOk') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
@@ -15,12 +15,20 @@
             Elève ajouté avec <strong>succès</strong> !
         </div>
     {% endfor %}
+
+    {% for message in app.flashes('eleveModif') %}
+        <div class="alert alert-success alert-dismissible spaceTop" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            Elève modifié avec <strong>succès</strong> !
+        </div>
+    {% endfor %}
     <div class="panel panel-default">
         <div class="panel-heading">
             <b>Liste des élèves</b>
         </div>
         <!-- /.panel-heading -->
-        <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
+        <table  width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
                id="eleve-table">
             <thead>
             <tr>
@@ -44,9 +52,9 @@
                         <button type="button" class="btn btn-success" aria-label="Left Align">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         </button>
-                        <button  onclick="edit('{{ path('eleve_edit',{'id': eleve.id}) }}','Modification élève')"  type="button" class="btn btn-primary" aria-label="Left Align">
+                        <a href = "{{ path('eleve_edit',{'id': eleve.id}) }}" class="btn btn-primary" aria-label="Left Align">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-                        </button>
+                        </a>
                         <button type="button" class="btn btn-danger" aria-label="Left Align">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
@@ -56,8 +64,6 @@
             </tbody>
         </table>
     </div>
-
-
 
 {% endblock %}
 
@@ -75,29 +81,4 @@
             });
         });
     </script>
-
-
-
-    <script>
-        function edit(routeNameId,title)
-        {
-
-            var options = {
-                url: routeNameId,
-                title: title,
-                buttons: [
-                    {text: 'OK', style: 'info',   close: true },
-                    {text: 'Fermer', style: 'danger', close: true }
-                ]
-            };
-
-            eModal.ajax(options);
-        }
-
-
-
-    </script>
-
-
-
 {% endblock %}
