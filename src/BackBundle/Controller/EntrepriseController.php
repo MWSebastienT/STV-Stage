@@ -7,6 +7,7 @@ use BackBundle\Entity\typeEntreprise;
 use ConnexionBundle\Entity\User;
 use BackBundle\Form\EntrepriseType;
 use ConnexionBundle\Form\RefProType;
+use ConnexionBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,11 +31,25 @@ class EntrepriseController extends Controller
     }
 
     /**
-     * @Route("/entreprise/show", name="entreprise_show")
+     * @Route("/entreprise/show/{id}", name="entreprise_show")
      */
-    public function showAction()
+    public function showAction($id)
     {
-        return $this->render('BackBundle:Entreprise:ficheEntreprise.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $stage = new Entreprise();
+        $entreprise = $em->getRepository('BackBundle:Entreprise')->find($id);
+        $form = $this->createForm(EntrepriseType::class, $stage);
+        $listeEntreprise = $em->getRepository('BackBundle:Entreprise')->findAll();
+        $lesRefPro = $entreprise->getLesReferentPro();
+        $lesStages = $entreprise->getLesStages();
+
+
+        return $this->render('BackBundle:Entreprise:ficheEntreprise.html.twig', [
+            'entreprises' => $listeEntreprise,
+            'entreprise' => $entreprise,
+            'lesRefPro' => $lesRefPro,
+            'lesStages' => $lesStages
+        ]);
     }
     /**
      * @Route("/entreprise/edit/{id}", name="entreprise_edit")
@@ -91,6 +106,10 @@ class EntrepriseController extends Controller
             return new Response($data);
         }
     }
+
+
+
+
 
     /**
      * @Route("/entreprise/remove/{id}", name="entreprise_remove")
