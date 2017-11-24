@@ -1,0 +1,65 @@
+{% extends "BackBundle::layout.html.twig" %}
+
+{% block pageHeader %}
+
+    {% if action %}
+        Ajout d'une Promo
+    {% else %}
+        Modification d'une eleve
+    {% endif %}
+
+
+{% endblock %}
+
+{% block pageContent %}
+
+    <div class="formWidth container">
+
+        {{ form_start(form, {'attr': {'class': 'form-horizontal','data-toggle':'validator'}}) }}
+        {# Idem pour un autre champ. #}
+
+        <div class="form-group">
+            {{ form_label(form.year, "Année début promo", {'label_attr': {'class': 'col-sm-2 control-label '}}) }}
+            {{ form_errors(form.year) }}
+            <div class='col-sm-10'>
+                <div class="input-group">
+                    {{ form_widget(form.year, {'attr': {'class': 'form-control','data-toggle' :'datepicker'}}) }}
+                    <span class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        {{ form_row(form.year) }}
+        <div class="spaceButton">
+            <a href="{{ path('eleve_show') }}" class="btn btn-default"><span
+                        class="glyphicon glyphicon-arrow-left"></span>
+                Retour</a>
+            {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+
+        </div>
+
+        {% block javascript %}
+            {{ parent() }}
+            <script src="{{ asset('js/datepicker.common.js') }}"></script>
+            <script src="{{ asset('js/datepicker.esm.js') }}"></script>
+            <script src="{{ asset('js/datepicker.js') }}"></script>
+            <script type="text/javascript">
+                $('[data-toggle=\"datepicker\"]').datepicker({
+                    format: "yyyy",
+                    zIndex: 1400,
+                });
+            </script>
+        {% endblock %}
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+
+    </div>
+{% endblock %}
+
+
+
+
+
+
