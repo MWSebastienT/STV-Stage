@@ -10,6 +10,7 @@ use ConnexionBundle\Form\RefProType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Session;
 
 class EntrepriseController extends Controller
@@ -22,84 +23,87 @@ class EntrepriseController extends Controller
         $entreprise = new Entreprise();
         $em = $this->getDoctrine()->getManager();
         $listeEntreprise = $em->getRepository('BackBundle:Entreprise')->findAll();
-        $form = $this->createForm(EntrepriseType::class, $entreprise);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($entreprise);
-            $em->flush();
-            $session = new Session();
-            $session->getFlashBag()->add('entrepriseOk', 'Entreprise ajouté avec succès !');
-
-            return $this->redirectToRoute('entreprise_index', ['id' => $entreprise->getId()]);
-        }
-
+        $em = $this->getDoctrine()->getManager();
         return $this->render('BackBundle:Entreprise:index.html.twig', [
-            'form'        => $form->createView(),
             'entreprises' => $listeEntreprise,
         ]);
     }
 
     /**
-     * @Route("/entreprise/fiche/{id}", name="entreprise_show")
+     * @Route("/entreprise/show", name="entreprise_show")
      */
-    public function showAction($id, Request $request)
+    public function showAction()
     {
-        $entreprise = new Entreprise();
-        $refPro = new User();
+        return $this->render('BackBundle:Entreprise:ficheEntreprise.html.twig');
+    }
+    /**
+     * @Route("/entreprise/edit/{id}", name="entreprise_edit")
+     */
+    public function editAction(Request $request, $id)
+    {
+        /* Config nécessaire au fonctionnement du service */
+
         $em = $this->getDoctrine()->getManager();
-        $entreprise = $em->getRepository('BackBundle:Entreprise')->find($id);
-//        Je ne peux pas les afficher
-        $form = $this->get('form.factory')->create(RefProType::class, $refPro);
+        $stage = $em->getRepository('BackBundle:Entreprise')->find($id);
+        $form = $this->createForm(EntrepriseType::class, $stage);
+        $entityName = 'Entreprise';
+        $listEntreprise = $em->getRepository('BackBundle:Entreprise')->findAll();
 
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($refPro);
-            $em->flush();
+        /* l'appel du service */
+
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $stage, $entityName);
+        if ($data[0] == 'validate') // si on est dans la validation du formulaire
+        {
             $session = new Session();
-            $session->getFlashBag()->add('refProOk', 'Referent ajouté avec succès !');
+            $session->getFlashBag()->add('entrepriseModif', '');// le message à l'utilisateur
 
-            return $this->redirectToRoute('entreprise_show', ['id' => $entreprise->getId()]);
+            return $this->redirectToRoute('entreprise_index', ['entreprise' => $listEntreprise]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
+        } else {// sinon on affiche le formulaire
+            return new Response($data);
         }
-
-
-        return $this->render('BackBundle:Entreprise:ficheEntreprise.html.twig', [
-            'form'       => $form->createView(),
-            'entreprise' => $entreprise,
-        ]);
     }
 
     /**
-     * @Route("/entreprise/delete/{id}", name="entreprise_delete")
+     * @Route("/entreprise/add", name="entreprise_add")
      */
-    public function deleteAction($id, Request $request)
+    public function addAction(Request $request)
     {
+
+        /* Config nécessaire au fonctionnement du service */
+
+        $em = $this->getDoctrine()->getManager();
         $entreprise = new Entreprise();
+        $form = $this->createForm(EntrepriseType::class, $entreprise);
+        $entityName = 'Entreprise';
+        $listEntreprise = $em->getRepository('BackBundle:Entreprise')->findAll();
+        $action = 'edit';
+
+        /* l'appel du service */
+
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $entreprise, $entityName,
+            $action);// true parce que j'utilise la table User pour add
+        if ($data[0] == 'validate') // si on est dans la validation du formulaire
+        {
+            $session = new Session();
+            $session->getFlashBag()->add('entrepriseOk', ''); // le message à l'utilisateur
+            return $this->redirectToRoute('entreprise_index', ['entreprises' => $listEntreprise]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
+        } else {// sinon on affiche le formulaire
+            return new Response($data);
+        }
+    }
+
+    /**
+     * @Route("/entreprise/remove/{id}", name="entreprise_remove")
+     */
+    public function removeAction($id)
+    {
         $em = $this->getDoctrine()->getManager();
         $entreprise = $em->getRepository('BackBundle:Entreprise')->find($id);
-        $em->remove($entreprise);
-        $em->flush();
-
-
-        $entreprise = new Entreprise();
-        $em = $this->getDoctrine()->getManager();
-        $listeEntreprise = $em->getRepository('BackBundle:Entreprise')->findAll();
-        $form = $this->createForm(EntrepriseType::class, $entreprise);
-
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($entreprise);
-            $em->flush();
-            $session = new Session();
-            $session->getFlashBag()->add('entrepriseOk', 'Entreprise ajouté avec succès !');
-
-            return $this->redirectToRoute('entreprise_index', ['id' => $entreprise->getId()]);
-        }
-
-        return $this->render('BackBundle:Entreprise:index.html.twig', [
-            'form'        => $form->createView(),
-            'entreprises' => $listeEntreprise,
-        ]);
+        $this->container->get('back.method.actions')->removeAction($entreprise);
+        $listEntreprise = $em->getRepository('BackBundle:Entreprise')->findAll();
+        $session = new Session();
+        $session->getFlashBag()->add('enterpriseDeleteOk', ''); // le message à l'utilisateur
+        return $this->redirectToRoute('entreprise_index',['entreprise' => $listEntreprise]);
     }
+
 }

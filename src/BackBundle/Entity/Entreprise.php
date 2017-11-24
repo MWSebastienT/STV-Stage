@@ -71,7 +71,7 @@ class Entreprise
     private $telephone;
 
     /**
-     * @ORM\OneToMany(targetEntity="ConnexionBundle\Entity\User", mappedBy="Entreprise")
+     * @ORM\OneToMany(targetEntity="ConnexionBundle\Entity\User", mappedBy="leEntreprise")
      */
     private $lesReferentPro;
 
@@ -286,6 +286,12 @@ class Entreprise
     {
         return $this->leTypeEnt;
     }
+
+
+    public function __toString()
+    {
+        return $this->nom;
+    }
     /**
      * Constructor
      */
@@ -326,10 +332,5 @@ class Entreprise
     public function getLesReferentPro()
     {
         return $this->lesReferentPro;
-    }
-
-    public function __toString()
-    {
-        return $this->nom;
     }
 }
