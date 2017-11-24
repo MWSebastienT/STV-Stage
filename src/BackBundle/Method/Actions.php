@@ -43,7 +43,7 @@ class Actions
                 $object->setEnabled(1);// on active l'élève
                 $object->setPlainPassword('on s en fou du mot de passe mais faut pas que ça soit null');
                 $object->setRoles([$role]); // on ajoute le role
-                $object->setUsernameCanonical($request->get('id')); // pareil je sais aps à quoi sert ce c
+                $object->setUsernameCanonical($request->get('id')); // pareil je sais pas à quoi sert ce c
             }
             $em->persist($object);
             $em->flush();
