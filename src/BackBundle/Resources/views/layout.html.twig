@@ -10,4 +10,13 @@
     {% endblock %}
 
 
+    {% block javascript %}
+{{ parent() }}
+        <script src="{{ asset('datatables/js/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('datatables-plugins/dataTables.bootstrap.min.js') }}"></script>
+        <script src="{{ asset('datatables-responsive/dataTables.responsive.js') }}"></script>
+    {% endblock %}
+
 {% endblock %}
+
+

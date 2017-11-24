@@ -1,0 +1,24 @@
+{% extends "BackBundle::layout.html.twig" %}
+
+{% block pageHeader %}Suivi de scolarité{% endblock %}
+
+{% block pageContent %}
+
+
+
+{% endblock %}
+
+
+{% block javascript %}
+    {{ parent() }}
+    <!-- DataTables JavaScript -->
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+        $(document).ready(function () {
+            $('#classe-table').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+{% endblock %}
