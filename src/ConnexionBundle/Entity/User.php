@@ -11,6 +11,10 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="ConnexionBundle\Repository\UserRepository")
+ * @ORM\AttributeOverrides({
+ *              @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true)),
+ *              @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true))
+ * })
  */
 class User extends BaseUser
 {
@@ -82,10 +86,6 @@ class User extends BaseUser
      * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Entreprise", inversedBy="lesReferentPro")
      */
     private $leEntreprise;
-
-
-
-
 
 
     public function __construct()
@@ -239,6 +239,34 @@ class User extends BaseUser
     }
 
 
+
+    /**
+     * Set obtentionBac
+     *
+     * @param \DateTime $obtentionBac
+     *
+     * @return User
+     */
+    public function setObtentionBac($obtentionBac)
+    {
+        $this->obtention_bac = new \DateTime();
+
+        return $this;
+    }
+
+    /**
+     * Get obtentionBac
+     *
+     * @return \DateTime
+     */
+    public function getObtentionBac($format = 'Y')
+    {
+
+        $date = $this->obtention_bac;
+        if ($date != null) {
+            return $date->format($format);
+        } else
+            return null;
 
 
 

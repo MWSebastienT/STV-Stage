@@ -1,0 +1,91 @@
+{% extends "BackBundle::layout.html.twig" %}
+
+{% block pageHeader %}
+
+    {% if action %}
+        Ajout d'un referent pro
+    {% else %}
+        Modification d'un referent pro
+    {% endif %}
+
+
+{% endblock %}
+
+{% block pageContent %}
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal','data-toggle':'validator'}}) }}
+    {# Idem pour un autre champ. #}
+    <div class="form-group">
+        {{ form_label(form.firstName, "Prénom", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.firstName) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.lastName, "Nom", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.lastName) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.phone, "Téléphone", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.phone) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.city, "Ville", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.city) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.address, "Adresse", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.address) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.address, {'attr': {'class': 'form-control selectpicker'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.zipCode, "Code postal", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.zipCode) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.zipCode, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+    {{ form_start(form) }}
+    {{ form_row(form.firstName) }}
+    {{ form_row(form.lastName) }}
+    {{ form_row(form.phone) }}
+    {{ form_row(form.city) }}
+    {{ form_row(form.address) }}
+    {{ form_row(form.zipCode) }}
+    {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $('[data-toggle="datepicker"]').datepicker({
+            format: "yyyy",
+            zIndex: 1400,
+            autoHide: true,
+        });
+    </script>
+
+
+{% endblock %}
