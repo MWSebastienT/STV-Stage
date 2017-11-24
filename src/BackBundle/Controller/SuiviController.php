@@ -87,10 +87,20 @@ class SuiviController extends Controller
      */
     public function removeAction($id)
     {
+        /* config service */
+
         $em = $this->getDoctrine()->getManager();
         $eleve = $em->getRepository('ConnexionBundle:User')->find($id);
-        $data = $this->container->get('back.method.actions')->removeAction($eleve);
         $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');
+
+        /* appel service */
+
+        $this->container->get('back.method.actions')->removeAction($eleve);
+        $session = new Session();
+        $session->getFlashBag()->add('eleveDelete', '');
+
+
+
         return $this->redirectToRoute('eleve_show',['eleve' => $listEleve]);
     }
 

@@ -57,7 +57,6 @@ class Actions
     {
         $em = $this->em;
         $em->remove($object);
-        $em->persist($object);
         $em->flush();
     }
 
