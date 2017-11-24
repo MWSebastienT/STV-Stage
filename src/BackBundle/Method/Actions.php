@@ -29,12 +29,12 @@ class Actions
      *  $role -> Le role en string lors d'un add User (jamais true pour les edits)
      *  $action -> permet d'identifier dans quel action on se trouve pour le titre du formulaire ^^
     */
-    public function formAction(Request $request,$form,$object,$entityName,$role=null,$action=null)
+    public function formAction(Request $request,$form,$object,$entityName,$action=null,$role=null)
     {
         $em = $this->em;
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            if($role != null)
+            if($role != "")
             {
                 $firstName = $object->getFirstName();
                 $lastName = $object->getLastName();

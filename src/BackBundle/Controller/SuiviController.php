@@ -71,7 +71,7 @@ class SuiviController extends Controller
 
         /* l'appel du service */
 
-        $data = $this->container->get('back.method.actions')->formAction($request, $form, $eleve, $entityName,'ROLE_ELEVE',$action);// true parce que j'utilise la table User pour add
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $eleve, $entityName,$action,'ROLE_ELEVE');// true parce que j'utilise la table User pour add
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
             $session = new Session();

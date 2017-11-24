@@ -1,0 +1,104 @@
+{% extends "BackBundle::layout.html.twig" %}
+
+{% block pageHeader %}
+
+    {% if action %}
+        Ajout d'un eleve
+    {% else %}
+        Modification d'un eleve
+    {% endif %}
+
+
+{% endblock %}
+
+{% block pageContent %}
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal','data-toggle':'validator'}}) }}
+    Idem pour un autre champ.
+    <div class="form-group">
+        {{ form_label(form.dateDebut, "Date de debut", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.dateDebut) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.dateDebut, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.dateFin, "Date de fin", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.dateFin) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.dateFin, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.lesTechno, "Les technologies", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.lesTechno) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.lesTechno, {'attr': {'class': 'form-control selectpicker',
+                'title': 'Selectionner une ou plusieurs technologie(s)'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.leEleve, "L'éleve", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.leEleve) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.leEleve, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.leReferentPro, "Le Referent Pro", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.leReferentPro) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.leReferentPro, {'attr': {'class': 'form-control selectpicker'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.leReferentPeda, "Le Referent Peda", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.leReferentPeda) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.leReferentPeda, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.leEntreprise, "L'entreprise", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.leEntreprise) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.leEntreprise, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    {{ form_start(form) }}
+    {{ form_row(form.dateDebut) }}
+    {{ form_row(form.dateFin) }}
+    {{ form_row(form.lesTechno) }}
+    {{ form_row(form.leEleve) }}
+    {{ form_row(form.leReferentPro) }}
+    {{ form_row(form.leReferentPeda) }}
+    {{ form_row(form.leEntreprise) }}
+    {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $('[data-toggle="datepicker"]').datepicker({
+            format: "yyyy",
+            zIndex: 1400,
+            autoHide: true,
+        });
+    </script>
+
+
+{% endblock %}

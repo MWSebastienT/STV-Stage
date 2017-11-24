@@ -1,0 +1,119 @@
+{% extends "BackBundle::layout.html.twig" %}
+
+{% block pageHeader %}
+
+    {% if action %}
+        Ajout d'une entreprise
+    {% else %}
+        Modification d'une entreprise
+    {% endif %}
+
+
+{% endblock %}
+
+{% block pageContent %}
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal','data-toggle':'validator'}}) }}
+    {# Idem pour un autre champ. #}
+    <div class="form-group">
+        {{ form_label(form.nom, "Nom", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.nom) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.leTypeEnt, "Type d'entreprise", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.leTypeEnt) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.leTypeEnt, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.cA, "Chiffre d'affaire", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.cA) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.cA, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.telephone, "Telephone", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.telephone) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.telephone, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.adresse, "Adresse", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.adresse) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.adresse, {'attr': {'class': 'form-control selectpicker'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.zipCode, "Code postal", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.zipCode) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.zipCode, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.city, "Ville", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.city) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.country, "Pays", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.country) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.country, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.LesReferentPro, "Les référents pro", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+        {{ form_errors(form.LesReferentPro) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.LesReferentPro, {'attr': {'class': 'form-control selectpicker',
+                'title': 'Selectionner un ou plusieurs referent(s)'}}) }}
+        </div>
+    </div>
+
+
+    {{ form_start(form) }}
+    {{ form_row(form.nom) }}
+    {{ form_row(form.leTypeEnt) }}
+    {{ form_row(form.cA) }}
+    {{ form_row(form.telephone) }}
+    {{ form_row(form.adresse) }}
+    {{ form_row(form.zipCode) }}
+    {{ form_row(form.city) }}
+    {{ form_row(form.country) }}
+    {{ form_row(form.LesReferentPro) }}
+    {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $('[data-toggle="datepicker"]').datepicker({
+            format: "yyyy",
+            zIndex: 1400,
+            autoHide: true,
+        });
+    </script>
+
+
+{% endblock %}
