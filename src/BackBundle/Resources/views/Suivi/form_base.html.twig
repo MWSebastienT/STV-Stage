@@ -71,11 +71,10 @@
             {{ form_errors(form.obtentionBac) }}
             <div class='col-sm-10'>
                 <div class="input-group">
-                    {{ form_widget(form.obtentionBac, {'attr': {'class': 'form-control picker','data-toggle' :'datepicker'}}) }}
+                    {{ form_widget(form.obtentionBac, {'attr': {'class': 'form-control','data-toggle' :'datepicker'}}) }}
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
-
                 </div>
 
             </div>
@@ -88,35 +87,35 @@
         {{ form_row(form.zipCode) }}
         {{ form_row(form.city) }}
         {{ form_row(form.obtentionBac) }}
-        <div  class="spaceButton">
-            <a href="{{ path('eleve_show') }}" class="btn btn-default"><span class="glyphicon glyphicon-arrow-left"></span>
+        <div class="spaceButton">
+            <a href="{{ path('eleve_show') }}" class="btn btn-default"><span
+                        class="glyphicon glyphicon-arrow-left"></span>
                 Retour</a>
             {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
 
         </div>
 
+        {% block javascript %}
+            {{ parent() }}
+            <script src="{{ asset('js/datepicker.common.js') }}"></script>
+            <script src="{{ asset('js/datepicker.esm.js') }}"></script>
+            <script src="{{ asset('js/datepicker.js') }}"></script>
+            <script type="text/javascript">
+                $('[data-toggle=\"datepicker\"]').datepicker({
+                    format: "yyyy",
+                    zIndex: 1400,
+                });
+            </script>
+        {% endblock %}
+
         {{ form_rest(form) }}
         {{ form_end(form) }}
 
     </div>
-
-
-
-
 {% endblock %}
 
 
 
-{% block javascripts %}
-    {{ parent() }}
-
-    <script type="text/javascript">
-        $('[data-toggle="datepicker"]').datepicker({
-            format: "yyyy",
-            zIndex: 1400,
-            autoHide: true,
-        });
-    </script>
 
 
-{% endblock %}
+

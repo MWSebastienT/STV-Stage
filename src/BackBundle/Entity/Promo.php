@@ -21,10 +21,20 @@ class Promo
      */
     private $id;
 
+
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="year", type="datetimetz")
+     * @ORM\Column(name="label", type="string")
+     */
+    private $label;
+
+
+
+    /**
+     * @var int
+     *
+     * @ORM\Column(name="year", type="integer")
      */
     private $year;
 
@@ -40,14 +50,49 @@ class Promo
     }
 
     /**
+     * Set label
+     *
+     * @param string $label
+     *
+     * @return Promo
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * Get label
+     *
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+
+    }
+
+    /**
      * Set year
      *
-     * @param \DateTime $year
+     * @param integer $year
      *
      * @return Promo
      */
     public function setYear($year)
     {
+        $year2 = $year + 1;
+        $label = $year.'/'.$year2;
+        $this->setLabel($label);
         $this->year = $year;
 
         return $this;
@@ -56,7 +101,7 @@ class Promo
     /**
      * Get year
      *
-     * @return \DateTime
+     * @return integer
      */
     public function getYear()
     {
