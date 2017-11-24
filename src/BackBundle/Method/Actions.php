@@ -22,30 +22,43 @@ class Actions
         $this->templating = $templating;
     }
 
-    public function formAction(Request $request,$form,$object,$entityName,$eleve = false,$redirect)
+    /* paramètres
+     *  $form -> le formulaire avec le formtype
+     *  $object -> l'objet sur lequelle on travaille exemple $eleve = $em->getRepository('blabalbal')->find($id) ou alors $eleve = new User();
+     *  $entityName -> le nom de la classe sur laquelle on travaille ( majuscule sur la premièr elettre )
+     *  $role -> Le role en string lors d'un add User (jamais true pour les edits)
+     *  $action -> permet d'identifier dans quel action on se trouve pour le titre du formulaire ^^
+    */
+    public function formAction(Request $request,$form,$object,$entityName,$role=null,$action=null)
     {
         $em = $this->em;
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            if($eleve == false)
+            if($role != null)
             {
-                  //on fait rien de spécialle pour l'instant
-            }
-            else{// si c'est un élève
                 $firstName = $object->getFirstName();
                 $lastName = $object->getLastName();
                 $object->setEmailCanonical($request->get('email')); // je sais pas à quoi sert ce champs mais il ne doit pas être nul donc on met dedans le même mail saisi pour le champs email
                 $object->setUsername($lastName.' '.$firstName);
                 $object->setEnabled(1);// on active l'élève
                 $object->setPlainPassword('on s en fou du mot de passe mais faut pas que ça soit null');
-                $object->setRoles(['ROLE_ELEVE']); // on ajoute le role
+                $object->setRoles([$role]); // on ajoute le role
                 $object->setUsernameCanonical($request->get('id')); // pareil je sais aps à quoi sert ce c
             }
             $em->persist($object);
             $em->flush();
-            return $redirect;
+            return array(0 => 'validate');
         }
         return
-            $this->templating->render('BackBundle:'.$entityName.':form_base.html.twig',['form' => $form->createView()]);
+            $this->templating->render('BackBundle:'.$entityName.':form_base.html.twig',['state'=>'show','form' => $form->createView(),'action'=>$action]);
     }
+
+    public function removeAction($object)
+    {
+        $em = $this->em;
+        $em->remove($object);
+        $em->persist($object);
+        $em->flush();
+    }
+
 }

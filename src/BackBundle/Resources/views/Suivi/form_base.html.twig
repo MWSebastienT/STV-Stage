@@ -1,5 +1,16 @@
 {% extends "BackBundle::layout.html.twig" %}
 
+{% block pageHeader %}
+
+    {% if action %}
+        Ajout d'un eleve
+    {% else %}
+        Modification d'un eleve
+    {% endif %}
+
+
+{% endblock %}
+
 {% block pageContent %}
 
     {{ form_start(form, {'attr': {'class': 'form-horizontal','data-toggle':'validator'}}) }}
@@ -36,7 +47,7 @@
         {{ form_label(form.address, "Adresse", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
         {{ form_errors(form.address) }}
         <div class="col-sm-9">
-            {{ form_widget(form.address, {'attr': {'class': 'form-control selectpicker'}}) }}
+            {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
         </div>
     </div>
     <div class="form-group">
@@ -58,7 +69,7 @@
         {{ form_errors(form.obtentionBac) }}
         <div class='col-sm-9'>
             <div class="input-group">
-                {{ form_widget(form.obtentionBac, {'attr': {'class': 'form-control','data-toggle' :'datepicker'}}) }}
+                {{ form_widget(form.obtentionBac, {'attr': {'class': 'form-control picker','data-toggle' :'datepicker'}}) }}
                 <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -86,8 +97,9 @@
 
 {% block javascripts %}
     {{ parent() }}
+
     <script type="text/javascript">
-        $('[data-toggle=\"datepicker\"]').datepicker({
+        $('[data-toggle="datepicker"]').datepicker({
             format: "yyyy",
             zIndex: 1400,
             autoHide: true,
