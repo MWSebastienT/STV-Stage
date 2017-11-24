@@ -1,26 +1,26 @@
 {% extends "BackBundle::layout.html.twig" %}
 
-{% block pageHeader %}Gestion des classes{% endblock %}
+{% block pageHeader %}Gestion des promos{% endblock %}
 
 {% block pageContent %}
 
-    <a href="{{ path('classe_add') }}" class="btn btn-success">
+    <a href="{{ path('promo_add') }}" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter
     </a>
 
-    {% for message in app.flashes('classeOk') %}
+    {% for message in app.flashes('promoOk') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Classe ajouté avec <strong>succès</strong> !
+            Promo ajouté avec <strong>succès</strong> !
         </div>
     {% endfor %}
 
-    {% for message in app.flashes('classeDelete') %}
+    {% for message in app.flashes('promoDelete') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Classe supprimé avec <strong>succès</strong> !
+            Promo supprimé avec <strong>succès</strong> !
         </div>
     {% endfor %}
 

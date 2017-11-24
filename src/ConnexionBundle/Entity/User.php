@@ -67,9 +67,9 @@ class User extends BaseUser
     protected $zipCode;
 
     /**
-     * @var DateTime
+     * @var string
      *
-     * @ORM\Column(name="obtention_bac", type="datetime",nullable=true, nullable=true)
+     * @ORM\Column(name="obtention_bac", type="string",nullable=true, nullable=true)
      */
     protected $obtention_bac;
 
@@ -240,37 +240,7 @@ class User extends BaseUser
 
 
 
-    /**
-     * Set obtentionBac
-     *
-     * @param \DateTime $obtentionBac
-     *
-     * @return User
-     */
-    public function setObtentionBac($obtentionBac)
-    {
-        $this->obtention_bac = new \DateTime();
 
-        return $this;
-    }
-
-    /**
-     * Get obtentionBac
-     *
-     * @return \DateTime
-     */
-    public function getObtentionBac($format = 'Y')
-    {
-
-        $date = $this->obtention_bac;
-        if($date != null)
-        {
-            return $date->format($format);
-        }
-        else
-            return null;
-
-    }
 
     /**
      * Set address
@@ -353,5 +323,29 @@ class User extends BaseUser
     public function getLeEntreprise()
     {
         return $this->leEntreprise;
+    }
+
+    /**
+     * Set obtentionBac
+     *
+     * @param string $obtentionBac
+     *
+     * @return User
+     */
+    public function setObtentionBac($obtentionBac)
+    {
+        $this->obtention_bac = $obtentionBac;
+
+        return $this;
+    }
+
+    /**
+     * Get obtentionBac
+     *
+     * @return string
+     */
+    public function getObtentionBac()
+    {
+        return $this->obtention_bac;
     }
 }

@@ -24,7 +24,7 @@
         <!-- Custom Fonts -->
         <link href="{{ asset('font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
         <link href="{{ asset('css/datepicker.min.css') }}" rel="stylesheet" type="text/css">
-
+        <link href="{{ asset('css/daterangepicker.min.css') }}" rel="stylesheet" type="text/css">
 
         <link href="{{ asset('style.css') }}" rel="stylesheet">
 
@@ -116,7 +116,7 @@
                                 <a href="{{ path('classe_show') }}">Classe</a>
                             </li>
                             <li>
-                                <a href="#">Années Scolaires</a>
+                                <a href="{{ path('promo_show') }}">Promo</a>
                             </li>
                             <li>
                                 <a href="#">Types de BAC</a>
@@ -183,7 +183,7 @@
     <!-- Pour les datetimes -->
 
     <script src="{{ asset('js/eModal.min.js') }}"></script>
-
+    <script src="{{ asset('js/daterangepicker.js') }}"></script>
 {% endblock %}
 
 </body>

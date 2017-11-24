@@ -100,17 +100,12 @@
             <script src="{{ asset('js/datepicker.common.js') }}"></script>
             <script src="{{ asset('js/datepicker.esm.js') }}"></script>
             <script src="{{ asset('js/datepicker.js') }}"></script>
-
-
-
-
-
-            <<script type="text/javascript">
-            $('[data-toggle=\"datepicker\"]').datepicker({
-                format: "yyyy",
-                zIndex: 1400,
-            });
-        </script>
+            <script type="text/javascript">
+                $('[data-toggle=\"datepicker\"]').datepicker({
+                    format: "yyyy",
+                    zIndex: 1400,
+                });
+            </script>
         {% endblock %}
 
         {{ form_rest(form) }}
