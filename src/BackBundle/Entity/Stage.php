@@ -36,7 +36,7 @@ class Stage
     private $dateFin;
 
     /**
-     * @ORM\ManyToMany (targetEntity="BackBundle\Entity\Techno", cascade={"persist"}, mappedBy="Stage")
+     * @ORM\ManyToMany (targetEntity="BackBundle\Entity\Techno", cascade={"persist"})
      */
     private $lesTechno;
 

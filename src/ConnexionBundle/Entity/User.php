@@ -78,6 +78,11 @@ class User extends BaseUser
      */
     private $lesDiplomes;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Entreprise", inversedBy="lesReferentPro")
+     */
+    private $leEntreprise;
+
 
 
 
@@ -323,5 +328,30 @@ class User extends BaseUser
     public function getLesDiplomes()
     {
         return $this->lesDiplomes;
+    }
+
+
+    /**
+     * Set leEntreprise
+     *
+     * @param \BackBundle\Entity\Entreprise $leEntreprise
+     *
+     * @return User
+     */
+    public function setLeEntreprise(\BackBundle\Entity\Entreprise $leEntreprise = null)
+    {
+        $this->leEntreprise = $leEntreprise;
+
+        return $this;
+    }
+
+    /**
+     * Get leEntreprise
+     *
+     * @return \BackBundle\Entity\Entreprise
+     */
+    public function getLeEntreprise()
+    {
+        return $this->leEntreprise;
     }
 }
