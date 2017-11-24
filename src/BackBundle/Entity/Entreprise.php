@@ -76,6 +76,11 @@ class Entreprise
     private $lesReferentPro;
 
     /**
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\Stage", mappedBy="leEntreprise")
+     */
+    private $lesStages;
+
+    /**
      * @ORM\ManyToOne(targetEntity="BackBundle\Entity\typeEntreprise")
      */
     private $leTypeEnt;
@@ -298,6 +303,7 @@ class Entreprise
     public function __construct()
     {
         $this->lesReferentPro = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->lesStages = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -332,5 +338,39 @@ class Entreprise
     public function getLesReferentPro()
     {
         return $this->lesReferentPro;
+    }
+
+    /**
+     * Add lesStage
+     *
+     * @param \BackBundle\Entity\Stage $lesStage
+     *
+     * @return Entreprise
+     */
+    public function addLesStage(\BackBundle\Entity\Stage $lesStage)
+    {
+        $this->lesStages[] = $lesStage;
+
+        return $this;
+    }
+
+    /**
+     * Remove lesStage
+     *
+     * @param \BackBundle\Entity\Stage $lesStage
+     */
+    public function removeLesStage(\BackBundle\Entity\Stage $lesStage)
+    {
+        $this->lesStages->removeElement($lesStage);
+    }
+
+    /**
+     * Get lesStages
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLesStages()
+    {
+        return $this->lesStages;
     }
 }
