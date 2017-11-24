@@ -191,27 +191,27 @@ class User extends BaseUser
     }
 
     /**
-     * Set adress
+     * Set address
      *
      * @param string $adress
      *
      * @return User
      */
-    public function setAdress($adress)
+    public function setAddress($address)
     {
-        $this->adress = $adress;
+        $this->address = $address;
 
         return $this;
     }
 
     /**
-     * Get adress
+     * Get address
      *
      * @return string
      */
-    public function getAdress()
+    public function getAddress()
     {
-        return $this->adress;
+        return $this->address;
     }
 
     /**
@@ -240,59 +240,8 @@ class User extends BaseUser
 
 
 
-    /**
-     * Set obtentionBac
-     *
-     * @param \DateTime $obtentionBac
-     *
-     * @return User
-     */
-    public function setObtentionBac($obtentionBac)
-    {
-        $this->obtention_bac = new \DateTime();
-
-        return $this;
-    }
-
-    /**
-     * Get obtentionBac
-     *
-     * @return \DateTime
-     */
-    public function getObtentionBac($format = 'Y')
-    {
-
-        $date = $this->obtention_bac;
-        if ($date != null) {
-            return $date->format($format);
-        } else
-            return null;
 
 
-
-    /**
-     * Set address
-     *
-     * @param string $address
-     *
-     * @return User
-     */
-    public function setAddress($address)
-    {
-        $this->address = $address;
-
-        return $this;
-    }
-
-    /**
-     * Get address
-     *
-     * @return string
-     */
-    public function getAddress()
-    {
-        return $this->address;
-    }
 
     /**
      * Add lesDiplome
