@@ -354,11 +354,12 @@
     </div>
     <!--/.footer-bottom-->
 </footer>
+
 <!-- /#wrapper -->
 {% block javascript %}
     <!-- jQuery -->
     <script src="{{ asset('jquery/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/moment.js') }}"></script>
+    <script src="{{ asset('jquery/moment.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
@@ -377,7 +378,9 @@
     <script src="{{ asset('js/datepicker.esm.js') }}"></script>
     <script src="{{ asset('js/datepicker.min.js') }}"></script>
     <script src="{{ asset('js/eModal.min.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('bundles/js/ajax.js') }}"></script>
+    <script src="{{ asset('datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('datatables-plugins/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('datatables-responsive/dataTables.responsive.js') }}"></script>
 {% endblock %}
 
 </body>
