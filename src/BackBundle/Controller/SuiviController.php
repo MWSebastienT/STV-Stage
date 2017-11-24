@@ -91,11 +91,14 @@ class SuiviController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $eleve = $em->getRepository('ConnexionBundle:User')->find($id);
+        $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');
 
         /* appel service */
 
         $this->container->get('back.method.actions')->removeAction($eleve);
-        $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');
+        $session = new Session();
+        $session->getFlashBag()->add('eleveDelete', '');
+
 
 
         return $this->redirectToRoute('eleve_show',['eleve' => $listEleve]);
