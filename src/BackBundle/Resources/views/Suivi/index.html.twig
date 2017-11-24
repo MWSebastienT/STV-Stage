@@ -1,6 +1,6 @@
 {% extends "BackBundle::layout.html.twig" %}
 
-{% block pageHeader %}Suivi de scolarité{% endblock %}
+{% block pageHeader %}Gestion des élèves{% endblock %}
 
 {% block pageContent %}
 
@@ -54,7 +54,7 @@
                     <td class="text-center">{{ eleve.city }}</td>
                     <td class="text-center">{{ eleve.zipCode }}</td>
                     <td class="text-center">{{ eleve.address }}</td>
-                    <td class="text-center">{{ eleve.obtentionBac | date("Y") }}</td>
+                    <td class="text-center">{{ eleve.obtentionBac | format("Y") }}</td>
                     <td class="text-center">
                         <button type="button" class="btn btn-success" aria-label="Left Align">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
