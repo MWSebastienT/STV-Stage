@@ -19,7 +19,7 @@ class PromoController extends Controller
      * @Route("/promo.html", name="promo_show")
      *
      */
-    public function indexAction(Request $request, $promos= null)
+    public function indexAction(Request $request, $promos = null)
     {
         if ($promos == null) {
             $em = $this->getDoctrine()->getManager();
@@ -29,6 +29,8 @@ class PromoController extends Controller
             'promos' => $promos
         ));
     }
+
+
 
     /**
      * @Route("/promo.html/edit/{id}", name="promo_edit")

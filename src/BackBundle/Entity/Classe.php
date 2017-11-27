@@ -29,9 +29,19 @@ class Classe
     private $label;
 
     /**
-     * @ORM\ManyToMany (targetEntity="BackBundle\Entity\Promo", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Promo", cascade={"persist"})
      */
     private $lesPromos;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\HistoryClasse",mappedBy="classe",cascade={"persist"})
+     */
+    private $history;
+
+    /**
+     * @ORM\OneToMany(targetEntity="ConnexionBundle\Entity\User",mappedBy="classe",cascade={"persist"})
+     */
+    private $eleve;
 
 
     /**
@@ -107,5 +117,78 @@ class Classe
     public function removeLesPromo(\BackBundle\Entity\Promo $lesPromo)
     {
         $this->lesPromos->removeElement($lesPromo);
+    }
+
+    /**
+     * Add history
+     *
+     * @param \BackBundle\Entity\HistoryClasse $history
+     *
+     * @return Classe
+     */
+    public function addHistory(\BackBundle\Entity\HistoryClasse $history)
+    {
+        $this->history[] = $history;
+
+        return $this;
+    }
+
+    /**
+     * Remove history
+     *
+     * @param \BackBundle\Entity\HistoryClasse $history
+     */
+    public function removeHistory(\BackBundle\Entity\HistoryClasse $history)
+    {
+        $this->history->removeElement($history);
+    }
+
+    /**
+     * Get history
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHistory()
+    {
+        return $this->history;
+    }
+
+    public function __toString()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Add eleve
+     *
+     * @param \ConnexionBundle\Entity\User $eleve
+     *
+     * @return Classe
+     */
+    public function addEleve(\ConnexionBundle\Entity\User $eleve)
+    {
+        $this->eleve[] = $eleve;
+
+        return $this;
+    }
+
+    /**
+     * Remove eleve
+     *
+     * @param \ConnexionBundle\Entity\User $eleve
+     */
+    public function removeEleve(\ConnexionBundle\Entity\User $eleve)
+    {
+        $this->eleve->removeElement($eleve);
+    }
+
+    /**
+     * Get eleve
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEleve()
+    {
+        return $this->eleve;
     }
 }

@@ -87,11 +87,20 @@ class User extends BaseUser
      */
     private $leEntreprise;
 
+    /**
+ * @ORM\OneToMany(targetEntity="BackBundle\Entity\HistoryClasse",mappedBy="eleve",cascade={"persist"})
+ */
+    protected $history;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Classe",inversedBy="eleve",cascade={"persist"})
+     */
+    protected $classe;
+
 
     public function __construct()
     {
         parent::__construct();
-        // your own logic
     }
 
     /**
@@ -239,10 +248,6 @@ class User extends BaseUser
     }
 
 
-
-
-
-
     /**
      * Add lesDiplome
      *
@@ -324,5 +329,63 @@ class User extends BaseUser
     public function getObtentionBac()
     {
         return $this->obtention_bac;
+    }
+
+    /**
+     * Add history
+     *
+     * @param \BackBundle\Entity\HistoryClasse $history
+     *
+     * @return User
+     */
+    public function addHistory(\BackBundle\Entity\HistoryClasse $history)
+    {
+        $this->history[] = $history;
+
+        return $this;
+    }
+
+    /**
+     * Remove history
+     *
+     * @param \BackBundle\Entity\HistoryClasse $history
+     */
+    public function removeHistory(\BackBundle\Entity\HistoryClasse $history)
+    {
+        $this->history->removeElement($history);
+    }
+
+    /**
+     * Get history
+     *
+     * @return string
+     */
+    public function getHistory()
+    {
+        return $this->history;
+    }
+
+    /**
+     * Set classe
+     *
+     * @param \BackBundle\Entity\Classe $classe
+     *
+     * @return User
+     */
+    public function setClasse(\BackBundle\Entity\Classe $classe = null)
+    {
+        $this->classe = $classe;
+
+        return $this;
+    }
+
+    /**
+     * Get classe
+     *
+     * @return \BackBundle\Entity\Classe
+     */
+    public function getClasse()
+    {
+        return $this->classe;
     }
 }

@@ -5,7 +5,7 @@
     {% if action %}
         Ajout d'une Promo
     {% else %}
-        Modification d'une eleve
+        Modification d'une promo
     {% endif %}
 
 
@@ -32,7 +32,7 @@
         </div>
         {{ form_row(form.year) }}
         <div class="spaceButton">
-            <a href="{{ path('eleve_show') }}" class="btn btn-default"><span
+            <a href="{{ path('promo_show') }}" class="btn btn-default"><span
                         class="glyphicon glyphicon-arrow-left"></span>
                 Retour</a>
             {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}

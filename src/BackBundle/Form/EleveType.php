@@ -2,6 +2,8 @@
 
 namespace BackBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -28,6 +30,9 @@ class EleveType extends AbstractType
             ->add('address')
             ->add('email', TextType::class)
             ->add('obtentionBac')
+            ->add('classe', EntityType::class, array(
+                'class' => 'BackBundle:Classe'
+            ))
             ->add('Valider', SubmitType::class);
     }
     

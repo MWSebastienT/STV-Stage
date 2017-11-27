@@ -2,6 +2,7 @@
 
 namespace BackBundle\Controller;
 
+use BackBundle\Entity\HistoryClasse;
 use BackBundle\Form\EleveType;
 use ConnexionBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -74,6 +75,15 @@ class SuiviController extends Controller
         $data = $this->container->get('back.method.actions')->formAction($request, $form, $eleve, $entityName,$action,'ROLE_ELEVE');// true parce que j'utilise la table User pour add
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
+
+            /* gestion des historique de classe */
+
+            $history = new HistoryClasse();
+            $history->setClasse($eleve->getClasse());
+            $history->setEleve($eleve);
+            $history->setActiveStatus(1);
+            $em->persist($history);
+            $em->flush();
             $session = new Session();
             $session->getFlashBag()->add('eleveOk', ''); // le message à l'utilisateur
             return $this->redirectToRoute('eleve_show', ['eleves' => $listEleve]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
