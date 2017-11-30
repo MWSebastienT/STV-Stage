@@ -1,7 +1,10 @@
-{% extends "@FOSUser/layout.html.twig" %}
+{% extends "BackBundle::layout.html.twig" %}
+{% block pageHeader %}Votre Profil{% endblock %}
 {% block pageContent %}
-{% block fos_user_content %}
-{% include "@FOSUser/Profile/edit_content.html.twig" %}
-{% endblock fos_user_content %}
 
+{% block fos_user_content %}
+    {% include "@FOSUser/Profile/edit_content.html.twig" %}
+
+{% endblock fos_user_content %}
 {% endblock %}
+
