@@ -3,9 +3,9 @@
 {% block pageHeader %}
 
     {% if action %}
-        Ajout d'un eleve
+        Ajout d'un type de BAC
     {% else %}
-        Modification d'un eleve
+        Modification d'un type de BAC
     {% endif %}
 
 
@@ -17,105 +17,22 @@
 
         {{ form_start(form, {'attr': {'class': 'form-horizontal','data-toggle':'validator'}}) }}
         {# Idem pour un autre champ. #}
-        <div class="form-group">
-            {{ form_label(form.lastName, "Nom", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-            {{ form_errors(form.lastName) }}
-            <div class="col-sm-10">
-                {{ form_widget(form.lastName, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_label(form.firstName, "Prenom", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-            {{ form_errors(form.firstName) }}
-            <div class="col-sm-10">
-                {{ form_widget(form.firstName, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_label(form.email, "Email", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-            {{ form_errors(form.email) }}
-            <div class="col-sm-10">
-                {{ form_widget(form.email, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_label(form.phone, "Téléphone", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-            {{ form_errors(form.phone) }}
-            <div class="col-sm-10">
-                {{ form_widget(form.phone, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_label(form.address, "Adresse", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-            {{ form_errors(form.address) }}
-            <div class="col-sm-10">
-                {{ form_widget(form.address, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_label(form.zipCode, "Code postal", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-            {{ form_errors(form.zipCode) }}
-            <div class="col-sm-10">
-                {{ form_widget(form.zipCode, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_label(form.city, "Ville", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
-            {{ form_errors(form.city) }}
-            <div class="col-sm-10">
-                {{ form_widget(form.city, {'attr': {'class': 'form-control'}}) }}
-            </div>
-        </div>
-        <div class="form-group">
-            {{ form_label(form.obtentionBac, "Année obtention BAC", {'label_attr': {'class': 'col-sm-2 control-label '}}) }}
-            {{ form_errors(form.obtentionBac) }}
-            <div class='col-sm-10'>
-                <div class="input-group">
-                    {{ form_widget(form.obtentionBac, {'attr': {'class': 'form-control','data-toggle' :'datepicker'}}) }}
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-
-            </div>
-        </div>
 
         <div class="form-group">
-            {{ form_label(form.classePromo, "La classe", {'label_attr': {'class': 'col-sm-3
-                        control-label'}}) }}
-            {{ form_errors(form.classePromo) }}
-            <div class="col-sm-9">
-                {{ form_widget(form.classePromo, {'attr': {'class': 'form-control'}}) }}
+            {{ form_label(form.label, "Type de bac", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+            {{ form_errors(form.label) }}
+            <div class="col-sm-10">
+                {{ form_widget(form.label, {'attr': {'class': 'form-control'}}) }}
             </div>
         </div>
-        {{ form_row(form.lastName) }}
-        {{ form_row(form.firstName) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.phone) }}
-        {{ form_row(form.address) }}
-        {{ form_row(form.zipCode) }}
-        {{ form_row(form.city) }}
-        {{ form_row(form.obtentionBac) }}
+        {{ form_row(form.label) }}
         <div class="spaceButton">
-            <a href="{{ path('eleve_show') }}" class="btn btn-default"><span
+            <a href="{{ path('promo_show') }}" class="btn btn-default"><span
                         class="glyphicon glyphicon-arrow-left"></span>
                 Retour</a>
             {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
 
         </div>
-
-        {% block javascript %}
-            {{ parent() }}
-            <script src="{{ asset('js/datepicker.common.js') }}"></script>
-            <script src="{{ asset('js/datepicker.esm.js') }}"></script>
-            <script src="{{ asset('js/datepicker.js') }}"></script>
-            <script type="text/javascript">
-                $('[data-toggle=\"datepicker\"]').datepicker({
-                    format: "yyyy",
-                    zIndex: 1400,
-                });
-            </script>
-        {% endblock %}
 
         {{ form_rest(form) }}
         {{ form_end(form) }}

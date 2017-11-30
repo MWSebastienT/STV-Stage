@@ -2,29 +2,34 @@
 
 namespace BackBundle\Controller;
 
+use BackBundle\Entity\Diplome;
+use BackBundle\Form\DiplomeType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class TypeBacController extends Controller
 {
     /**
-     * @Route("/", name="eleve_show")
+     * @Route("/bac", name="type_bac_show")
      *
      */
-    public function indexAction(Request $request, $listEleve = null)
+    public function indexAction(Request $request, $listBac = null)
     {
-        if ($listEleve == null) {
+        if ($listBac == null) {
             $em = $this->getDoctrine()->getManager();
-            $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');
+            $listBac = $em->getRepository('BackBundle:Diplome')->findAll();
         }
-        return $this->render('BackBundle:Suivi:index.html.twig', array(
-            'eleves' => $listEleve
+        return $this->render('BackBundle:TypeBac:index.html.twig', array(
+            'lesBacs' => $listBac
         ));
     }
 
 
     /**
-     * @Route("/eleve.html/edit/{id}", name="eleve_edit")
+     * @Route("/bac/edit/{id}", name="type_bac_edit")
      */
     public function editAction(Request $request, $id)
     {
@@ -32,48 +37,28 @@ class TypeBacController extends Controller
 
         $em = $this->getDoctrine()->getManager();
 
-        /* @var User $eleve */
-        $eleve = $em->getRepository('ConnexionBundle:User')->find($id);
-        $form = $this->createForm(EleveType::class, $eleve);
-        $entityName = 'Suivi';
-        $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');
-        $currentClasse = $em->getRepository('ConnexionBundle:User')->oldClassePromo($id); // on récupère l'id de l'ancienne classePromo
+        /* @var Diplome $bac */
+        $bac = $em->getRepository('BackBundle:Diplome')->find($id);
 
-        /* @var HistoryClasse $oldHistory */
-        $oldHistoryId = $eleve->getHistory()->getId();// on récupère l'ancienne classe rangé dans l'historique
+        $form = $this->createForm(DiplomeType::class, $bac);
+        $entityName = 'TypeBac';
+        $listBac = $em->getRepository('BackBundle:Diplome')->findAll();
 
         /* l'appel du service */
 
-        $data = $this->container->get('back.method.actions')->formAction($request, $form, $eleve, $entityName);
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $bac, $entityName);
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
-            $classePromo = $eleve->getClassePromo();
-            $idClassePromo = $classePromo->getId(); // on récupère la classe promo id saisi par l'utilisateur
-            if ($currentClasse != $idClassePromo && $currentClasse != null) //si la classe promo id est différente de l'ancienne
-            {
-                $oldHistory = $em->getRepository('BackBundle:HistoryClasse')->find($oldHistoryId);
-                $oldHistory->setActiveStatus(1); // on desactive l'ancienne classe
-                $em->persist($oldHistory);
-                $em->flush();
-                $history = new HistoryClasse();
-                $history->setClasse($eleve->getClassePromo()->getClasse());
-                $history->setEleve($eleve);
-                $history->setActiveStatus(0); // on active la nouvelle
-                $em->persist($history);
-                $eleve->setHistory($history); // et on pense à remplacé l'history de l'élève par l'history actuelle
-                $em->persist($eleve);
-                $em->flush();
-            }
             $session = new Session();
-            $session->getFlashBag()->add('eleveModif', '');// le message à l'utilisateur
-            return $this->redirectToRoute('eleve_show', ['eleves' => $listEleve]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
+            $session->getFlashBag()->add('bacModif', '');// le message à l'utilisateur
+            return $this->redirectToRoute('type_bac_show', ['lesBacs' => $listBac]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
         } else {// sinon on affiche le formulaire
             return new Response($data);
         }
     }
 
     /**
-     * @Route("/eleve/add", name="eleve_add")
+     * @Route("/bac/add", name="type_bac_add")
      */
     public function addAction(Request $request)
     {
@@ -81,52 +66,41 @@ class TypeBacController extends Controller
         /* Config nécessaire au fonctionnement du service */
 
         $em = $this->getDoctrine()->getManager();
-        $eleve = new User;
-        $form = $this->createForm(EleveType::class, $eleve);
-        $entityName = 'Suivi';
-        $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');
+        $bac = new Diplome();
+        $form = $this->createForm(DiplomeType::class, $bac);
+        $entityName = 'TypeBac';
+        $listBac = $em->getRepository('BackBundle:Diplome')->findAll();
         $action = 'edit';
 
         /* l'appel du service */
 
-        $data = $this->container->get('back.method.actions')->formAction($request, $form, $eleve, $entityName, $action, 'ROLE_ELEVE');// true parce que j'utilise la table User pour add
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $bac, $entityName, $action);// true parce que j'utilise la table User pour add
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
-
-            /* gestion des historique de classe */
-
-            $history = new HistoryClasse();
-            $history->setClasse($eleve->getClassePromo()->getClasse());
-            $history->setEleve($eleve);
-            $history->setActiveStatus(0);
-            $eleve->setHistory($history);
-            $em->persist($history);
-            $em->persist($eleve);
-            $em->flush();
             $session = new Session();
-            $session->getFlashBag()->add('eleveOk', ''); // le message à l'utilisateur
-            return $this->redirectToRoute('eleve_show', ['eleves' => $listEleve]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
+            $session->getFlashBag()->add('bacOk', ''); // le message à l'utilisateur
+            return $this->redirectToRoute('type_bac_show', ['lesBacs' => $listBac]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
         } else {// sinon on affiche le formulaire
             return new Response($data);
         }
     }
 
     /**
-     * @Route("/eleve/remove/{id}", name="eleve_remove")
+     * @Route("/bac/remove/{id}", name="type_bac_remove")
      */
     public function removeAction($id)
     {
         /* config service */
 
         $em = $this->getDoctrine()->getManager();
-        $eleve = $em->getRepository('ConnexionBundle:User')->find($id);
-        $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');
+        $bac = $em->getRepository('BackBundle:Diplome')->find($id);
+        $listBac = $em->getRepository('BackBundle:Diplome')->findAll();
 
         /* appel service */
 
-        $this->container->get('back.method.actions')->removeAction($eleve);
+        $this->container->get('back.method.actions')->removeAction($bac);
         $session = new Session();
         $session->getFlashBag()->add('eleveDelete', '');
-        return $this->redirectToRoute('eleve_show', ['eleve' => $listEleve]);
+        return $this->redirectToRoute('type_bac_show', ['lesBacs' => $listBac]);
     }
 }

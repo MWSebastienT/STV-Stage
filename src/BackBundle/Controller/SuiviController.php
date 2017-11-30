@@ -31,6 +31,21 @@ class SuiviController extends Controller
     }
 
     /**
+     * @Route("/eleve/show/{id}", name="eleve_focus")
+     *
+     */
+    public function showAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $eleve = $em->getRepository('ConnexionBundle:User')->find($id);
+        $historique = $em->getRepository('BackBundle:HistoryClasse')->findBy(['eleve' => $eleve]);
+        return $this->render('BackBundle:Suivi:show.html.twig', array(
+            'eleve' => $eleve,
+            'historique' => $historique
+        ));
+    }
+
+    /**
      * @Route("/eleve.html/edit/{id}", name="eleve_edit")
      */
     public function editAction(Request $request, $id)
@@ -41,12 +56,11 @@ class SuiviController extends Controller
 
         /* @var User $eleve */
         $eleve = $em->getRepository('ConnexionBundle:User')->find($id);
-
         $form = $this->createForm(EleveType::class, $eleve);
         $entityName = 'Suivi';
         $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');
         $currentClasse = $em->getRepository('ConnexionBundle:User')->oldClassePromo($id); // on récupère l'id de l'ancienne classePromo
-        $historyEleve = $eleve->getHistory();
+
         /* @var HistoryClasse $oldHistory */
         $oldHistoryId = $eleve->getHistory()->getId();// on récupère l'ancienne classe rangé dans l'historique
 
@@ -57,8 +71,7 @@ class SuiviController extends Controller
         {
             $classePromo = $eleve->getClassePromo();
             $idClassePromo = $classePromo->getId(); // on récupère la classe promo id saisi par l'utilisateur
-
-            if($currentClasse != $idClassePromo && $currentClasse != null) //si la classe promo id est différente de l'ancienne
+            if ($currentClasse != $idClassePromo && $currentClasse != null) //si la classe promo id est différente de l'ancienne
             {
                 $oldHistory = $em->getRepository('BackBundle:HistoryClasse')->find($oldHistoryId);
                 $oldHistory->setActiveStatus(1); // on desactive l'ancienne classe
@@ -67,9 +80,9 @@ class SuiviController extends Controller
                 $history = new HistoryClasse();
                 $history->setClasse($eleve->getClassePromo()->getClasse());
                 $history->setEleve($eleve);
-                $history->setActiveStatus(0);
+                $history->setActiveStatus(0); // on active la nouvelle
                 $em->persist($history);
-                $eleve->setHistory($historyEleve);
+                $eleve->setHistory($history); // et on pense à remplacé l'history de l'élève par l'history actuelle
                 $em->persist($eleve);
                 $em->flush();
             }
@@ -82,7 +95,7 @@ class SuiviController extends Controller
     }
 
     /**
-     * @Route("/eleve.html/add", name="eleve_add")
+     * @Route("/eleve/add", name="eleve_add")
      */
     public function addAction(Request $request)
     {
@@ -98,7 +111,7 @@ class SuiviController extends Controller
 
         /* l'appel du service */
 
-        $data = $this->container->get('back.method.actions')->formAction($request, $form, $eleve, $entityName,$action,'ROLE_ELEVE');// true parce que j'utilise la table User pour add
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $eleve, $entityName, $action, 'ROLE_ELEVE');// true parce que j'utilise la table User pour add
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
 
@@ -121,7 +134,7 @@ class SuiviController extends Controller
     }
 
     /**
-     * @Route("/eleve.html/remove/{id}", name="eleve_remove")
+     * @Route("/eleve/remove/{id}", name="eleve_remove")
      */
     public function removeAction($id)
     {
@@ -136,10 +149,7 @@ class SuiviController extends Controller
         $this->container->get('back.method.actions')->removeAction($eleve);
         $session = new Session();
         $session->getFlashBag()->add('eleveDelete', '');
-
-
-
-        return $this->redirectToRoute('eleve_show',['eleve' => $listEleve]);
+        return $this->redirectToRoute('eleve_show', ['eleve' => $listEleve]);
     }
 
 }
