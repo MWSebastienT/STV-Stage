@@ -29,15 +29,30 @@ class StageType extends AbstractType
                 'class' => 'BackBundle:Techno',
                 'multiple' => true,
             ])
-            ->add('leEleve')
+            ->add('leEleve', EntityType::class, array(
+                'class' => 'ConnexionBundle:User',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.roles LIKE :roles')
+                        ->setParameter('roles', '%"' . 'ROLE_ELEVE' . '"%');
+                },
+            ))
             ->add('leReferentPro', EntityType::class, [
                 'class' => 'ConnexionBundle:User',
                 'query_builder' => function (EntityRepository $er) {
                     return $er->createQueryBuilder('u')
                         ->where('u.roles LIKE :roles')
                         ->setParameter('roles', '%"' . 'ROLE_REF_PRO' . '"%');
+                },
             ])
-            ->add('leReferentPeda')
+            ->add('leReferentPeda', EntityType::class, [
+                'class' => 'ConnexionBundle:User',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.roles LIKE :roles')
+                        ->setParameter('roles', '%"' . 'ROLE_REF_PEDA' . '"%');
+                },
+            ])
             ->add('leEntreprise')
             ->add('Valider', SubmitType::class);
     }

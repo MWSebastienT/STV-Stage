@@ -3,9 +3,9 @@
 {% block pageHeader %}
 
     {% if action %}
-        Ajout d'un referent pro
+        Ajout d'un referent peda
     {% else %}
-        Modification d'un referent pro
+        Modification d'un referent pedagogique
     {% endif %}
 
 
@@ -69,7 +69,7 @@
     {{ form_row(form.address) }}
     {{ form_row(form.zipCode) }}
     <div class="spaceButton">
-        <a href="{{ path('entreprise_index') }}" class="btn btn-default"><span
+        <a href="{{ path('refpeda_index') }}" class="btn btn-default"><span
                     class="glyphicon glyphicon-arrow-left"></span>
             Retour</a>
         {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}

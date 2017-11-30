@@ -523,7 +523,7 @@
                 var value = $modal.find(INPUT).val();
                 close();
 
-                //TODO:
+
                 ev.type !== EVENT_SUBMIT ?
                     dfd.reject(value) :
                     dfd.resolve(value);

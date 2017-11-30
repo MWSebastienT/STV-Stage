@@ -15,6 +15,7 @@ use Symfony\Component\Validator\Constraints\DateTime;
  * @ORM\AttributeOverrides({
  *              @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true)),
  *              @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true))
+ *
  * })
  */
 class User extends BaseUser
@@ -111,10 +112,6 @@ class User extends BaseUser
      * @ORM\Column(name="activeStatus", type="boolean")
      */
     private $activeStatus;
-
-
-
-
 
     public function __construct()
     {
@@ -348,7 +345,6 @@ class User extends BaseUser
     {
         return $this->obtention_bac;
     }
-
 
 
     /**

@@ -34,7 +34,7 @@ class RefProController extends Controller
         /* l'appel du service */
 
         $data = $this->container->get('back.method.actions')->formAction($request, $form, $refPro, $entityName,
-            $action,'ROLE_ADMIN');// true parce que j'utilise la table User pour add
+            $action,'ROLE_REF_PRO');// true parce que j'utilise la table User pour add
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
             $refPro->setLeEntreprise($entreprise);
