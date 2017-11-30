@@ -28,18 +28,19 @@ class Classe
      */
     private $label;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Promo", cascade={"persist"})
-     */
-    private $lesPromos;
 
     /**
-     * @ORM\OneToMany(targetEntity="BackBundle\Entity\HistoryClasse",mappedBy="classe",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\ClassePromo",mappedBy="classe",cascade={"persist","remove"})
+     */
+    private $classePromo;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\HistoryClasse",mappedBy="classe",cascade={"persist","remove"})
      */
     private $history;
 
     /**
-     * @ORM\OneToMany(targetEntity="ConnexionBundle\Entity\User",mappedBy="classe",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="ConnexionBundle\Entity\User",mappedBy="classe",cascade={"persist","remove"})
      */
     private $eleve;
 
@@ -190,5 +191,39 @@ class Classe
     public function getEleve()
     {
         return $this->eleve;
+    }
+
+    /**
+     * Add classePromo
+     *
+     * @param \BackBundle\Entity\ClassePromo $classePromo
+     *
+     * @return Classe
+     */
+    public function addClassePromo(\BackBundle\Entity\ClassePromo $classePromo)
+    {
+        $this->classePromo[] = $classePromo;
+
+        return $this;
+    }
+
+    /**
+     * Remove classePromo
+     *
+     * @param \BackBundle\Entity\ClassePromo $classePromo
+     */
+    public function removeClassePromo(\BackBundle\Entity\ClassePromo $classePromo)
+    {
+        $this->classePromo->removeElement($classePromo);
+    }
+
+    /**
+     * Get classePromo
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getClassePromo()
+    {
+        return $this->classePromo;
     }
 }

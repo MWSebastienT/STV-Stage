@@ -2,6 +2,7 @@
 
 namespace ConnexionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -33,6 +34,11 @@ class User extends BaseUser
      * @ORM\Column(name="firstName", type="string", length=20, nullable=true)
      */
     protected $firstName;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\ClassePromo")
+     */
+    private $classePromo;
 
 
     /**
@@ -88,14 +94,11 @@ class User extends BaseUser
     private $leEntreprise;
 
     /**
- * @ORM\OneToMany(targetEntity="BackBundle\Entity\HistoryClasse",mappedBy="eleve",cascade={"persist"})
- */
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\HistoryClasse")
+     */
     protected $history;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Classe",inversedBy="eleve",cascade={"persist"})
-     */
-    protected $classe;
+
 
 
     public function __construct()
@@ -331,39 +334,7 @@ class User extends BaseUser
         return $this->obtention_bac;
     }
 
-    /**
-     * Add history
-     *
-     * @param \BackBundle\Entity\HistoryClasse $history
-     *
-     * @return User
-     */
-    public function addHistory(\BackBundle\Entity\HistoryClasse $history)
-    {
-        $this->history[] = $history;
 
-        return $this;
-    }
-
-    /**
-     * Remove history
-     *
-     * @param \BackBundle\Entity\HistoryClasse $history
-     */
-    public function removeHistory(\BackBundle\Entity\HistoryClasse $history)
-    {
-        $this->history->removeElement($history);
-    }
-
-    /**
-     * Get history
-     *
-     * @return string
-     */
-    public function getHistory()
-    {
-        return $this->history;
-    }
 
     /**
      * Set classe
@@ -387,5 +358,53 @@ class User extends BaseUser
     public function getClasse()
     {
         return $this->classe;
+    }
+
+    /**
+     * Set classePromo
+     *
+     * @param \BackBundle\Entity\ClassePromo $classePromo
+     *
+     * @return User
+     */
+    public function setClassePromo(\BackBundle\Entity\ClassePromo $classePromo = null)
+    {
+        $this->classePromo = $classePromo;
+
+        return $this;
+    }
+
+    /**
+     * Get classePromo
+     *
+     * @return \BackBundle\Entity\ClassePromo
+     */
+    public function getClassePromo()
+    {
+        return $this->classePromo;
+    }
+
+    /**
+     * Set history
+     *
+     * @param \BackBundle\Entity\HistoryClasse $history
+     *
+     * @return User
+     */
+    public function setHistory(\BackBundle\Entity\HistoryClasse $history = null)
+    {
+        $this->history = $history;
+
+        return $this;
+    }
+
+    /**
+     * Get history
+     *
+     * @return \BackBundle\Entity\HistoryClasse
+     */
+    public function getHistory()
+    {
+        return $this->history;
     }
 }

@@ -30,8 +30,8 @@ class EleveType extends AbstractType
             ->add('address')
             ->add('email', TextType::class)
             ->add('obtentionBac')
-            ->add('classe', EntityType::class, array(
-                'class' => 'BackBundle:Classe'
+            ->add('classePromo', EntityType::class, array(
+                'class' => 'BackBundle:ClassePromo'
             ))
             ->add('Valider', SubmitType::class);
     }

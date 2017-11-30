@@ -38,6 +38,11 @@ class Promo
      */
     private $year;
 
+    /**
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\ClassePromo",mappedBy="promo",cascade={"persist"})
+     */
+    private $classePromo;
+
 
     /**
      * Get id
@@ -113,5 +118,39 @@ class Promo
     public function __toString()
     {
         return $this->label;
+    }
+
+    /**
+     * Add classePromo
+     *
+     * @param \BackBundle\Entity\ClassePromo $classePromo
+     *
+     * @return Promo
+     */
+    public function addClassePromo(\BackBundle\Entity\ClassePromo $classePromo)
+    {
+        $this->classePromo[] = $classePromo;
+
+        return $this;
+    }
+
+    /**
+     * Remove classePromo
+     *
+     * @param \BackBundle\Entity\ClassePromo $classePromo
+     */
+    public function removeClassePromo(\BackBundle\Entity\ClassePromo $classePromo)
+    {
+        $this->classePromo->removeElement($classePromo);
+    }
+
+    /**
+     * Get classePromo
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getClassePromo()
+    {
+        return $this->classePromo;
     }
 }

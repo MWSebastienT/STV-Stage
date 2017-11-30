@@ -10,14 +10,32 @@ namespace ConnexionBundle\Repository;
  */
 class UserRepository extends \Doctrine\ORM\EntityRepository
 {
+    /* retourne les utilisateurs par rôle */
+
     public function findByRole($role)
     {
         $qb = $this->_em->createQueryBuilder();
         $qb->select('u')
             ->from($this->_entityName, 'u')
             ->where('u.roles LIKE :roles')
-            ->setParameter('roles', '%"'.$role.'"%');
+            ->setParameter('roles', '%"' . $role . '"%');
 
         return $qb->getQuery()->getResult();
+    }
+
+    /* retourne l'id de la classe promo  courante d'un élève */
+
+    public function oldClassePromo($id)
+    {
+        $qb = $this->_em->createQueryBuilder();
+        $qb->select('cp.id')
+            ->from($this->_entityName, 'u')
+            ->LeftJoin('u.history', 'h')
+            ->LeftJoin('u.classePromo', 'cp')
+            ->where('h.activeStatus = 0')
+            ->andWhere('u.id = :id')
+            ->setParameter('id', $id);
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 }

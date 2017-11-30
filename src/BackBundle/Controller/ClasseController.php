@@ -3,6 +3,7 @@
 namespace BackBundle\Controller;
 
 use BackBundle\Entity\Classe;
+use BackBundle\Entity\ClassePromo;
 use BackBundle\Form\ClasseType;
 use BackBundle\Form\EleveType;
 use ConnexionBundle\Entity\User;
@@ -90,6 +91,16 @@ class ClasseController extends Controller
         $data = $this->container->get('back.method.actions')->formAction($request, $form, $classe, $entityName, $action);// true parce que j'utilise la table User pour add
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
+            $lesPromo = $classe->getLesPromos();
+            foreach ($lesPromo as $unePromo)
+            {
+                $classPromo = new ClassePromo();
+                $classPromo->setClasse($classe);
+                $classPromo->setPromo($unePromo);
+                $classPromo->setLabel();
+                $em->persist($classPromo);
+            }
+            $em->flush();
             $session = new Session();
             $session->getFlashBag()->add('classeOk', ''); // le message à l'utilisateur
             return $this->redirectToRoute('classe_show', ['classes' => $listClasse]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
