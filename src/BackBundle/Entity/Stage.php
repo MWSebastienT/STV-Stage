@@ -22,16 +22,16 @@ class Stage
     private $id;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="dateDebut", type="datetimetz")
+     * @ORM\Column(name="dateDebut", type="string")
      */
     private $dateDebut;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="dateFin", type="datetimetz")
+     * @ORM\Column(name="dateFin", type="string")
      */
     private $dateFin;
 
@@ -99,7 +99,7 @@ class Stage
     /**
      * Set dateFin
      *
-     * @param \DateTime $dateFin
+     * @param string $dateFin
      *
      * @return Stage
      */
@@ -113,7 +113,7 @@ class Stage
     /**
      * Get dateFin
      *
-     * @return \DateTime
+     * @return string
      */
     public function getDateFin()
     {
