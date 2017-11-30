@@ -38,6 +38,11 @@ class Promo
      */
     private $year;
 
+    /**
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\ClassePromo",mappedBy="promo",cascade={"persist"})
+     */
+    private $classePromo;
+
 
     /**
      * Get id
@@ -90,6 +95,8 @@ class Promo
      */
     public function setYear($year)
     {
+        /* on stock la date en int pour pouvoir faire +1 dans le label ^^ */
+
         $year2 = $year + 1;
         $label = $year.'/'.$year2;
         $this->setLabel($label);
@@ -106,5 +113,44 @@ class Promo
     public function getYear()
     {
         return $this->year;
+    }
+
+    public function __toString()
+    {
+        return $this->label;
+    }
+
+    /**
+     * Add classePromo
+     *
+     * @param \BackBundle\Entity\ClassePromo $classePromo
+     *
+     * @return Promo
+     */
+    public function addClassePromo(\BackBundle\Entity\ClassePromo $classePromo)
+    {
+        $this->classePromo[] = $classePromo;
+
+        return $this;
+    }
+
+    /**
+     * Remove classePromo
+     *
+     * @param \BackBundle\Entity\ClassePromo $classePromo
+     */
+    public function removeClassePromo(\BackBundle\Entity\ClassePromo $classePromo)
+    {
+        $this->classePromo->removeElement($classePromo);
+    }
+
+    /**
+     * Get classePromo
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getClassePromo()
+    {
+        return $this->classePromo;
     }
 }
