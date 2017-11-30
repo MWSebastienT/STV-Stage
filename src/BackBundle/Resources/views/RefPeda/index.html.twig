@@ -1,100 +1,79 @@
 {% extends "BackBundle::layout.html.twig" %}
-{% block pageHeader %}Entreprise{% endblock %}
+{% block pageHeader %}Referents Pedagogique{% endblock %}
 {% block pageContent %}
-    <a href="{{ path('entreprise_add') }}" class="btn btn-success">
+    <a href="{{ path('refpeda_add') }}" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter
     </a>
-    <a href="{{ path('typeentreprise_add') }}" class="btn btn-success">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter un Type d'Entreprise
-    </a>
 
 
-    {% for message in app.flashes('entrepriseOk') %}
+    {% for message in app.flashes('refpedaOk') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Stage ajouté avec <strong>succès</strong> !
+            Type ajouté avec <strong>succès</strong> !
         </div>
     {% endfor %}
-    {% for message in app.flashes('entrepriseModif') %}
+    {% for message in app.flashes('refpedaModif') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Stage modifié avec <strong>succès</strong> !
+            Type modifié avec <strong>succès</strong> !
         </div>
     {% endfor %}
-    {% for message in app.flashes('entrepriseDeleteOk') %}
+    {% for message in app.flashes('refpedaDeleteOk') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Stage supprimé avec <strong>succès</strong> !
+            Type supprimé avec <strong>succès</strong> !
         </div>
     {% endfor %}
     <div class="panel panel-default">
         <div class="panel-heading">
-            <b>Liste des entreprises</b>
+            <b>Liste des élèves</b>
         </div>
         <!-- /.panel-heading -->
-        <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
-               id="eleve-table">
+        <table width="100%" class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline" id="eleve-table">
             <thead>
             <tr>
-                <th>Titre</th>
-                <th>Type</th>
-                <th>Chiffre d'affaire</th>
-                <th>Telephone</th>
+                <th>Nom - Prénom</th>
+                <th>Ville</th>
                 <th>Adresse</th>
                 <th>Code postal</th>
-                <th>Ville</th>
-                <th>Pays</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            {% for entreprise in entreprises %}
+            {% for refPeda in refPedas %}
                 <tr>
+                    <td class="text-center">{{ refPeda.firstName }} {{ refPeda.lastName }}</td>
+                    <td class="text-center">{{ refPeda.city }}</td>
+                    <td class="text-center">{{ refPeda.address }}</td>
+                    <td class="text-center">{{ refPeda.zipCode }}</td>
                     <td class="text-center">
-                        {{ entreprise.nom }}
-                    </td>
-                    <td class="text-center">{{ entreprise.leTypeEnt.label }}</td>
-                    <td class="text-center">{{ entreprise.ca }}</td>
-                    <td class="text-center">{{ entreprise.telephone }}</td>
-                    <td class="text-center">{{ entreprise.adresse }}</td>
-                    <td class="text-center">{{ entreprise.zipCode }}</td>
-                    <td class="text-center">{{ entreprise.city }}</td>
-                    <td class="text-center">{{ entreprise.country }}</td>
-                    <td class="text-center">
-                        <a href="{{ path('entreprise_show', {'id': entreprise.id}) }}">
-                            <button type="button" class="btn btn-success" aria-label="Left Align">
-                            <span class="glyphicon
-                            glyphicon-eye-open" aria-hidden="true"></span>
-                            </button>
-                        </a>
-                        <a href="{{ path('entreprise_edit',{'id': entreprise.id}) }}" class="btn btn-primary"
+                        <a href = "{{ path('refpeda_edit',{'id': refPeda.id}) }}" class="btn btn-primary"
                            aria-label="Left Align">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </a>
-                        <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-danger"
-                                aria-label="Left Align">
+
+                        <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-danger" aria-label="Left Align">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </button>
-                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
-                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Suppresion Entreprise</h5>
+                                        <h1 class="modal-title" id="exampleModalLabel">Suppression de Referent</h1>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Êtes-vous sûr de vouloir supprimer cette entreprise ?</p>
+                                        <h3>Êtes-vous sûr de vouloir supprimer le Referent ?</h3>
                                     </div>
                                     <div class="modal-footer">
-                                        <a href="{{ path('entreprise_remove',{'id': entreprise.id}) }}" type="button"
-                                           class="btn btn-danger">Oui</a>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-arrow-left"></span> Retour</button>
+                                        <a href = "{{ path('refpeda_remove',{'id': refPeda.id}) }}" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer élève</a>
                                     </div>
                                 </div>
                             </div>
