@@ -3,6 +3,7 @@
 namespace BackBundle\Form;
 
 use ConnexionBundle\ConnexionBundle;
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -20,11 +21,18 @@ class StageType extends AbstractType
             ->add('dateDebut')
             ->add('dateFin')
             ->add('lesTechno', EntityType::class, [
-                'class'    => 'BackBundle:Techno',
+                'class' => 'BackBundle:Techno',
                 'multiple' => true,
             ])
             ->add('leEleve')
-            ->add('leReferentPro')
+            ->add('leReferentPro', EntityType::class, [
+                'class' => 'ConnexionBundle:User',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.roles LIKE :roles')
+                        ->setParameter('roles', '%"' . 'ROLE_REF_PRO' . '"%');
+                },
+            ])
             ->add('leReferentPeda')
             ->add('leEntreprise')
             ->add('Valider', SubmitType::class);
