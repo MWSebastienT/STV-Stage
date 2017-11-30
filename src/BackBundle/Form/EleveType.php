@@ -33,6 +33,9 @@ class EleveType extends AbstractType
             ->add('classePromo', EntityType::class, array(
                 'class' => 'BackBundle:ClassePromo'
             ))
+            ->add('diplome', EntityType::class, array(
+                'class' => 'BackBundle:Diplome'
+            ))
             ->add('Valider', SubmitType::class);
     }
     

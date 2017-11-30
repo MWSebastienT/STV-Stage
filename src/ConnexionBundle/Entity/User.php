@@ -12,10 +12,6 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="ConnexionBundle\Repository\UserRepository")
- * @ORM\AttributeOverrides({
- *              @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true)),
- *              @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true))
- * })
  */
 class User extends BaseUser
 {
@@ -97,6 +93,11 @@ class User extends BaseUser
      * @ORM\ManyToOne(targetEntity="BackBundle\Entity\HistoryClasse")
      */
     protected $history;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\diplome")
+     */
+    protected $diplome;
 
 
 
@@ -406,5 +407,29 @@ class User extends BaseUser
     public function getHistory()
     {
         return $this->history;
+    }
+
+    /**
+     * Set diplome
+     *
+     * @param \BackBundle\Entity\diplome $diplome
+     *
+     * @return User
+     */
+    public function setDiplome(\BackBundle\Entity\diplome $diplome = null)
+    {
+        $this->diplome = $diplome;
+
+        return $this;
+    }
+
+    /**
+     * Get diplome
+     *
+     * @return \BackBundle\Entity\diplome
+     */
+    public function getDiplome()
+    {
+        return $this->diplome;
     }
 }
