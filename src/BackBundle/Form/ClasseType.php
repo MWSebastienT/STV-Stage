@@ -2,6 +2,7 @@
 
 namespace BackBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -20,7 +21,10 @@ class ClasseType extends AbstractType
             ->add('lesPromos', EntityType::class, [
                 'class' => 'BackBundle:Promo',
                 'multiple' => true,
-            ])
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.activeStatus = TRUE');
+                }])
             ->add('Valider', SubmitType::class);
     }
 

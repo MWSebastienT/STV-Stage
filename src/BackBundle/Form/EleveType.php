@@ -2,6 +2,7 @@
 
 namespace BackBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -22,20 +23,26 @@ class EleveType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('firstName')
-            ->add('lastName')
-            ->add('phone')
-            ->add('city')
-            ->add('zipCode')
-            ->add('address')
-            ->add('email', TextType::class)
-            ->add('obtentionBac')
-            ->add('classePromo', EntityType::class, array(
-                'class' => 'BackBundle:ClassePromo'
-            ))
-            ->add('diplome', EntityType::class, array(
-                'class' => 'BackBundle:Diplome'
-            ))
+            ->add('firstName',null,array('required' => true))
+            ->add('lastName',null,array('required' => true))
+            ->add('phone',NumberType::class,array('required' => true))
+            ->add('city',null,array('required' => true))
+            ->add('zipCode',NumberType::class,array('required' => true))
+            ->add('address',null,array('required' => true))
+            ->add('email', TextType::class,array('required' => true))
+            ->add('obtentionBac',null,array('required' => true))
+            ->add('classePromo', EntityType::class, [
+                'class' => 'BackBundle:ClassePromo',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.activeStatus = TRUE');
+                }])
+            ->add('diplome', EntityType::class, [
+                'class' => 'BackBundle:Diplome',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.activeStatus = TRUE');
+                }])
             ->add('Valider', SubmitType::class);
     }
     

@@ -28,22 +28,22 @@ class Classe
      */
     private $label;
 
-
-    /**
-     * @ORM\OneToMany(targetEntity="BackBundle\Entity\ClassePromo",mappedBy="classe",cascade={"persist","remove"})
-     */
-    private $classePromo;
-
     /**
      * @ORM\OneToMany(targetEntity="BackBundle\Entity\HistoryClasse",mappedBy="classe",cascade={"persist","remove"})
      */
     private $history;
 
     /**
-     * @ORM\OneToMany(targetEntity="ConnexionBundle\Entity\User",mappedBy="classe",cascade={"persist","remove"})
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\ClassePromo",cascade={"persist","remove"})
      */
-    private $eleve;
+    private $classePromo;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="activeStatus", type="boolean")
+     */
+    private $activeStatus;
 
     /**
      * Get id
@@ -193,34 +193,49 @@ class Classe
         return $this->eleve;
     }
 
+
     /**
-     * Add classePromo
+     * Set activeStatus
      *
-     * @param \BackBundle\Entity\ClassePromo $classePromo
+     * @param boolean $activeStatus
      *
      * @return Classe
      */
-    public function addClassePromo(\BackBundle\Entity\ClassePromo $classePromo)
+    public function setActiveStatus($activeStatus)
     {
-        $this->classePromo[] = $classePromo;
+        $this->activeStatus = $activeStatus;
 
         return $this;
     }
 
     /**
-     * Remove classePromo
+     * Get activeStatus
+     *
+     * @return boolean
+     */
+    public function getActiveStatus()
+    {
+        return $this->activeStatus;
+    }
+
+    /**
+     * Set classePromo
      *
      * @param \BackBundle\Entity\ClassePromo $classePromo
+     *
+     * @return Classe
      */
-    public function removeClassePromo(\BackBundle\Entity\ClassePromo $classePromo)
+    public function setClassePromo(\BackBundle\Entity\ClassePromo $classePromo = null)
     {
-        $this->classePromo->removeElement($classePromo);
+        $this->classePromo = $classePromo;
+
+        return $this;
     }
 
     /**
      * Get classePromo
      *
-     * @return \Doctrine\Common\Collections\Collection
+     * @return \BackBundle\Entity\ClassePromo
      */
     public function getClassePromo()
     {

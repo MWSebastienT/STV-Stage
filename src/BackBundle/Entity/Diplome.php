@@ -68,4 +68,35 @@ class Diplome
     {
         return $this->label;
     }
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="activeStatus", type="boolean")
+     */
+    private $activeStatus;
+
+    /**
+     * Set activeStatus
+     *
+     * @param boolean $activeStatus
+     *
+     * @return Diplome
+     */
+    public function setActiveStatus($activeStatus)
+    {
+        $this->activeStatus = $activeStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get activeStatus
+     *
+     * @return boolean
+     */
+    public function getActiveStatus()
+    {
+        return $this->activeStatus;
+    }
 }

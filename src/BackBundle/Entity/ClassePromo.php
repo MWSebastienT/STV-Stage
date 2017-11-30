@@ -22,7 +22,7 @@ class ClassePromo
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Promo",inversedBy="classePromo")
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Promo")
      */
     private $promo;
 
@@ -37,6 +37,13 @@ class ClassePromo
      * @ORM\Column(name="label", type="string", length=255)
      */
     private $label;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="activeStatus", type="boolean")
+     */
+    private $activeStatus;
 
 
     /**
@@ -97,6 +104,11 @@ class ClassePromo
         return $this->classe;
     }
 
+    public function __construct()
+    {
+        $this->activeStatus = true;
+    }
+
     /**
      * Set label
      *
@@ -126,5 +138,29 @@ class ClassePromo
     public function getLabel()
     {
         return $this->label;
+    }
+
+    /**
+     * Set activeStatus
+     *
+     * @param boolean $activeStatus
+     *
+     * @return ClassePromo
+     */
+    public function setActiveStatus($activeStatus)
+    {
+        $this->activeStatus = $activeStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get activeStatus
+     *
+     * @return boolean
+     */
+    public function getActiveStatus()
+    {
+        return $this->activeStatus;
     }
 }

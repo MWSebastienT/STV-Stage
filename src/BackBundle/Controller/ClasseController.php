@@ -24,7 +24,7 @@ class ClasseController extends Controller
     {
         if ($listClasse == null) {
             $em = $this->getDoctrine()->getManager();
-            $listClasse = $em->getRepository('BackBundle:Classe')->findAll();
+            $listClasse = $em->getRepository('BackBundle:Classe')->findBy(['activeStatus' => 1]);
         }
         return $this->render('BackBundle:Classe:index.html.twig', array(
             'classes' => $listClasse
@@ -35,7 +35,7 @@ class ClasseController extends Controller
      * @Route("/classe.html/show/{id}", name="classe_focus")
      *
      */
-    public function showAction($listClasse = null, $id)
+    public function showAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $classe = $em->getRepository('BackBundle:Classe')->find($id);
@@ -56,7 +56,7 @@ class ClasseController extends Controller
         $classe = $em->getRepository('BackBundle:Classe')->find($id);
         $form = $this->createForm(ClasseType::class, $classe);
         $entityName = 'Classe';
-        $listClasse = $em->getRepository('BackBundle:Classe')->findAll();
+        $listClasse = $em->getRepository('BackBundle:Classe')->findBy(['activeStatus' => 1]);
 
         /* l'appel du service */
 
@@ -81,14 +81,18 @@ class ClasseController extends Controller
 
         $em = $this->getDoctrine()->getManager();
         $classe = new Classe();
+
         $form = $this->createForm(ClasseType::class, $classe);
+
         $entityName = 'Classe';
-        $listClasse = $em->getRepository('BackBundle:Classe')->findAll();
+
+        $listClasse = $em->getRepository('BackBundle:Classe')->findBy(['activeStatus' => true]);
+
         $action = 'edit';
 
         /* l'appel du service */
 
-        $data = $this->container->get('back.method.actions')->formAction($request, $form, $classe, $entityName, $action);// true parce que j'utilise la table User pour add
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $classe, $entityName, $action,null,'yo');// true parce que j'utilise la table User pour add
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
             $lesPromo = $classe->getLesPromos();
@@ -117,15 +121,21 @@ class ClasseController extends Controller
         /* config service */
 
         $em = $this->getDoctrine()->getManager();
+        /* @var Classe $classe */
         $classe = $em->getRepository('BackBundle:Classe')->find($id);
-        $listClasse = $em->getRepository('BackBundle:Classe')->findAll();
+        $listClasse = $em->getRepository('BackBundle:Classe')->findBy(['activeStatus' => 1]);
+        /* @var User $eleve */
 
         /* appel service */
 
-        $this->container->get('back.method.actions')->removeAction($classe);
+        dump( $classe->getClassePromo());die;
+        $classePromo = $classe->getClassePromo();
+        foreach ($classePromo as $cp) {
+            $classePromo->setActiveStatus(0);
+        }
+        $this->container->get('back.method.actions')->disableAction($classe); //en réalité on désactive on ne supprime pas
         $session = new Session();
-        $session->getFlashBag()->add('classeDelete', '');
-
+        $session->getFlashBag()->add('classeDelete','');
 
         return $this->redirectToRoute('classe_show', ['classe' => $listClasse]);
     }

@@ -12,6 +12,10 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="ConnexionBundle\Repository\UserRepository")
+ * @ORM\AttributeOverrides({
+ *              @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true)),
+ *              @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true))
+ * })
  */
 class User extends BaseUser
 {
@@ -33,6 +37,7 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToOne(targetEntity="BackBundle\Entity\ClassePromo")
+     * @ORM\Column(nullable=true)
      */
     private $classePromo;
 
@@ -90,7 +95,8 @@ class User extends BaseUser
     private $leEntreprise;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\HistoryClasse")
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\HistoryClasse",cascade={"persist","remove"})
+     * @ORM\Column(nullable=true)
      */
     protected $history;
 
@@ -98,6 +104,14 @@ class User extends BaseUser
      * @ORM\ManyToOne(targetEntity="BackBundle\Entity\diplome")
      */
     protected $diplome;
+
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="activeStatus", type="boolean")
+     */
+    private $activeStatus;
+
 
 
 
@@ -431,5 +445,29 @@ class User extends BaseUser
     public function getDiplome()
     {
         return $this->diplome;
+    }
+
+    /**
+     * Set activeStatus
+     *
+     * @param boolean $activeStatus
+     *
+     * @return User
+     */
+    public function setActiveStatus($activeStatus)
+    {
+        $this->activeStatus = $activeStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get activeStatus
+     *
+     * @return boolean
+     */
+    public function getActiveStatus()
+    {
+        return $this->activeStatus;
     }
 }

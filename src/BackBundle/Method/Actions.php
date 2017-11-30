@@ -30,11 +30,12 @@ class Actions
      *  $role -> Le role en string lors d'un add User (jamais true pour les edits)
      *  $action -> permet d'identifier dans quel action on se trouve pour le titre du formulaire ^^
     */
-    public function formAction(Request $request,$form,$object,$entityName,$action=null,$role=null)
+    public function formAction(Request $request,$form,$object,$entityName,$action=null,$role=null,$suivi = null)
     {
         $em = $this->em;
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+
             if($role != "")
             {
                 $firstName = $object->getFirstName();
@@ -45,6 +46,9 @@ class Actions
                 $object->setPlainPassword('on s en fou du mot de passe mais faut pas que ça soit null');
                 $object->setRoles([$role]); // on ajoute le role
                 $object->setUsernameCanonical($request->get('id')); // pareil je sais pas à quoi sert ce c
+            }
+            if($suivi != null){
+                $object->setActiveStatus(1);
             }
             $em->persist($object);
             $em->flush();
@@ -58,6 +62,13 @@ class Actions
     {
         $em = $this->em;
         $em->remove($object);
+        $em->flush();
+    }
+    public function disableAction($object)
+    {
+        $em = $this->em;
+        $object->setActiveStatus(0);
+        $em->persist(($object));
         $em->flush();
     }
 

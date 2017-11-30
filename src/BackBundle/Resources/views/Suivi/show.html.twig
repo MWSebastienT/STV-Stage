@@ -44,13 +44,15 @@
                     {% for uneClasse in historique %}
                         {% if uneClasse.activeStatus == 0 %}
                             <tr style="background-color: lightgray">
-                                <td>{{ uneClasse.classe.label }}</td>
-                                <td>{{ uneClasse.eleve.classePromo.promo.label }}</td>
+
+                                <td>{% if uneClasse.classe != null %}{{ uneClasse.classe.label }}{% endif %}</td>
+                                <td>{% if uneClasse.eleve != null %}{{ uneClasse.eleve.classePromo.promo.label }}{% endif %}</td>
+
                             </tr>
                         {% else %}
                             <tr>
-                                <td>{{ uneClasse.classe.label }}</td>
-                                <td>{{ uneClasse.eleve.classePromo.promo.label }}</td>
+                                <td>{% if uneClasse.classe != null %}{{ uneClasse.classe.label }}{% endif %}</td>
+                                <td>{% if uneClasse.eleve.classePromo != null %}{{ uneClasse.eleve.classePromo.promo.label }}{% endif %}</td>
                             </tr>
                         {% endif %}
                     {% endfor %}

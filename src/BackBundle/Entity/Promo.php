@@ -30,6 +30,14 @@ class Promo
     private $label;
 
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="activeStatus", type="boolean")
+     */
+    private $activeStatus;
+
+
 
     /**
      * @var int
@@ -39,7 +47,7 @@ class Promo
     private $year;
 
     /**
-     * @ORM\OneToMany(targetEntity="BackBundle\Entity\ClassePromo",mappedBy="promo",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\ClassePromo",mappedBy="promo",cascade={"persist","remove"})
      */
     private $classePromo;
 
@@ -152,5 +160,29 @@ class Promo
     public function getClassePromo()
     {
         return $this->classePromo;
+    }
+
+    /**
+     * Set activeStatus
+     *
+     * @param boolean $activeStatus
+     *
+     * @return Promo
+     */
+    public function setActiveStatus($activeStatus)
+    {
+        $this->activeStatus = $activeStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get activeStatus
+     *
+     * @return boolean
+     */
+    public function getActiveStatus()
+    {
+        return $this->activeStatus;
     }
 }

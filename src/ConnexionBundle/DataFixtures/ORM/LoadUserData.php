@@ -17,6 +17,7 @@ class LoadUserData implements FixtureInterface
         $role = array('ROLE_ADMIN');
         $entity->setEnabled(1);
         $entity->setRoles($role);
+        $entity->setActiveStatus(1);
         $manager->persist($entity);
         $manager->flush();
     }
