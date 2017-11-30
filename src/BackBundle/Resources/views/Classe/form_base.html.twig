@@ -1,0 +1,62 @@
+{% extends "BackBundle::layout.html.twig" %}
+
+{% block pageHeader %}
+    {% if action %}
+        Ajout d'une classe
+    {% else %}
+        Modification d'une classe
+    {% endif %}
+{% endblock %}
+
+{% block pageContent %}
+    <div class="formWidth container">
+        {{ form_start(form, {'attr': {'class': 'form-horizontal','data-toggle':'validator'}}) }}
+        {# Idem pour un autre champ. #}
+        <div class="form-group">
+            {{ form_label(form.label, "Nom", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+            {{ form_errors(form.label) }}
+            <div class="col-sm-10">
+                {{ form_widget(form.label, {'attr': {'class': 'form-control'}}) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(form.lesPromos, "Les promos", {'label_attr': {'class': 'col-sm-3
+                        control-label'}}) }}
+            {{ form_errors(form.lesPromos) }}
+            <div class="col-sm-9">
+                {{ form_widget(form.lesPromos, {'attr': {'class': 'form-control selectpicker',
+                    'title': 'Selectionner une ou plusieurs promo à assigner'}}) }}
+            </div>
+        </div>
+        {{ form_row(form.label) }}
+        <div class="spaceButton">
+            <a href="{{ path('classe_show') }}" class="btn btn-default"><span
+                        class="glyphicon glyphicon-arrow-left"></span>
+                Retour</a>
+            {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+        </div>
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+{% endblock %}
+
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script type="text/javascript">
+        $('[data-toggle="datepicker"]').datepicker({
+            format: "yyyy",
+            zIndex: 1400,
+            autoHide: true,
+        });
+    </script>
+
+
+{% endblock %}
+
+
+
+
+
+

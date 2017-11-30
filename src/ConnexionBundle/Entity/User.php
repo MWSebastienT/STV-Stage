@@ -2,6 +2,7 @@
 
 namespace ConnexionBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
 use Symfony\Component\Validator\Constraints\DateTime;
@@ -33,6 +34,11 @@ class User extends BaseUser
      * @ORM\Column(name="firstName", type="string", length=20, nullable=true)
      */
     protected $firstName;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\ClassePromo")
+     */
+    private $classePromo;
 
 
     /**
@@ -87,11 +93,17 @@ class User extends BaseUser
      */
     private $leEntreprise;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\HistoryClasse")
+     */
+    protected $history;
+
+
+
 
     public function __construct()
     {
         parent::__construct();
-        // your own logic
     }
 
     /**
@@ -239,10 +251,6 @@ class User extends BaseUser
     }
 
 
-
-
-
-
     /**
      * Add lesDiplome
      *
@@ -324,5 +332,79 @@ class User extends BaseUser
     public function getObtentionBac()
     {
         return $this->obtention_bac;
+    }
+
+
+
+    /**
+     * Set classe
+     *
+     * @param \BackBundle\Entity\Classe $classe
+     *
+     * @return User
+     */
+    public function setClasse(\BackBundle\Entity\Classe $classe = null)
+    {
+        $this->classe = $classe;
+
+        return $this;
+    }
+
+    /**
+     * Get classe
+     *
+     * @return \BackBundle\Entity\Classe
+     */
+    public function getClasse()
+    {
+        return $this->classe;
+    }
+
+    /**
+     * Set classePromo
+     *
+     * @param \BackBundle\Entity\ClassePromo $classePromo
+     *
+     * @return User
+     */
+    public function setClassePromo(\BackBundle\Entity\ClassePromo $classePromo = null)
+    {
+        $this->classePromo = $classePromo;
+
+        return $this;
+    }
+
+    /**
+     * Get classePromo
+     *
+     * @return \BackBundle\Entity\ClassePromo
+     */
+    public function getClassePromo()
+    {
+        return $this->classePromo;
+    }
+
+    /**
+     * Set history
+     *
+     * @param \BackBundle\Entity\HistoryClasse $history
+     *
+     * @return User
+     */
+    public function setHistory(\BackBundle\Entity\HistoryClasse $history = null)
+    {
+        $this->history = $history;
+
+        return $this;
+    }
+
+    /**
+     * Get history
+     *
+     * @return \BackBundle\Entity\HistoryClasse
+     */
+    public function getHistory()
+    {
+        return $this->history;
     }
 }

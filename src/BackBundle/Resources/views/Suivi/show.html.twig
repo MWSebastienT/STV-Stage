@@ -1,0 +1,90 @@
+{% extends "BackBundle::layout.html.twig" %}
+{% block pageHeader %}{% endblock %}
+{% block pageContent %}
+
+    <a href="{{ path('eleve_show') }}" class="btn btn-default"><span
+                class="glyphicon glyphicon-arrow-left"></span>
+        Retour</a>
+
+    <h1 class="spaceTop">{{ eleve.lastName }} {{ eleve.firstName | upper }} </h1>
+    <br>
+
+    <div class="col-md-12">
+        <div class="col-md-6">
+            <p>Email : {{ eleve.email }} </p>
+            <p>Téléphone : {{ eleve.phone }} </p>
+            <p><div >Adresse:</div><div class="col-md-1"></div><div class="col-md-11"> {{ eleve.address }}  <br>{{ eleve.zipCode }} <br> {{ eleve.city }}</div></p>
+        </div>
+        <div class="col-md-6">
+            <p>Année obtentioon BAC : {{ eleve.obtentionBac }} </p>
+            <p>Type de bac : pas encore géré </p>
+
+        </div>
+    </div>
+
+    <div class="col-md-12">
+
+        <div class="container">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <b>Historique des classes</b>
+                </div>
+                <!-- /.panel-heading -->
+                <table width="100%"
+                       class="table table-striped table-bordered table-hover dataTable no-footer dtr-inline"
+                       id="dataTables-example">
+                    <thead>
+                    <tr>
+                        <th>Classe</th>
+                        <th>Promo</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for uneClasse in historique %}
+                        {% if uneClasse.activeStatus == 0 %}
+                            <tr style="background-color: lightgray">
+                                <td>{{ uneClasse.classe.label }}</td>
+                                <td>{{ uneClasse.eleve.classePromo.promo.label }}</td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td>{{ uneClasse.classe.label }}</td>
+                                <td>{{ uneClasse.eleve.classePromo.promo.label }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="col-md-12">
+
+        <div style="width: 20px;height:10px;background-color: lightgray"></div>
+        <p style="float:left">Classe actuelle</p>
+
+    </div>
+
+
+{% endblock %}
+{% block javascript %}
+    {{ parent() }}
+    <!-- DataTables JavaScript -->
+    <script src="{{ asset('datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('datatables-plugins/dataTables.bootstrap.min.js') }}"></script>
+    <script src="{{ asset('datatables-responsive/dataTables.responsive.js') }}"></script>
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+        $(document).ready(function () {
+            $('#dataTables-example').DataTable({
+                responsive: true
+            });
+        });
+    </script>
+{% endblock %}
