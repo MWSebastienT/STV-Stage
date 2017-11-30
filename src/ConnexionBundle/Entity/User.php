@@ -247,8 +247,6 @@ class User extends BaseUser
     }
 
 
-<<<<<<< HEAD
-=======
     /**
      * Add lesDiplome
      *
@@ -284,7 +282,6 @@ class User extends BaseUser
     }
 
 
->>>>>>> 7607f63cd3ea8c98362821bc89b0475b086f41e8
     /**
      * Set leEntreprise
      *
