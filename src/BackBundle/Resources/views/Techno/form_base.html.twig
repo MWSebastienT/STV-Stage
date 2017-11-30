@@ -3,9 +3,9 @@
 {% block pageHeader %}
 
     {% if action %}
-        Ajout d'un type d'entreprise
+        Ajout d'une techno
     {% else %}
-        Modification d'un type d'entreprise
+        Modification d'une techno
     {% endif %}
 
 
@@ -28,7 +28,7 @@
     {{ form_start(form) }}
     {{ form_row(form.label) }}
     <div class="spaceButton">
-        <a href="{{ path('entreprise_index') }}" class="btn btn-default"><span
+        <a href="{{ path('default_show') }}" class="btn btn-default"><span
                     class="glyphicon glyphicon-arrow-left"></span>
             Retour</a>
         {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}

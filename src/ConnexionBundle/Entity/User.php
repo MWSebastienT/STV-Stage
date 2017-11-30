@@ -12,6 +12,10 @@ use Symfony\Component\Validator\Constraints\DateTime;
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="ConnexionBundle\Repository\UserRepository")
+ * @ORM\AttributeOverrides({
+ *              @ORM\AttributeOverride(name="email", column=@ORM\Column(nullable=true)),
+ *              @ORM\AttributeOverride(name="emailCanonical", column=@ORM\Column(nullable=true))
+ * })
  */
 class User extends BaseUser
 {
@@ -98,8 +102,6 @@ class User extends BaseUser
      * @ORM\ManyToOne(targetEntity="BackBundle\Entity\diplome")
      */
     protected $diplome;
-
-
 
 
     public function __construct()
@@ -334,7 +336,6 @@ class User extends BaseUser
     {
         return $this->obtention_bac;
     }
-
 
 
     /**

@@ -98,7 +98,17 @@
                         <a href="{{ path('default_show') }}"><i class="fa fa-dashboard fa-fw"></i> Accueil</a>
                     </li>
                     <li>
-                        <a href="{{ path('stage_show') }}"><i class="fa fa-pencil-square-o fa-fw"></i> Stages</a>
+                        <a href="#"><i class="fa fa-graduation-cap fa-fw"></i> Stages<span
+                                    class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ path('stage_show') }}">Stages</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('techno_index') }}">Technologies</a>
+                            </li>
+                        </ul>
+                        <!-- /.nav-second-level -->
                     </li>
                     <li>
                         <a href="#"><i class="fa fa-briefcase fa-fw fa-fw"></i> Entreprise<span
@@ -127,7 +137,7 @@
                                 <a href="{{ path('promo_show') }}">Promo</a>
                             </li>
                             <li>
-                                <a href="#">Types de BAC</a>
+                                <a href="{{ path('type_bac_show') }}">Types de BAC</a>
                             </li>
                         </ul>
                         <!-- /.nav-second-level -->

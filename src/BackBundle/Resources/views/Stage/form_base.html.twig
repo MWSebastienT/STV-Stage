@@ -13,7 +13,7 @@
 
 {% block pageContent %}
 
-    {{ form_start(form, {'attr': {'class': 'form-horizontal','data-toggle':'validator'}}) }}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal validation','data-toggle':'validator'}}) }}
     <div class="form-group">
         {{ form_label(form.dateDebut, "Date de debut", {'label_attr': {'class': 'col-sm-2 control-label '}}) }}
         {{ form_errors(form.dateDebut) }}
@@ -89,7 +89,13 @@
     {{ form_row(form.leReferentPro) }}
     {{ form_row(form.leReferentPeda) }}
     {{ form_row(form.leEntreprise) }}
-    {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+    <div class="spaceButton">
+        <a href="{{ path('stage_show') }}" class="btn btn-default"><span
+                    class="glyphicon glyphicon-arrow-left"></span>
+            Retour</a>
+        {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+
+    </div>
     {{ form_rest(form) }}
     {{ form_end(form) }}
 

@@ -15,11 +15,21 @@
     <a href="{{ path('entreprise_add_refpro', {'id': entreprise.id}) }}" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter un referent pro
     </a>
+    <a href="{{ path('entreprise_add_refpeda', {'id': entreprise.id}) }}" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter un referent peda
+    </a>
     {% for message in app.flashes('refProOk') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Stage ajouté avec <strong>succès</strong> !
+            Referent Pro ajouté avec <strong>succès</strong> !
+        </div>
+    {% endfor %}
+    {% for message in app.flashes('refPedaOk') %}
+        <div class="alert alert-success alert-dismissible spaceTop" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            Referent Pedagogique ajouté avec <strong>succès</strong> !
         </div>
     {% endfor %}
     {% for message in app.flashes('entrepriseModif') %}
@@ -65,7 +75,8 @@
                         <button type="button" class="btn btn-success" aria-label="Left Align">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         </button>
-                        {#<a href = "{{ path('eleve_edit',{'id': eleve.id}) }}" class="btn btn-primary" aria-label="Left Align">#}
+                        <a href = "{{ path('eleve_edit',{'id': refPro.id}) }}" class="btn btn-primary" aria-label="Left
+                        Align">
                         <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </a>
 
@@ -91,7 +102,7 @@
                                         <button type="button" class="btn btn-default" data-dismiss="modal"><span
                                                     class="glyphicon glyphicon-arrow-left"></span> Retour
                                         </button>
-                                        {#<a href = "{{ path('eleve_remove',{'id': eleve.id}) }}" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer élève</a>#}
+                                        <a href = "{{ path('eleve_remove',{'id': refPro.id}) }}" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer élève</a>
                                     </div>
                                 </div>
                             </div>

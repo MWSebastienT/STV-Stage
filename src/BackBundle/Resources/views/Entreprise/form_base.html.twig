@@ -13,7 +13,7 @@
 
 {% block pageContent %}
 
-    {{ form_start(form, {'attr': {'class': 'form-horizontal','data-toggle':'validator'}}) }}
+    {{ form_start(form, {'attr': {'class': 'form-horizontal validation','data-toggle':'validator'}}) }}
     {# Idem pour un autre champ. #}
     <div class="form-group">
         {{ form_label(form.nom, "Nom", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
@@ -95,7 +95,13 @@
     {{ form_row(form.city) }}
     {{ form_row(form.country) }}
     {{ form_row(form.LesReferentPro) }}
-    {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+    <div class="spaceButton">
+        <a href="{{ path('entreprise_index') }}" class="btn btn-default"><span
+                    class="glyphicon glyphicon-arrow-left"></span>
+            Retour</a>
+        {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+
+    </div>
     {{ form_rest(form) }}
     {{ form_end(form) }}
 
