@@ -1,0 +1,37 @@
+{% extends "BackBundle::layout.html.twig" %}
+
+{% block pageHeader %}
+
+    {% if action %}
+        Ajout d'un type d'entreprise
+    {% else %}
+        Modification d'un type d'entreprise
+    {% endif %}
+
+
+{% endblock %}
+
+{% block pageContent %}
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal','data-toggle':'validator'}}) }}
+    {# Idem pour un autre champ. #}
+    <div class="form-group">
+        {{ form_label(form.label, "Nom", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.label) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.label, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+
+
+    {{ form_start(form) }}
+    {{ form_row(form.label) }}
+    {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+
