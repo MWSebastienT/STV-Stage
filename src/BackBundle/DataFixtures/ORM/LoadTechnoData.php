@@ -24,4 +24,4 @@ class LoadTechnoData implements FixtureInterface
         $manager->flush();
     }
 }
-?>
+

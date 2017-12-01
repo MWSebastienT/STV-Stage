@@ -24,4 +24,4 @@ class LoadTypeBacData implements FixtureInterface
         $manager->flush();
     }
 }
-?>
+

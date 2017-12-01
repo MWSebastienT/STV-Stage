@@ -24,4 +24,4 @@ class LoadTypeEntrepriseData implements FixtureInterface
         $manager->flush();
     }
 }
-?>
+
