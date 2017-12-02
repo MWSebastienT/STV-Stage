@@ -47,6 +47,16 @@ class typeEntrepriseController extends Controller
             $action);// true parce que j'utilise la table User pour add
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
+            foreach ($listTypeEntreprise as $unType) {
+                if ($typeEntreprise->getLabel() == $unType->getLabel()) {
+                    $session = new Session();
+                    $session->getFlashBag()->add('typePasOk', ''); // le message à l'utilisateur
+                    return $this->render('BackBundle:TypeEntreprise:index.html.twig', [
+                        'typeEntreprises' => $listTypeEntreprise,
+                    ]);
+                }
+            }
+
             $session = new Session();
             $session->getFlashBag()->add('typeentrepriseOk', ''); // le message à l'utilisateur
             return $this->redirectToRoute('typeentreprise_index', ['typeEntreprises' => $listTypeEntreprise]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
@@ -73,6 +83,16 @@ class typeEntrepriseController extends Controller
         $data = $this->container->get('back.method.actions')->formAction($request, $form, $typeEntreprise, $entityName);
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
+
+            foreach ($listTypeEntreprise as $unType) {
+                if ($typeEntreprise->getLabel() == $unType->getLabel()) {
+                    $session = new Session();
+                    $session->getFlashBag()->add('typePasOk', ''); // le message à l'utilisateur
+                    return $this->render('BackBundle:TypeEntreprise:index.html.twig', [
+                        'typeEntreprises' => $listTypeEntreprise,
+                    ]);
+                }
+            }
             $session = new Session();
             $session->getFlashBag()->add('entrepriseModif', '');// le message à l'utilisateur
 

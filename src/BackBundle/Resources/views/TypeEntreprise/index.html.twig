@@ -13,6 +13,13 @@
             Type ajouté avec <strong>succès</strong> !
         </div>
     {% endfor %}
+    {% for message in app.flashes('typePasOk') %}
+        <div class="alert alert-danger alert-dismissible spaceTop" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            <strong>Ce type d'entreprise existe dèja !</strong>
+        </div>
+    {% endfor %}
     {% for message in app.flashes('typeentrepriseModif') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span

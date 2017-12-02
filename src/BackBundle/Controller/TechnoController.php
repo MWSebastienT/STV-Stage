@@ -20,6 +20,7 @@ class TechnoController extends Controller
         $em = $this->getDoctrine()->getManager();
         $listeTechno = $em->getRepository('BackBundle:Techno')->findAll();
         $em = $this->getDoctrine()->getManager();
+
         return $this->render('BackBundle:Techno:index.html.twig', [
             'Technos' => $listeTechno,
         ]);
@@ -40,18 +41,35 @@ class TechnoController extends Controller
         $listTechno = $em->getRepository('BackBundle:Techno')->findAll();
         $action = 'edit';
 
+
         /* l'appel du service */
+
+
+
+
 
         $data = $this->container->get('back.method.actions')->formAction($request, $form, $techno, $entityName,
             $action);// true parce que j'utilise la table User pour add
+
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
+            foreach ($listTechno as $uneTechno) {
+                if ($techno->getLabel() == $uneTechno->getLabel()) {
+                    $session = new Session();
+                    $session->getFlashBag()->add('technoPasOk', ''); // le message à l'utilisateur
+                    return $this->render('BackBundle:Techno:index.html.twig', [
+                        'Technos' => $listTechno,
+                    ]);
+                }
+            }
             $session = new Session();
             $session->getFlashBag()->add('technok', ''); // le message à l'utilisateur
+
             return $this->redirectToRoute('techno_index', ['Technos' => $listTechno]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
         } else {// sinon on affiche le formulaire
             return new \Symfony\Component\HttpFoundation\Response($data);
         }
+
     }
 
     /**
@@ -70,8 +88,22 @@ class TechnoController extends Controller
         /* l'appel du service */
 
         $data = $this->container->get('back.method.actions')->formAction($request, $form, $techno, $entityName);
+
+
+
+
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
+
+            foreach ($listTechno as $uneTechno) {
+                if ($techno->getLabel() == $uneTechno->getLabel()) {
+                    $session = new Session();
+                    $session->getFlashBag()->add('technoPasOk', ''); // le message à l'utilisateur
+                    return $this->render('BackBundle:Techno:index.html.twig', [
+                        'Technos' => $listTechno,
+                    ]);
+                }
+            }
             $session = new Session();
             $session->getFlashBag()->add('technoModif', '');// le message à l'utilisateur
 
@@ -92,6 +124,7 @@ class TechnoController extends Controller
         $listTechno = $em->getRepository('BackBundle:Techno')->findAll();
         $session = new Session();
         $session->getFlashBag()->add('technoDeleteOk', ''); // le message à l'utilisateur
-        return $this->redirectToRoute('techno_index',['Technos' => $listTechno]);
+
+        return $this->redirectToRoute('techno_index', ['Technos' => $listTechno]);
     }
 }
