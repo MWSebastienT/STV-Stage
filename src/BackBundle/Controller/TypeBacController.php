@@ -49,6 +49,16 @@ class TypeBacController extends Controller
         $data = $this->container->get('back.method.actions')->formAction($request, $form, $bac, $entityName);
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
+
+            foreach ($listBac as $unType) {
+                if ($bac->getLabel() == $unType->getLabel()) {
+                    $session = new Session();
+                    $session->getFlashBag()->add('typePasOk', ''); // le message à l'utilisateur
+                    return $this->render('BackBundle:TypeBac:index.html.twig', [
+                        'lesBacs' => $listBac,
+                    ]);
+                }
+            }
             $session = new Session();
             $session->getFlashBag()->add('bacModif', '');// le message à l'utilisateur
             return $this->redirectToRoute('type_bac_show', ['lesBacs' => $listBac]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
@@ -77,6 +87,15 @@ class TypeBacController extends Controller
         $data = $this->container->get('back.method.actions')->formAction($request, $form, $bac, $entityName, $action);// true parce que j'utilise la table User pour add
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
+            foreach ($listBac as $unType) {
+                if ($bac->getLabel() == $unType->getLabel()) {
+                    $session = new Session();
+                    $session->getFlashBag()->add('typePasOk', ''); // le message à l'utilisateur
+                    return $this->render('BackBundle:TypeBac:index.html.twig', [
+                        'lesBacs' => $listBac,
+                    ]);
+                }
+            }
             $session = new Session();
             $session->getFlashBag()->add('bacOk', ''); // le message à l'utilisateur
             return $this->redirectToRoute('type_bac_show', ['lesBacs' => $listBac]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
