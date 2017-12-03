@@ -36,7 +36,6 @@ class RefPedaController extends Controller
      */
     public function addRefProAction(Request $request)
     {
-
         $em = $this->getDoctrine()->getManager();
         $refPeda = new User();
         $form = $this->createForm(RefPedaType::class, $refPeda);
@@ -46,8 +45,8 @@ class RefPedaController extends Controller
 
         /* l'appel du service */
 
-        $data = $this->container->get('back.method.actions')->formAction($request, $form, $refPeda, $entityName,
-            $action, 'ROLE_REF_PEDA');// true parce que j'utilise la table User pour add
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $refPeda, $entityName,$listRefPeda,
+            $action,null, 'ROLE_REF_PEDA');// true parce que j'utilise la table User pour add
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
             $session = new Session();
@@ -69,11 +68,11 @@ class RefPedaController extends Controller
         $refPeda = $em->getRepository('ConnexionBundle:User')->find($id);
         $form = $this->createForm(RefPedaType::class, $refPeda);
         $entityName = 'RefPeda';
-        $listRefPeda = $em->getRepository('ConnexionBundle:User')->findAll();
+        $listRefPeda = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_REF_PEDA');
 
         /* l'appel du service */
 
-        $data = $this->container->get('back.method.actions')->formAction($request, $form, $refPeda, $entityName);
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $refPeda, $entityName,$listRefPeda);
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
             $session = new Session();
@@ -98,5 +97,4 @@ class RefPedaController extends Controller
         $session->getFlashBag()->add('refpedaDeleteOk', ''); // le message à l'utilisateur
         return $this->redirectToRoute('refpeda_index',['refPedas' => $listRefPeda]);
     }
-
 }

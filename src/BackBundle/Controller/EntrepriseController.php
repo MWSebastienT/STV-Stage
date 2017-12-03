@@ -66,7 +66,7 @@ class EntrepriseController extends Controller
 
         /* l'appel du service */
 
-        $data = $this->container->get('back.method.actions')->formAction($request, $form, $stage, $entityName);
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $stage, $entityName,$listEntreprise,null,'Nom');
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
             $session = new Session();
@@ -95,21 +95,18 @@ class EntrepriseController extends Controller
 
         /* l'appel du service */
 
-        $data = $this->container->get('back.method.actions')->formAction($request, $form, $entreprise, $entityName,
-            $action);// true parce que j'utilise la table User pour add
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $entreprise, $entityName,$listEntreprise,
+            $action,'Nom');
+
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
             $session = new Session();
             $session->getFlashBag()->add('entrepriseOk', ''); // le message à l'utilisateur
-            return $this->redirectToRoute('entreprise_index', ['entreprises' => $listEntreprise]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargment d'un cache de merde !!!!
+            return $this->redirectToRoute('entreprise_index', ['entreprises' => $listEntreprise]); // pas le choix d'utiliser ce redirectToRoute pour evité le chargement d'une page blanche avant la redirectionn ... !!!!
         } else {// sinon on affiche le formulaire
             return new Response($data);
         }
     }
-
-
-
-
 
     /**
      * @Route("/entreprise/remove/{id}", name="entreprise_remove")

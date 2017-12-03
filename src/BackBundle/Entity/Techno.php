@@ -67,6 +67,4 @@ class Techno
     {
         return $this->label;
     }
-
-
 }

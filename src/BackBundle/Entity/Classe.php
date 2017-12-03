@@ -2,6 +2,7 @@
 
 namespace BackBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -30,12 +31,12 @@ class Classe
 
 
     /**
-     * @ORM\OneToMany(targetEntity="BackBundle\Entity\ClassePromo",mappedBy="classe",cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\Promo",mappedBy="classe",cascade={"persist","remove"})
      */
-    private $classePromo;
+    private $lesPromos;
 
     /**
-     * @ORM\OneToMany(targetEntity="BackBundle\Entity\HistoryClasse",mappedBy="classe",cascade={"persist","remove"})
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\HistoryClasse",mappedBy="history",cascade={"persist","remove"})
      */
     private $history;
 
@@ -83,50 +84,9 @@ class Classe
      */
     public function __construct()
     {
-        $this->lesPromos = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->lesPromos = new ArrayCollection();
     }
 
-    /**
-     * Get lesPromos
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLesPromos()
-    {
-        return $this->lesPromos;
-    }
-
-    /**
-     * Add lesPromo
-     *
-     * @param \BackBundle\Entity\Promo $lesPromo
-     *
-     * @return Classe
-     */
-    public function addLesPromo(\BackBundle\Entity\Promo $lesPromo)
-    {
-        $this->lesPromos[] = $lesPromo;
-
-        return $this;
-    }
-
-    /**
-     * Remove lesPromo
-     *
-     * @param \BackBundle\Entity\Promo $lesPromo
-     */
-    public function removeLesPromo(\BackBundle\Entity\Promo $lesPromo)
-    {
-        $this->lesPromos->removeElement($lesPromo);
-    }
-
-    /**
-     * Add history
-     *
-     * @param \BackBundle\Entity\HistoryClasse $history
-     *
-     * @return Classe
-     */
     public function addHistory(\BackBundle\Entity\HistoryClasse $history)
     {
         $this->history[] = $history;
@@ -194,36 +154,36 @@ class Classe
     }
 
     /**
-     * Add classePromo
+     * Add lesPromo
      *
-     * @param \BackBundle\Entity\ClassePromo $classePromo
+     * @param \BackBundle\Entity\Promo $lesPromo
      *
      * @return Classe
      */
-    public function addClassePromo(\BackBundle\Entity\ClassePromo $classePromo)
+    public function addLesPromo(\BackBundle\Entity\Promo $lesPromo)
     {
-        $this->classePromo[] = $classePromo;
+        $this->lesPromos[] = $lesPromo;
 
         return $this;
     }
 
     /**
-     * Remove classePromo
+     * Remove lesPromo
      *
-     * @param \BackBundle\Entity\ClassePromo $classePromo
+     * @param \BackBundle\Entity\Promo $lesPromo
      */
-    public function removeClassePromo(\BackBundle\Entity\ClassePromo $classePromo)
+    public function removeLesPromo(\BackBundle\Entity\Promo $lesPromo)
     {
-        $this->classePromo->removeElement($classePromo);
+        $this->lesPromos->removeElement($lesPromo);
     }
 
     /**
-     * Get classePromo
+     * Get lesPromos
      *
      * @return \Doctrine\Common\Collections\Collection
      */
-    public function getClassePromo()
+    public function getLesPromos()
     {
-        return $this->classePromo;
+        return $this->lesPromos;
     }
 }

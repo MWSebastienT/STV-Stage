@@ -12,33 +12,6 @@
     <p>{{ entreprise.telephone }}</p>
 
     <br>
-    <a href="{{ path('entreprise_add_refpro', {'id': entreprise.id}) }}" class="btn btn-success">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter un referent pro
-    </a>
-    <a href="{{ path('entreprise_add_refpeda', {'id': entreprise.id}) }}" class="btn btn-success">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter un referent peda
-    </a>
-    {% for message in app.flashes('refProOk') %}
-        <div class="alert alert-success alert-dismissible spaceTop" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            Referent Pro ajouté avec <strong>succès</strong> !
-        </div>
-    {% endfor %}
-    {% for message in app.flashes('refPedaOk') %}
-        <div class="alert alert-success alert-dismissible spaceTop" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            Referent Pedagogique ajouté avec <strong>succès</strong> !
-        </div>
-    {% endfor %}
-    {% for message in app.flashes('entrepriseModif') %}
-        <div class="alert alert-success alert-dismissible spaceTop" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            Stage modifié avec <strong>succès</strong> !
-        </div>
-    {% endfor %}
     {% for message in app.flashes('entrepriseDeleteOk') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
