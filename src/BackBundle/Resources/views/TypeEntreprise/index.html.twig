@@ -1,5 +1,5 @@
 {% extends "BackBundle::layout.html.twig" %}
-{% block pageHeader %}Type Entreprise{% endblock %}
+{% block pageHeader %}Gestion des types d'entreprises{% endblock %}
 {% block pageContent %}
     <a href="{{ path('typeentreprise_add') }}" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter
@@ -10,28 +10,21 @@
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Type ajouté avec <strong>succès</strong> !
-        </div>
-    {% endfor %}
-    {% for message in app.flashes('typePasOk') %}
-        <div class="alert alert-danger alert-dismissible spaceTop" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            <strong>Ce type d'entreprise existe dèja !</strong>
+            Type d'entreprise ajouté avec <strong>succès</strong> !
         </div>
     {% endfor %}
     {% for message in app.flashes('typeentrepriseModif') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Type modifié avec <strong>succès</strong> !
+            Type d'entreprise modifié avec <strong>succès</strong> !
         </div>
     {% endfor %}
     {% for message in app.flashes('typeentrepriseDeleteOk') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Type supprimé avec <strong>succès</strong> !
+            Type d'entreprise supprimé avec <strong>succès</strong> !
         </div>
     {% endfor %}
     <div class="panel panel-default">

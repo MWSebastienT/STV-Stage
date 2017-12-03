@@ -29,12 +29,51 @@ class Actions
      *  $entityName -> le nom de la classe sur laquelle on travaille ( majuscule sur la premièr elettre )
      *  $role -> Le role en string lors d'un add User (jamais true pour les edits)
      *  $action -> permet d'identifier dans quel action on se trouve pour le titre du formulaire ^^
+     *  $attribute -> L'attribut qui doit être unique lors de l'ajout donc il doit commencer par une majuscule
+     *  $listObject ->
     */
-    public function formAction(Request $request,$form,$object,$entityName,$action=null,$role=null)
+    public function formAction(Request $request,$form,$object,$entityName,$listObject = null,$action=null,$attribute = null,$role=null)
     {
         $em = $this->em;
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() ) {
+
+            // La on test pour éviter les valeurs qui se duplique
+            if($attribute != null && $listObject != null)
+            {
+                $getter = 'get'.$attribute.'()';
+                $getterSaisi = "$object.'->'.$getter.";
+                foreach ($listObject as $unObject) {
+                    $getterBDD = "$unObject.'->'.$getter.";
+                    if (strtoupper($getterSaisi) == strtoupper($getterBDD) && $unObject->getId() != $object->getId() ) {
+                        $session = new Session();
+                        $session->getFlashBag()->add('duplicate', ''); // le message à l'utilisateur
+                        return $this->templating->render('BackBundle:'.$entityName.':form_base.html.twig', [
+                            'form' => $form->createView(),
+                            'action' => $action
+                        ]);
+                    }
+                }
+            }
+            // test pour les utilisateurs
+            if($attribute == null && $listObject != null)
+            {
+                $firstName = $object->getFirstName();
+                $lastName = $object->getLastName();
+
+                foreach ($listObject as $unObject) {
+                    $userNameBDD = $unObject->getUserName();
+                    $userNameSaisi = $lastName.' '.$firstName;
+                    if (strtoupper($userNameBDD) ==  strtoupper($userNameSaisi) && $unObject->getId() != $object->getId()  ) {
+                        $session = new Session();
+                        $session->getFlashBag()->add('duplicate', ''); // le message à l'utilisateur
+                        return $this->templating->render('BackBundle:'.$entityName.':form_base.html.twig', [
+                            'form' => $form->createView(),
+                            'action' => $action
+                        ]);
+                    }
+                }
+            }
             if($role != "")
             {
                 $firstName = $object->getFirstName();
@@ -53,12 +92,10 @@ class Actions
         return
             $this->templating->render('BackBundle:'.$entityName.':form_base.html.twig',['state'=>'show','form' => $form->createView(),'action'=>$action]);
     }
-
     public function removeAction($object)
     {
         $em = $this->em;
         $em->remove($object);
         $em->flush();
     }
-
 }

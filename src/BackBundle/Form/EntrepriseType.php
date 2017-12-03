@@ -2,6 +2,7 @@
 
 namespace BackBundle\Form;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -43,6 +44,11 @@ class EntrepriseType extends AbstractType
             ->add('LesReferentPro', EntityType::class, [
                 'class' => 'ConnexionBundle:User',
                 'multiple' => true,
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('u')
+                        ->where('u.roles LIKE :roles')
+                        ->setParameter('roles', '%"' . 'ROLE_REF_PRO' . '"%');
+                },
             ])
             ->add('Valider', SubmitType::class);
     }

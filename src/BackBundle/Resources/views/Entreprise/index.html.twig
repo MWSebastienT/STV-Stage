@@ -1,33 +1,28 @@
 {% extends "BackBundle::layout.html.twig" %}
-{% block pageHeader %}Entreprise{% endblock %}
+{% block pageHeader %}Gestion des entreprises{% endblock %}
 {% block pageContent %}
     <a href="{{ path('entreprise_add') }}" class="btn btn-success">
         <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter
     </a>
-    <a href="{{ path('typeentreprise_add') }}" class="btn btn-success">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Ajouter un Type d'Entreprise
-    </a>
-
-
     {% for message in app.flashes('entrepriseOk') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Stage ajouté avec <strong>succès</strong> !
+            Entreprise ajouté avec <strong>succès</strong> !
         </div>
     {% endfor %}
     {% for message in app.flashes('entrepriseModif') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Stage modifié avec <strong>succès</strong> !
+            Entreprise modifié avec <strong>succès</strong> !
         </div>
     {% endfor %}
     {% for message in app.flashes('entrepriseDeleteOk') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Stage supprimé avec <strong>succès</strong> !
+            Entreprise supprimé avec <strong>succès</strong> !
         </div>
     {% endfor %}
     <div class="panel panel-default">

@@ -30,6 +30,11 @@ class Promo
     private $label;
 
 
+    /**
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\ClassePromo",inversedBy="lesPromos",cascade={"persist"})
+     */
+    private $classe;
+
 
     /**
      * @var int
@@ -152,5 +157,29 @@ class Promo
     public function getClassePromo()
     {
         return $this->classePromo;
+    }
+
+    /**
+     * Set classe
+     *
+     * @param \BackBundle\Entity\Classe $classe
+     *
+     * @return Promo
+     */
+    public function setClasse(\BackBundle\Entity\Classe $classe = null)
+    {
+        $this->classe = $classe;
+
+        return $this;
+    }
+
+    /**
+     * Get classe
+     *
+     * @return \BackBundle\Entity\Classe
+     */
+    public function getClasse()
+    {
+        return $this->classe;
     }
 }

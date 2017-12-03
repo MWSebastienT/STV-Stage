@@ -3,15 +3,23 @@
 {% block pageHeader %}
 
     {% if action %}
-        Ajout d'un referent pro
+        Ajout d'un référent professionnel
     {% else %}
-        Modification d'un referent pro
+        Modification d'un référent professionnel
     {% endif %}
 
 
 {% endblock %}
 
 {% block pageContent %}
+
+    {% for message in app.flashes('duplicate') %}
+        <div class="alert alert-danger alert-dismissible spaceTop" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            <strong>Ce référent professionnel existe déjà !</strong>
+        </div>
+    {% endfor %}
 
     {{ form_start(form, {'attr': {'class': 'form-horizontal validation','data-toggle':'validator'}}) }}
     {# Idem pour un autre champ. #}
@@ -69,7 +77,7 @@
     {{ form_row(form.address) }}
     {{ form_row(form.zipCode) }}
     <div class="spaceButton">
-        <a href="{{ path('entreprise_index') }}" class="btn btn-default"><span
+        <a href="{{ path('refPro_index') }}" class="btn btn-default"><span
                     class="glyphicon glyphicon-arrow-left"></span>
             Retour</a>
         {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}

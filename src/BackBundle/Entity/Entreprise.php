@@ -71,11 +71,6 @@ class Entreprise
     private $telephone;
 
     /**
-     * @ORM\OneToMany(targetEntity="ConnexionBundle\Entity\User", mappedBy="leEntreprise")
-     */
-    private $lesReferentPro;
-
-    /**
      * @ORM\OneToMany(targetEntity="BackBundle\Entity\Stage", mappedBy="leEntreprise")
      */
     private $lesStages;
@@ -84,6 +79,11 @@ class Entreprise
      * @ORM\ManyToOne(targetEntity="BackBundle\Entity\typeEntreprise")
      */
     private $leTypeEnt;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="ConnexionBundle\Entity\User")
+     */
+    private $lesReferentPro;
 
 
     /**
@@ -306,39 +306,7 @@ class Entreprise
         $this->lesStages = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
-    /**
-     * Add lesReferentPro
-     *
-     * @param \ConnexionBundle\Entity\User $lesReferentPro
-     *
-     * @return Entreprise
-     */
-    public function addLesReferentPro(\ConnexionBundle\Entity\User $lesReferentPro)
-    {
-        $this->lesReferentPro[] = $lesReferentPro;
 
-        return $this;
-    }
-
-    /**
-     * Remove lesReferentPro
-     *
-     * @param \ConnexionBundle\Entity\User $lesReferentPro
-     */
-    public function removeLesReferentPro(\ConnexionBundle\Entity\User $lesReferentPro)
-    {
-        $this->lesReferentPro->removeElement($lesReferentPro);
-    }
-
-    /**
-     * Get lesReferentPro
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getLesReferentPro()
-    {
-        return $this->lesReferentPro;
-    }
 
     /**
      * Add lesStage
@@ -372,5 +340,39 @@ class Entreprise
     public function getLesStages()
     {
         return $this->lesStages;
+    }
+
+    /**
+     * Add lesReferentPro
+     *
+     * @param \ConnexionBundle\Entity\User $lesReferentPro
+     *
+     * @return Entreprise
+     */
+    public function addLesReferentPro(\ConnexionBundle\Entity\User $lesReferentPro)
+    {
+        $this->lesReferentPro[] = $lesReferentPro;
+
+        return $this;
+    }
+
+    /**
+     * Remove lesReferentPro
+     *
+     * @param \ConnexionBundle\Entity\User $lesReferentPro
+     */
+    public function removeLesReferentPro(\ConnexionBundle\Entity\User $lesReferentPro)
+    {
+        $this->lesReferentPro->removeElement($lesReferentPro);
+    }
+
+    /**
+     * Get lesReferentPro
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLesReferentPro()
+    {
+        return $this->lesReferentPro;
     }
 }

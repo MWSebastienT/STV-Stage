@@ -13,6 +13,14 @@
 
 {% block pageContent %}
 
+    {% for message in app.flashes('duplicate') %}
+        <div class="alert alert-danger alert-dismissible spaceTop" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            <strong>Ce type d'entreprise existe dèja !</strong>
+        </div>
+    {% endfor %}
+
     {{ form_start(form, {'attr': {'class': 'form-horizontal validation','data-toggle':'validator'}}) }}
     {# Idem pour un autre champ. #}
     <div class="form-group">
@@ -28,7 +36,7 @@
     {{ form_start(form) }}
     {{ form_row(form.label) }}
     <div class="spaceButton">
-        <a href="{{ path('entreprise_index') }}" class="btn btn-default"><span
+        <a href="{{ path('typeentreprise_index') }}" class="btn btn-default"><span
                     class="glyphicon glyphicon-arrow-left"></span>
             Retour</a>
         {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}

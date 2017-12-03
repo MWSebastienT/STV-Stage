@@ -27,9 +27,11 @@ class ClassePromo
     private $promo;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Classe",inversedBy="classePromo")
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Classe",inversedBy="lesPromos")
      */
     private $classe;
+
+
 
     /**
      * @var string
