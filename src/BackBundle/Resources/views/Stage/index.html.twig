@@ -59,9 +59,10 @@
                     <td class="text-center">{{ stage.leReferentPeda }}</td>
                     <td class="text-center">{{ stage.leEntreprise }}</td>
                     <td class="text-center">
-                        <button type="button" class="btn btn-success" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                        </button>
+
+                        <a href="{{ path('stage_show_fiche',{'id': stage.id}) }}" class="btn btn-primary"
+                           aria-label="Left Align">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
                         <a href="{{ path('stage_edit',{'id': stage.id}) }}" class="btn btn-primary"
                            aria-label="Left Align">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
@@ -77,18 +78,21 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Suppresion élève</h5>
+                                        <h1 class="modal-title" id="exampleModalLabel">Suppression promo</h1>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <p>Êtes-vous sûr de vouloir supprimer cette élève ?</p>
+                                        <h3>Êtes-vous sûr de vouloir supprimer cette promo ?</h3>
                                     </div>
                                     <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                                    class="glyphicon glyphicon-arrow-left"></span> Retour
+                                        </button>
                                         <a href="{{ path('stage_remove',{'id': stage.id}) }}" type="button"
-                                           class="btn btn-danger">Oui</a>
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Non</button>
+                                           class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+                                            Supprimer promo</a>
                                     </div>
                                 </div>
                             </div>

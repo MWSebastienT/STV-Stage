@@ -3,6 +3,7 @@
 namespace BackBundle\Controller;
 
 use BackBundle\Entity\Stage;
+use BackBundle\Entity\Visite;
 use BackBundle\Form\StageType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -31,11 +32,37 @@ class StageController extends Controller
     }
 
      /**
-     * @Route("/stage/show", name="stage_show_fiche")
+     * @Route("/stage/show/{id}", name="stage_show_fiche")
      */
-    public function showAction()
+    public function showAction($id)
     {
-        return $this->render('BackBundle:Stage:ficheStage.html.twig');
+        $em = $this->getDoctrine()->getManager();
+        $stage = new Stage();
+        $stage = $em->getRepository('BackBundle:Stage')->find($id);
+        $form = $this->createForm(StageType::class, $stage);
+        $listeStage = $em->getRepository('BackBundle:Stage')->findAll();
+        $visite = new Visite();
+        $listeVisite = $em->getRepository('BackBundle:Visite')->findByStageId($id);
+
+        $leEntreprise = $stage->getLeEntreprise();
+        $leRefPro = $stage->getLeReferentPro();
+        $leRefPeda = $stage->getLeReferentPeda();
+        $leEleve = $stage->getLeEleve();
+        $lesTechnos = $stage->getLesTechno();
+
+
+
+        return $this->render('BackBundle:Stage:ficheStage.html.twig', [
+            'stage' => $stage,
+            'listeStage' => $listeStage,
+            'leEntreprise' => $leEntreprise,
+            'leRefPro' => $leRefPro,
+            'leRefPeda' => $leRefPeda,
+            'leEleve' => $leEleve,
+            'lesTechnos' => $lesTechnos,
+            'listeVisite' => $listeVisite,
+        ]);
+
     }
 
     /**
