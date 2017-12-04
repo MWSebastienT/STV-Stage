@@ -41,6 +41,11 @@ class User extends BaseUser
      */
     private $classePromo;
 
+    /**
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\Stage",mappedBy="leEleve", cascade={"persist","remove"})
+     */
+    private $stage;
+
 
     /**
      * @var string
@@ -95,8 +100,10 @@ class User extends BaseUser
      */
     protected $history;
 
+
+
     /**
-     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\diplome")
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\diplome",inversedBy="eleve")
      */
     protected $diplome;
 
@@ -104,6 +111,8 @@ class User extends BaseUser
     public function __construct()
     {
         parent::__construct();
+        $this->stage = new ArrayCollection();
+        $this->historyBis = new ArrayCollection();
     }
 
     /**
@@ -397,5 +406,73 @@ class User extends BaseUser
     public function getDiplome()
     {
         return $this->diplome;
+    }
+
+    /**
+     * Add stage
+     *
+     * @param \BackBundle\Entity\Stage $stage
+     *
+     * @return User
+     */
+    public function addStage(\BackBundle\Entity\Stage $stage)
+    {
+        $this->stage[] = $stage;
+
+        return $this;
+    }
+
+    /**
+     * Remove stage
+     *
+     * @param \BackBundle\Entity\Stage $stage
+     */
+    public function removeStage(\BackBundle\Entity\Stage $stage)
+    {
+        $this->stage->removeElement($stage);
+    }
+
+    /**
+     * Get stage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getStage()
+    {
+        return $this->stage;
+    }
+
+    /**
+     * Add historyBis
+     *
+     * @param \BackBundle\Entity\HistoryClasse $historyBis
+     *
+     * @return User
+     */
+    public function addHistoryBis(\BackBundle\Entity\HistoryClasse $historyBis)
+    {
+        $this->historyBis[] = $historyBis;
+
+        return $this;
+    }
+
+    /**
+     * Remove historyBis
+     *
+     * @param \BackBundle\Entity\HistoryClasse $historyBis
+     */
+    public function removeHistoryBis(\BackBundle\Entity\HistoryClasse $historyBis)
+    {
+        $this->historyBis->removeElement($historyBis);
+    }
+
+    /**
+     * Get historyBis
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getHistoryBis()
+    {
+        return $this->historyBis;
     }
 }

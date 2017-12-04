@@ -13,6 +13,14 @@
 
 {% block pageContent %}
 
+    {% for message in app.flashes('duplicate') %}
+        <div class="alert alert-danger alert-dismissible spaceTop" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            <strong>Ce type de bac existe déjà !</strong>
+        </div>
+    {% endfor %}
+
     <div class="formWidth container">
 
         {{ form_start(form, {'attr': {'class': 'form-horizontal validation','data-toggle':'validator'}}) }}
@@ -27,7 +35,7 @@
         </div>
         {{ form_row(form.label) }}
         <div class="spaceButton">
-            <a href="{{ path('promo_show') }}" class="btn btn-default"><span
+            <a href="{{ path('type_bac_show') }}" class="btn btn-default"><span
                         class="glyphicon glyphicon-arrow-left"></span>
                 Retour</a>
             {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}

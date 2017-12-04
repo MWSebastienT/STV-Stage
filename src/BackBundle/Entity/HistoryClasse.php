@@ -22,7 +22,7 @@ class HistoryClasse
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ConnexionBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="ConnexionBundle\Entity\User",inversedBy="historyBis")
      */
     private $eleve;
 

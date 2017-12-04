@@ -15,26 +15,26 @@
             Type de bac ajouté avec <strong>succès</strong> !
         </div>
     {% endfor %}
-    {% for message in app.flashes('typePasOk') %}
-        <div class="alert alert-danger alert-dismissible spaceTop" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-            <strong>Ce type de bac existe dèja !</strong>
-        </div>
-    {% endfor %}
-    {% for message in app.flashes('bacDelete') %}
+    {% for message in app.flashes('suppOk') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Bac supprimé avec <strong>succès</strong> !
+            Type de bac supprimé avec <strong>succès</strong> !
         </div>
     {% endfor %}
-
     {% for message in app.flashes('bacModif') %}
         <div class="alert alert-success alert-dismissible spaceTop" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
-            Bac modifié avec <strong>succès</strong> !
+            Type de bac modifié avec <strong>succès</strong> !
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger alert-dismissible spaceTop" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                La suppression à <strong>échoué</strong> ! Un ou plusieurs élèves est liés à ce type de bac .
         </div>
     {% endfor %}
     <div class="panel panel-default">
@@ -59,9 +59,6 @@
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </a>
 
-                        <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-danger" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>
 
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
@@ -73,7 +70,7 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <h3>Êtes-vous sûr de vouloir supprimer ce bac ?</h3>
+                                        <h3>Êtes-vous sûr de vouloir supprimer ce type de bac ?</h3>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-arrow-left"></span> Retour</button>

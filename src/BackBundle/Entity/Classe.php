@@ -31,9 +31,10 @@ class Classe
 
 
     /**
-     * @ORM\OneToMany(targetEntity="BackBundle\Entity\Promo",mappedBy="classe",cascade={"persist","remove"})
+     * @ORM\ManyToMany(targetEntity="BackBundle\Entity\Promo")
+     * @ORM\JoinTable(name="les_promos")
      */
-    private $lesPromos;
+    private $lesPromos; /* petite bidouille de dernière minute pour que le projet fonctionne dans les temps. Y'a déjà une table qui existe pour ça */
 
     /**
      * @ORM\OneToMany(targetEntity="BackBundle\Entity\HistoryClasse",mappedBy="history",cascade={"persist","remove"})

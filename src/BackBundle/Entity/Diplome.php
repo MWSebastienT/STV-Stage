@@ -28,6 +28,11 @@ class Diplome
      */
     private $label;
 
+    /**
+     * @ORM\OneToMany(targetEntity="ConnexionBundle\Entity\User",mappedBy="diplome")
+     */
+    protected $eleve;
+
 
 
     public function __toString()
@@ -67,5 +72,46 @@ class Diplome
     public function getLabel()
     {
         return $this->label;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->eleve = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add eleve
+     *
+     * @param \ConnexionBundle\Entity\User $eleve
+     *
+     * @return Diplome
+     */
+    public function addEleve(\ConnexionBundle\Entity\User $eleve)
+    {
+        $this->eleve[] = $eleve;
+
+        return $this;
+    }
+
+    /**
+     * Remove eleve
+     *
+     * @param \ConnexionBundle\Entity\User $eleve
+     */
+    public function removeEleve(\ConnexionBundle\Entity\User $eleve)
+    {
+        $this->eleve->removeElement($eleve);
+    }
+
+    /**
+     * Get eleve
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getEleve()
+    {
+        return $this->eleve;
     }
 }

@@ -22,9 +22,9 @@ class Visite
     private $id;
 
     /**
- * @var \DateTime
+ * @var string
  *
- * @ORM\Column(name="date", type="datetimetz")
+ * @ORM\Column(name="date", type="string")
  */
     private $date;
 
@@ -36,7 +36,7 @@ class Visite
     private $obs;
 
     /**
-     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Stage")
+     * @ORM\ManyToOne(targetEntity="BackBundle\Entity\Stage",inversedBy="visite")
      */
     private $leStage;
 
@@ -51,29 +51,6 @@ class Visite
         return $this->id;
     }
 
-    /**
-     * Set date
-     *
-     * @param \DateTime $date
-     *
-     * @return Visite
-     */
-    public function setDate($date)
-    {
-        $this->date = $date;
-
-        return $this;
-    }
-
-    /**
-     * Get date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->date;
-    }
 
     /**
      * Set obs
@@ -121,5 +98,34 @@ class Visite
     public function getLeStage()
     {
         return $this->leStage;
+    }
+
+    /**
+     * Set date
+     *
+     * @param string $date
+     *
+     * @return Visite
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    /**
+     * Get date
+     *
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
+    public function __toString()
+    {
+        return $this->date;
     }
 }

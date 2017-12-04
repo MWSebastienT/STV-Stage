@@ -13,6 +13,14 @@
 
 {% block pageContent %}
 
+    {% for message in app.flashes('duplicate') %}
+        <div class="alert alert-danger alert-dismissible spaceTop" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            <strong>Cette promo existe déjà !</strong>
+        </div>
+    {% endfor %}
+
     <div class="formWidth container">
 
         {{ form_start(form, {'attr': {'class': 'form-horizontal validation','data-toggle':'validator'}}) }}

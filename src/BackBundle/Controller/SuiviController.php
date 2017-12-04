@@ -140,9 +140,21 @@ class SuiviController extends Controller
     {
         /* config service */
 
+
         $em = $this->getDoctrine()->getManager();
+        /* @var User $eleve */
         $eleve = $em->getRepository('ConnexionBundle:User')->find($id);
         $listEleve = $em->getRepository('ConnexionBundle:User')->findByRole('ROLE_ELEVE');
+
+        $history = $em->getRepository('BackBundle:HistoryClasse')->findBy(['eleve' => $eleve]);
+        $eleve->setHistory(null);
+        $em->persist($eleve);
+        $em->flush();
+        foreach ($history as $h)
+        {
+            $em->remove($h);
+        }
+        $em->flush();
 
         /* appel service */
 

@@ -41,7 +41,7 @@ class Stage
     private $lesTechno;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ConnexionBundle\Entity\User")
+     * @ORM\ManyToOne(targetEntity="ConnexionBundle\Entity\User",inversedBy="stage")
      */
     private $leEleve;
 
@@ -60,6 +60,10 @@ class Stage
      */
     private $leEntreprise;
 
+    /**
+     * @ORM\OneToMany(targetEntity="BackBundle\Entity\Visite",mappedBy="leStage",cascade={"persist","remove"})
+     */
+    private $leStage;
 
 
     /**
@@ -259,5 +263,39 @@ class Stage
     public function getLesTechno()
     {
         return $this->lesTechno;
+    }
+
+    /**
+     * Add leStage
+     *
+     * @param \BackBundle\Entity\Visite $leStage
+     *
+     * @return Stage
+     */
+    public function addLeStage(\BackBundle\Entity\Visite $leStage)
+    {
+        $this->leStage[] = $leStage;
+
+        return $this;
+    }
+
+    /**
+     * Remove leStage
+     *
+     * @param \BackBundle\Entity\Visite $leStage
+     */
+    public function removeLeStage(\BackBundle\Entity\Visite $leStage)
+    {
+        $this->leStage->removeElement($leStage);
+    }
+
+    /**
+     * Get leStage
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getLeStage()
+    {
+        return $this->leStage;
     }
 }

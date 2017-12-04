@@ -47,7 +47,7 @@ class PromoController extends Controller
 
         /* l'appel du service */
 
-        $data = $this->container->get('back.method.actions')->formAction($request, $form, $promo, $entityName);
+        $data = $this->container->get('back.method.actions')->formAction($request, $form, $promo, $entityName,$listPromo,null,'Year');
         if ($data[0] == 'validate') // si on est dans la validation du formulaire
         {
             $session = new Session();

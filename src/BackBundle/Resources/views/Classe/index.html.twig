@@ -48,16 +48,10 @@
                 <tr>
                     <td class="text-center">{{ classe.label }}</td>
                     <td class="text-center">
-                        <a href="{{ path('classe_focus',{'id': classe.id}) }}" class="btn btn-success" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                        </a>
+
                         <a href = "{{ path('classe_edit',{'id': classe.id}) }}" class="btn btn-primary" aria-label="Left Align">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </a>
-
-                        <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-danger" aria-label="Left Align">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </button>
 
                         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
