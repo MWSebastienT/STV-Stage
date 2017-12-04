@@ -1,16 +1,17 @@
 {% extends "BackBundle::layout.html.twig" %}
-{% block pageHeader %}{% endblock %}
+{% block pageHeader %}{{ stage.leEntreprise }}{% endblock %}
 {% block pageContent %}
-    <h1>Jean Marc Dupont - BTS 1</h1>
-    <p>TEST</p>
-    <p>TEST</p>
-    <p>TEST</p>
-    <p>TEST</p>
-    <p>TEST</p>
-    <br>
-    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#myModal">
-        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouvelle visite
-    </button>
+    <h1>{{ stage.leEleve }}</h1>
+    <p><b>Date début: </b>{{ stage.dateDebut | date("d/m/Y") }}</p>
+    <p><b>Date Fin: </b>{{  stage.dateFin | date("d/m/Y") }}</p>
+    {% for techno in stage.lesTechno %}
+        <p><b>{{ techno.label }}</b></p>
+    {% endfor %}
+    <p><b>Referent Pro: </b>{{ stage.leReferentPro }}</p>
+    <p><b>Referent Peda: </b>{{ stage.leReferentPeda }}</p>
+    <a href="{{ path('visite_add') }}" class="btn btn-success">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Nouvelle Visite
+    </a>
     <div class="panel panel-default">
         <div class="panel-heading">
             <b>Historique des visites</b>
@@ -20,31 +21,19 @@
                id="dataTables-example">
             <thead>
             <tr>
-                <th>Année</th>
-                <th>Elève</th>
-                <th>Référent pégagogique</th>
-                <th>Référent professionnel</th>
-                <th>Action</th>
+                <th>Date</th>
+                <th>Observation</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>2016/2017</td>
-                <td>Dupont Adrien</td>
-                <td>M. Ammar</td>
-                <td>M. Salesse</td>
-                <td>Voir Detail</td>
-            </tr>
-            <tr>
-                <td>2015/2016</td>
-                <td>Dupont Bernard</td>
-                <td>M. Ammar</td>
-                <td>M. Ammar</td>
-                <td class="text-center">
-                    Voir Detail
-                </td>
-            </tr>
-
+            {% for visite in listeVisite %}
+                <tr>
+                    <td class="text-center">
+                        {{ visite.date| date("d/m/Y") }}
+                    </td>
+                    <td class="text-center">{{ visite.obs }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>

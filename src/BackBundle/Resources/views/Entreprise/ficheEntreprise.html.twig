@@ -48,9 +48,9 @@
                         <button type="button" class="btn btn-success" aria-label="Left Align">
                             <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                         </button>
-                        <a href = "{{ path('eleve_edit',{'id': refPro.id}) }}" class="btn btn-primary" aria-label="Left
+                        <a href="{{ path('eleve_edit',{'id': refPro.id}) }}" class="btn btn-primary" aria-label="Left
                         Align">
-                        <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </a>
 
                         <button data-toggle="modal" data-target="#exampleModal" type="button" class="btn btn-danger"
@@ -75,7 +75,9 @@
                                         <button type="button" class="btn btn-default" data-dismiss="modal"><span
                                                     class="glyphicon glyphicon-arrow-left"></span> Retour
                                         </button>
-                                        <a href = "{{ path('eleve_remove',{'id': refPro.id}) }}" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer élève</a>
+                                        <a href="{{ path('eleve_remove',{'id': refPro.id}) }}" type="button"
+                                           class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+                                            Supprimer élève</a>
                                     </div>
                                 </div>
                             </div>
@@ -115,13 +117,10 @@
                     <td class="text-center">{{ stage.leReferentPro }}</td>
                     <td class="text-center">{{ stage.leReferentPeda }}</td>
                     <td class="text-center">
-                        <a href="{{ path('entreprise_show', {'id': entreprise.id}) }}">
-                            <button type="button" class="btn btn-success" aria-label="Left Align">
-                            <span class="glyphicon
-                            glyphicon-eye-open" aria-hidden="true"></span>
-                            </button>
-                        </a>
-                        <a href="{{ path('entreprise_edit',{'id': entreprise.id}) }}" class="btn btn-primary"
+                        <a href="{{ path('stage_show_fiche',{'id': stage.id}) }}" class="btn btn-primary"
+                           aria-label="Left Align">
+                            <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span></a>
+                        <a href="{{ path('stage_edit',{'id': stage.id}) }}" class="btn btn-primary"
                            aria-label="Left Align">
                             <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
                         </a>
@@ -146,7 +145,8 @@
                                         <a href="{{ path('entreprise_remove',{'id': entreprise.id}) }}" type="button"
                                            class="btn btn-danger">Oui</a>
                                         <button type="button" class="btn btn-default"
-                                                data-dismiss="modal">Retour</button>
+                                                data-dismiss="modal">Retour
+                                        </button>
                                     </div>
                                 </div>
                             </div>

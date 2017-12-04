@@ -82,6 +82,9 @@
 .footer-bottom p.pull-left {
     padding-top: 6px;
 }
+.footer-bottom p.pull-right {
+    padding-top: 6px;
+}
 .payments {
     font-size: 1.5em;
 }

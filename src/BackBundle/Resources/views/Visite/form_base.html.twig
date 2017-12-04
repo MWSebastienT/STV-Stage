@@ -1,0 +1,79 @@
+{% extends "BackBundle::layout.html.twig" %}
+
+{% block pageHeader %}
+
+    {% if action %}
+        Ajout d'une visite
+    {% else %}
+        Modification d'une visite
+    {% endif %}
+
+
+{% endblock %}
+
+{% block pageContent %}
+
+    {% for message in app.flashes('duplicate') %}
+        <div class="alert alert-danger alert-dismissible spaceTop" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+            <strong>Cette visite existe dèja !</strong>
+        </div>
+    {% endfor %}
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal validation','data-toggle':'validator'}}) }}
+    <div class="form-group">
+        {{ form_label(form.date, "Date", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.date) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.obs, "Observation", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.obs) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.obs, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form_label(form.leStage, "L'entreprise", {'label_attr': {'class': 'col-sm-3 control-label'}}) }}
+        {{ form_errors(form.leStage) }}
+        <div class="col-sm-9">
+            {{ form_widget(form.leStage, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    </div>
+
+
+
+    {{ form_start(form) }}
+    {{ form_row(form.date) }}
+    {{ form_row(form.obs) }}
+    {{ form_row(form.leStage) }}
+    <div class="spaceButton">
+        <a href="{{ path('entreprise_index') }}" class="btn btn-default"><span
+                    class="glyphicon glyphicon-arrow-left"></span>
+            Retour</a>
+        {{ form_widget(form.Valider, {'attr': {'class': 'btn btn-success'}}) }}
+
+    </div>
+    {{ form_rest(form) }}
+    {{ form_end(form) }}
+
+
+{% endblock %}
+
+{% block javascript %}
+    {{ parent() }}
+    <script src="{{ asset('js/datepicker.common.js') }}"></script>
+    <script src="{{ asset('js/datepicker.esm.js') }}"></script>
+    <script src="{{ asset('js/datepicker.js') }}"></script>
+    <script type="text/javascript">
+        $('[data-toggle=\"datepicker\"]').datepicker({
+            format: "dd-mm-yyyy",
+            zIndex: 1400,
+        });
+    </script>
+{% endblock %}
+
+

@@ -22,10 +22,10 @@ class Visite
     private $id;
 
     /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="date", type="datetimetz")
-     */
+ * @var \DateTime
+ *
+ * @ORM\Column(name="date", type="datetimetz")
+ */
     private $date;
 
     /**

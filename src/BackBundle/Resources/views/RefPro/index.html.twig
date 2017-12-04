@@ -63,17 +63,21 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h1 class="modal-title" id="exampleModalLabel">Suppression d'un référent professionnel</h1>
+                                        <h1 class="modal-title" id="exampleModalLabel">Suppression élève</h1>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <h3>Êtes-vous sûr de vouloir supprimer ce Référent professionnel ?</h3>
+                                        <h3>Êtes-vous sûr de vouloir supprimer cette élève ?</h3>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-arrow-left"></span> Retour</button>
-                                        <a href = "{{ path('refPro_remove',{'id': refPro.id}) }}" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span> Supprimer référent pro</a>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"><span
+                                                    class="glyphicon glyphicon-arrow-left"></span> Retour
+                                        </button>
+                                        <a href="{{ path('refPro_remove',{'id': refPro.id}) }}" type="button"
+                                           class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span>
+                                            Supprimer élève</a>
                                     </div>
                                 </div>
                             </div>
